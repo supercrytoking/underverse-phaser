@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"sammoland.json"
+        }
+    },
  "height":100,
  "infinite":false,
  "layers":[
@@ -49,7 +57,7 @@
                  "id":920,
                  "properties":[
                         {
-                         "name":"colides",
+                         "name":"collides",
                          "type":"bool",
                          "value":true
                         }]
@@ -58,7 +66,7 @@
                  "id":921,
                  "properties":[
                         {
-                         "name":"colides",
+                         "name":"collides",
                          "type":"bool",
                          "value":true
                         }]
@@ -67,7 +75,7 @@
                  "id":922,
                  "properties":[
                         {
-                         "name":"colides",
+                         "name":"collides",
                          "type":"bool",
                          "value":true
                         }]
