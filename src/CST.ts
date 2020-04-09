@@ -16,6 +16,6 @@ export const CST = {
         GAMEPAD_Y: 'gamepad-y.png'
     },
     AUDIO: {
-        MENU_MUSIC: 'menu-music.m4a'
+        MENU_MUSIC: 'menu-music.mp3'
     }
 }

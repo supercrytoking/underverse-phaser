@@ -8,9 +8,9 @@ export class MenuScene extends Phaser.Scene {
     }
     preload() {}
     create() {
-        // this.sound.play('MENU_MUSIC', {
-        //     loop: true
-        // });
+        this.sound.play('MENU_MUSIC', {
+            loop: true
+        });
 
         this.bg = this.add.image(0, 0, 'MENU_BG').setOrigin(0);
         this.bg.alpha = 0.2;

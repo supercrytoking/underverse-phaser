@@ -141,7 +141,7 @@ exports.CST = {
     GAMEPAD_Y: 'gamepad-y.png'
   },
   AUDIO: {
-    MENU_MUSIC: 'menu-music.m4a'
+    MENU_MUSIC: 'menu-music.mp3'
   }
 };
 },{}],"src/scenes/LoadScene.ts":[function(require,module,exports) {
@@ -235,62 +235,6 @@ function (_super) {
     this.load.on('load', function (file) {
       console.log("Loaded " + file.key + ".");
     });
-    this.load.tilemapTiledJSON('map', './assets/maps/map.json');
-    this.anims.create({
-      key: 'PLAYER_ANIMATION',
-      frameRate: 4,
-      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
-        prefix: 'player-',
-        start: 1,
-        end: 4,
-        suffix: '.png'
-      }),
-      repeat: -1
-    });
-    this.anims.create({
-      key: 'PLAYER_ANIMATION_NORTH',
-      frameRate: 4,
-      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
-        prefix: 'player-',
-        start: 1,
-        end: 4,
-        suffix: '.png',
-        frames: [1]
-      })
-    });
-    this.anims.create({
-      key: 'PLAYER_ANIMATION_SOUTH',
-      frameRate: 4,
-      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
-        prefix: 'player-',
-        start: 1,
-        end: 4,
-        suffix: '.png',
-        frames: [3]
-      })
-    });
-    this.anims.create({
-      key: 'PLAYER_ANIMATION_EAST',
-      frameRate: 4,
-      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
-        prefix: 'player-',
-        start: 1,
-        end: 4,
-        suffix: '.png',
-        frames: [2]
-      })
-    });
-    this.anims.create({
-      key: 'PLAYER_ANIMATION_WEST',
-      frameRate: 4,
-      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
-        prefix: 'player-',
-        start: 1,
-        end: 4,
-        suffix: '.png',
-        frames: [4]
-      })
-    });
   };
 
   return LoadScene;
@@ -346,11 +290,11 @@ function (_super) {
   MenuScene.prototype.preload = function () {};
 
   MenuScene.prototype.create = function () {
-    // this.sound.play('MENU_MUSIC', {
-    //     loop: true
-    // });
     var _this = this;
 
+    this.sound.play('MENU_MUSIC', {
+      loop: true
+    });
     this.bg = this.add.image(0, 0, 'MENU_BG').setOrigin(0);
     this.bg.alpha = 0.2;
     this.bg.displayWidth = this.game.renderer.width;
@@ -425,7 +369,7 @@ function (_super) {
       key: CST_1.CST.SCENES.GAME
     }) || this;
 
-    _this.speed = 120;
+    _this.speed = 200;
 
     _this.moveNorth = function () {
       _this.player.setVelocityY(-Math.abs(_this.speed));
@@ -454,7 +398,64 @@ function (_super) {
     return _this;
   }
 
-  GameScene.prototype.preload = function () {};
+  GameScene.prototype.preload = function () {
+    this.load.tilemapTiledJSON('map', './assets/maps/map.json');
+    this.anims.create({
+      key: 'PLAYER_ANIMATION',
+      frameRate: 4,
+      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+        prefix: 'player-',
+        start: 1,
+        end: 4,
+        suffix: '.png'
+      }),
+      repeat: -1
+    });
+    this.anims.create({
+      key: 'PLAYER_ANIMATION_NORTH',
+      frameRate: 4,
+      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+        prefix: 'player-',
+        start: 1,
+        end: 4,
+        suffix: '.png',
+        frames: [1]
+      })
+    });
+    this.anims.create({
+      key: 'PLAYER_ANIMATION_SOUTH',
+      frameRate: 4,
+      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+        prefix: 'player-',
+        start: 1,
+        end: 4,
+        suffix: '.png',
+        frames: [3]
+      })
+    });
+    this.anims.create({
+      key: 'PLAYER_ANIMATION_EAST',
+      frameRate: 4,
+      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+        prefix: 'player-',
+        start: 1,
+        end: 4,
+        suffix: '.png',
+        frames: [2]
+      })
+    });
+    this.anims.create({
+      key: 'PLAYER_ANIMATION_WEST',
+      frameRate: 4,
+      frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+        prefix: 'player-',
+        start: 1,
+        end: 4,
+        suffix: '.png',
+        frames: [4]
+      })
+    });
+  };
 
   GameScene.prototype.create = function () {
     var _this = this; // Create a map, terrain, and layers.
@@ -465,7 +466,7 @@ function (_super) {
     var bottomLayer = map.createStaticLayer('FirstLayer', [terrain], 0, 0).setDepth(0);
     var topLayer = map.createStaticLayer('SecondLayer', [terrain], 0, 0).setDepth(2); // Create the player.
 
-    this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-1.png').setScale(2).setDepth(1); // Enabled colliding with objects in the top layer where collides = true.
+    this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-3.png').setScale(2).setDepth(1); // Enabled colliding with objects in the top layer where collides = true.
 
     this.player.body.collideWorldBounds = true;
     this.physics.add.collider(this.player, topLayer);
@@ -476,28 +477,29 @@ function (_super) {
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels); // Create the on-screen buttons used in mobile.
-
-    var buttonPadding = 40;
-    var buttonMargin = 80;
-    var buttonSize = 80;
-    var abtn = this.add.sprite(this.game.renderer.width - buttonPadding - buttonMargin, this.game.renderer.height - buttonPadding, 'GAMEPAD_A').setDepth(4).setOrigin(1, 1);
-    abtn.setDisplaySize(buttonSize, buttonSize);
-    abtn.setScrollFactor(0);
-    var bbtn = this.add.sprite(this.game.renderer.width - buttonPadding, this.game.renderer.height - buttonPadding - buttonMargin, 'GAMEPAD_B').setDepth(4).setOrigin(1, 1);
-    bbtn.setDisplaySize(buttonSize, buttonSize);
-    bbtn.setScrollFactor(0);
-    var xbtn = this.add.sprite(0 + buttonPadding, this.game.renderer.height - buttonPadding - buttonMargin, 'GAMEPAD_X').setDepth(4).setOrigin(0, 1);
-    xbtn.setDisplaySize(buttonSize, buttonSize);
-    xbtn.setScrollFactor(0);
-    var ybtn = this.add.sprite(0 + buttonPadding + buttonMargin, this.game.renderer.height - buttonPadding, 'GAMEPAD_Y').setDepth(4).setOrigin(0, 1);
-    ybtn.setDisplaySize(buttonSize, buttonSize);
-    ybtn.setScrollFactor(0); // Player movement.
+    // var buttonPadding = 40;
+    // var buttonMargin = 80;
+    // var buttonSize = 80;
+    // var abtn = this.add.sprite(this.game.renderer.width - buttonPadding - buttonMargin, this.game.renderer.height - buttonPadding, 'GAMEPAD_A').setDepth(4).setOrigin(1, 1);
+    // abtn.setDisplaySize(buttonSize, buttonSize);
+    // abtn.setScrollFactor(0);
+    // var bbtn = this.add.sprite(this.game.renderer.width - buttonPadding, this.game.renderer.height - buttonPadding - buttonMargin, 'GAMEPAD_B').setDepth(4).setOrigin(1, 1);
+    // bbtn.setDisplaySize(buttonSize, buttonSize);
+    // bbtn.setScrollFactor(0);
+    // var xbtn = this.add.sprite(0 + buttonPadding, this.game.renderer.height - buttonPadding - buttonMargin, 'GAMEPAD_X').setDepth(4).setOrigin(0, 1);
+    // xbtn.setDisplaySize(buttonSize, buttonSize);
+    // xbtn.setScrollFactor(0);
+    // var ybtn = this.add.sprite(0 + buttonPadding + buttonMargin, this.game.renderer.height - buttonPadding, 'GAMEPAD_Y').setDepth(4).setOrigin(0, 1);
+    // ybtn.setDisplaySize(buttonSize, buttonSize);
+    // ybtn.setScrollFactor(0);
+    // Player movement.
 
     this.keyboard = this.input.keyboard.addKeys('W, S, A, D');
     this.input.on('pointerdown', function (pointer) {
       _this.startX = pointer.x;
       _this.startY = pointer.y;
     });
+    this.swipe = {};
     this.input.on('pointerup', function (pointer) {
       _this.swipe = {};
     });
@@ -509,12 +511,12 @@ function (_super) {
     var threshold = 40;
 
     if (this.swipe.direction) {
-      this.physics.moveTo(this.player, pointer.worldX, pointer.worldY, speed);
+      this.physics.moveTo(this.player, pointer.worldX, pointer.worldY, this.speed);
     }
 
     if (pointer.isDown) {
-      // console.log(this.swipe);
-      // console.log(`Start: ${this.startX} ${this.startY}, Current: ${pointer.x} ${pointer.y}`);
+      console.log(this.swipe); // console.log(`Start: ${this.startX} ${this.startY}, Current: ${pointer.x} ${pointer.y}`);
+
       if (pointer.x > this.startX + threshold) {
         this.swipe.right = true;
         this.swipe.direction = 'right';
@@ -569,7 +571,6 @@ function (_super) {
 exports.GameScene = GameScene;
 },{"../CST":"src/CST.ts"}],"src/main.ts":[function(require,module,exports) {
 "use strict";
-/** @type {import("../typings/phaser")} **/
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -582,7 +583,7 @@ var MenuScene_1 = require("./scenes/MenuScene");
 var GameScene_1 = require("./scenes/GameScene");
 
 var config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   scale: {
     mode: Phaser.Scale.FIT,
     width: window.innerWidth / 1.3,
@@ -626,7 +627,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65330" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56013" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

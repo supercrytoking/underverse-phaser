@@ -1,12 +1,9 @@
-/** @type {import("../typings/phaser")} **/
-
-
 import { LoadScene } from './scenes/LoadScene';
 import { MenuScene } from './scenes/MenuScene';
 import { GameScene } from './scenes/GameScene';
 
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     scale: {
         mode: Phaser.Scale.FIT,
         width: window.innerWidth / 1.3,
