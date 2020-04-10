@@ -6,8 +6,8 @@ var config = {
     type: Phaser.CANVAS,
     scale: {
         mode: Phaser.Scale.FIT,
-        width: window.innerWidth / 1.3,
-        height: window.innerHeight / 1.3
+        width: window.innerWidth,
+        height: window.innerHeight
     },
     scene: [
         LoadScene, MenuScene, GameScene

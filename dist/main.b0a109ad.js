@@ -135,6 +135,8 @@ exports.CST = {
     REGISTER_BTN: 'register-button.png',
     PLAYER: 'player.png',
     TERRAIN_ATLAS: 'terrain_atlas.png',
+    SUPER_TILESET: 'super-tileset.png',
+    DARK_TILESET: 'tileset_complet.png',
     GAMEPAD_A: 'gamepad-a.png',
     GAMEPAD_B: 'gamepad-b.png',
     GAMEPAD_X: 'gamepad-x.png',
@@ -399,7 +401,7 @@ function (_super) {
   }
 
   GameScene.prototype.preload = function () {
-    this.load.tilemapTiledJSON('map', './assets/maps/map.json');
+    this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
     this.anims.create({
       key: 'PLAYER_ANIMATION',
       frameRate: 4,
@@ -462,8 +464,9 @@ function (_super) {
 
 
     var map = this.add.tilemap('map');
-    var terrain = map.addTilesetImage('terrain_atlas', 'TERRAIN_ATLAS');
-    var bottomLayer = map.createStaticLayer('FirstLayer', [terrain], 0, 0).setDepth(0);
+    var terrain = map.addTilesetImage('super-tileset', 'SUPER_TILESET');
+    var terrainTwo = map.addTilesetImage('futuristic_tileset', 'DARK_TILESET');
+    var bottomLayer = map.createStaticLayer('FirstLayer', [terrain, terrainTwo], 0, 0).setDepth(0);
     var topLayer = map.createStaticLayer('SecondLayer', [terrain], 0, 0).setDepth(2); // Create the player.
 
     this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-3.png').setScale(2).setDepth(1); // Enabled colliding with objects in the top layer where collides = true.
@@ -494,7 +497,14 @@ function (_super) {
     // ybtn.setScrollFactor(0);
     // Player movement.
 
-    this.keyboard = this.input.keyboard.addKeys('W, S, A, D');
+    this.keyboard = this.input.keyboard.addKeys('W, S, A, D, SHIFT');
+    var shiftKey = this.input.keyboard.addKey('SHIFT');
+    shiftKey.on('down', function (event) {
+      _this.speed = 400;
+    });
+    shiftKey.on('up', function (event) {
+      _this.speed = 200;
+    });
     this.input.on('pointerdown', function (pointer) {
       _this.startX = pointer.x;
       _this.startY = pointer.y;
@@ -553,6 +563,10 @@ function (_super) {
 
     if (this.keyboard.D.isDown) {
       this.moveEast();
+    }
+
+    if (this.keyboard.SHIFT.isDown) {
+      console.log('SHIFT');
     } // Movement reset.
 
 
@@ -586,8 +600,8 @@ var config = {
   type: Phaser.CANVAS,
   scale: {
     mode: Phaser.Scale.FIT,
-    width: window.innerWidth / 1.3,
-    height: window.innerHeight / 1.3
+    width: window.innerWidth,
+    height: window.innerHeight
   },
   scene: [LoadScene_1.LoadScene, MenuScene_1.MenuScene, GameScene_1.GameScene],
   physics: {
@@ -627,7 +641,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56013" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56336" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

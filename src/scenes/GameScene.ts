@@ -7,7 +7,7 @@ export class GameScene extends Phaser.Scene {
         });
     }
     preload() {
-        this.load.tilemapTiledJSON('map', './assets/maps/map.json');
+        this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
 
         this.anims.create({
             key: 'PLAYER_ANIMATION',
@@ -91,11 +91,11 @@ export class GameScene extends Phaser.Scene {
     }
 
     create() {
-
         // Create a map, terrain, and layers.
         let map = this.add.tilemap('map');
-        let terrain = map.addTilesetImage('terrain_atlas', 'TERRAIN_ATLAS');
-        let bottomLayer = map.createStaticLayer('FirstLayer', [terrain], 0, 0).setDepth(0);
+        let terrain = map.addTilesetImage('super-tileset', 'SUPER_TILESET');
+        let terrainTwo = map.addTilesetImage('futuristic_tileset', 'DARK_TILESET');
+        let bottomLayer = map.createStaticLayer('FirstLayer', [terrain, terrainTwo], 0, 0).setDepth(0);
         let topLayer = map.createStaticLayer('SecondLayer', [terrain], 0, 0).setDepth(2);
 
         // Create the player.
@@ -133,7 +133,17 @@ export class GameScene extends Phaser.Scene {
         // ybtn.setScrollFactor(0);
 
         // Player movement.
-        this.keyboard = this.input.keyboard.addKeys('W, S, A, D');
+        this.keyboard = this.input.keyboard.addKeys('W, S, A, D, SHIFT');
+        var shiftKey = this.input.keyboard.addKey('SHIFT');
+
+        shiftKey.on('down', (event) => {
+            this.speed = 400;
+        });
+
+        shiftKey.on('up', (event) => {
+            this.speed = 200;
+        });
+
         this.input.on('pointerdown', (pointer) => {
             this.startX = pointer.x;
             this.startY = pointer.y;
@@ -186,6 +196,10 @@ export class GameScene extends Phaser.Scene {
         }
         if (this.keyboard.D.isDown) {
             this.moveEast();
+        }
+
+        if (this.keyboard.SHIFT.isDown) {
+            console.log('SHIFT');
         }
 
         // Movement reset.

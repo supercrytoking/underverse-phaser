@@ -10,6 +10,8 @@ export const CST = {
         REGISTER_BTN: 'register-button.png',
         PLAYER: 'player.png',
         TERRAIN_ATLAS: 'terrain_atlas.png',
+        SUPER_TILESET: 'super-tileset.png',
+        DARK_TILESET: 'tileset_complet.png',
         GAMEPAD_A: 'gamepad-a.png',
         GAMEPAD_B: 'gamepad-b.png',
         GAMEPAD_X: 'gamepad-x.png',
