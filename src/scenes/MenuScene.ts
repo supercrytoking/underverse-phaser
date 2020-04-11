@@ -35,6 +35,6 @@ export class MenuScene extends Phaser.Scene {
         registerButton.on('pointerdown', () => {
             this.scene.start(CST.SCENES.GAME);
             this.sound.stopAll();
-        }); 
+        });
     }
 }

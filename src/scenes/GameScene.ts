@@ -1,5 +1,10 @@
 import { CST } from '../CST';
 
+import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js';
+import { DigitalGamepad } from '../DigitalGamepad';
+
+const Utils = require('../Utils');
+
 export class GameScene extends Phaser.Scene {
     constructor() {
         super({
@@ -11,11 +16,11 @@ export class GameScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'PLAYER_ANIMATION',
-            frameRate: 4,
+            frameRate: 10,
             frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
                 prefix: 'player-',
                 start: 1,
-                end: 4,
+                end: 41,
                 suffix: '.png'
             }),
             repeat: -1
@@ -23,167 +28,218 @@ export class GameScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'PLAYER_ANIMATION_NORTH',
-            frameRate: 4,
+            frameRate: 10,
             frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
                 prefix: 'player-',
                 start: 1,
-                end: 4,
+                end: 41,
                 suffix: '.png',
-                frames: [1]
-            })
+                frames: [1, 2, 3, 4, 5, 6, 7, 8]
+            }),
+            repeat: -1
         });
 
         this.anims.create({
             key: 'PLAYER_ANIMATION_SOUTH',
-            frameRate: 4,
+            frameRate: 10,
             frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
                 prefix: 'player-',
                 start: 1,
-                end: 4,
+                end: 41,
                 suffix: '.png',
-                frames: [3]
-            })
+                frames: [22, 23, 24, 25, 26, 27, 28, 29]
+            }),
+            repeat: -1
         });
 
         this.anims.create({
             key: 'PLAYER_ANIMATION_EAST',
-            frameRate: 4,
+            frameRate: 20,
             frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
                 prefix: 'player-',
                 start: 1,
-                end: 4,
+                end: 41,
                 suffix: '.png',
-                frames: [2]
-            })
+                frames: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+            }),
+            repeat: -1
         });
 
         this.anims.create({
             key: 'PLAYER_ANIMATION_WEST',
-            frameRate: 4,
+            frameRate: 20,
             frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
                 prefix: 'player-',
                 start: 1,
-                end: 4,
+                end: 41,
                 suffix: '.png',
-                frames: [4]
-            })
+                frames: [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+            }),
+            repeat: -1
         });
     }
 
-    speed = 200;
+    inSpeech = false;
 
-    moveNorth = () => {
-        this.player.setVelocityY(-Math.abs(this.speed));
-        this.player.play('PLAYER_ANIMATION_NORTH');
-    }
-    moveSouth = () => {
-        this.player.setVelocityY(this.speed);
-        this.player.play('PLAYER_ANIMATION_SOUTH');
-    }
-    moveWest = () => {
-        this.player.setVelocityX(-Math.abs(this.speed));
-        this.player.play('PLAYER_ANIMATION_WEST');
-    }
-    
-    moveEast = () => {
-        this.player.setVelocityX(this.speed);
-        this.player.play('PLAYER_ANIMATION_EAST');
-    }
+    create = () => {
+        // Utils.loadGamepad(this);
+        // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
 
-    create() {
+        var gamepad = new DigitalGamepad(this);
+        gamepad.load();
+
+        gamepad.aButton.on('pointerdown', () => {
+            if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
+                console.log('CLOSE!')
+                Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
+            } else {
+                console.log('FAR!');
+            }
+        });
+
+        // Create Joystick
+        var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0.1).setDepth(10);
+        var joystickThumb = this.add.circle(0, 0, 25, 0xFFFFFF, 0.1).setDepth(10);
+
+        this.joystick = new VirtualJoystick(this, {
+            x: 200,
+            y: 200,
+            radius: 50,
+            base: joystickBase,
+            thumb: joystickThumb,
+            // dir: '8dir',
+            // forceMin: 16,
+            // fixed: true,
+            enable: false
+        });
+
+        let joystickMoved = 0;
+        this.joystick.on('update', () => {
+            if (this.joystick.force >= 200) {
+                joystickMoved++;
+                this.joystick.x = this.joystick.pointerX;
+                this.joystick.y = this.joystick.pointerY;
+            }
+
+            if (joystickMoved >= 1) {
+                this.speed = 240;
+                joystickBase.fillColor = 0xFF0000;
+            } else {
+                this.speed = 120;
+            }
+        });
+
+        var joystickArea = this.add.rectangle(0, 0, window.innerWidth / 2, window.innerHeight, 0xFF0000, 0).setScrollFactor(0).setDepth(4).setOrigin(0, 0);
+        joystickArea.setInteractive()
+
+        joystickArea.on('pointerdown', (pointer) => {
+            // Enable joystick on clickdown.
+            this.joystick.x = pointer.x;
+            this.joystick.y = pointer.y;
+            this.joystick.enable = true;
+        });
+
+        this.input.on('pointerup', (pointer) => {
+            // Disable joystick on clickup.
+            this.stopMovement();
+            // this.joystick.enable = false;
+            joystickMoved = 0;
+            joystickBase.fillColor = 0xFFFFFF;
+        })
+
         // Create a map, terrain, and layers.
         let map = this.add.tilemap('map');
-        let terrain = map.addTilesetImage('super-tileset', 'SUPER_TILESET');
-        let terrainTwo = map.addTilesetImage('futuristic_tileset', 'DARK_TILESET');
-        let bottomLayer = map.createStaticLayer('FirstLayer', [terrain, terrainTwo], 0, 0).setDepth(0);
-        let topLayer = map.createStaticLayer('SecondLayer', [terrain], 0, 0).setDepth(2);
+        let tileset = map.addTilesetImage('super-tileset', 'SUPER_TILESET', 32, 32, 1, 2);
+
+        let floorLayer = map.createDynamicLayer('FloorLayer', [tileset], 0, 0);
+        let grassLayer = map.createDynamicLayer('GrassLayer', [tileset], 0, 0);
+        let layerTwo = map.createDynamicLayer('LayerTwo', [tileset], 0, 0).setDepth(2);
 
         // Create the player.
-        this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-3.png').setScale(2).setDepth(1);
+        const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
+        this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
+        // this.player = this.physics.add.sprite(spawnPoint.x + (Math.random() * 100), spawnPoint.y + (Math.random() * 100), 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
+        // this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
+        this.player.body.setSize(this.player.body.width * 0.6, this.player.body.height * 0.6, true);
+        this.player.body.setOffset(this.player.body.width * 0.4, this.player.body.height * 0.6, true);
+        this.player.setScale(2);
+
+        this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ');
+        this.physics.add.collider(this.player, this.npc);
+        this.npc.setImmovable(true);
 
         // Enabled colliding with objects in the top layer where collides = true.
-        this.player.body.collideWorldBounds = true;
-        this.physics.add.collider(this.player, topLayer);
-        topLayer.setCollisionByProperty({ collides: true })
+        this.physics.add.collider(this.player, layerTwo);
+        layerTwo.setCollisionByProperty({ collides: true })
 
         // Lock the camera and set the bounds.
-        this.cameras.main.startFollow(this.player);
+        this.player.body.collideWorldBounds = true;
+        this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
-        // Create the on-screen buttons used in mobile.
-        // var buttonPadding = 40;
-        // var buttonMargin = 80;
-        // var buttonSize = 80;
+        // Keyboard handling...
+        this.keyboard = this.input.keyboard.addKeys('W, S, A, D');
 
-        // var abtn = this.add.sprite(this.game.renderer.width - buttonPadding - buttonMargin, this.game.renderer.height - buttonPadding, 'GAMEPAD_A').setDepth(4).setOrigin(1, 1);
-        // abtn.setDisplaySize(buttonSize, buttonSize);
-        // abtn.setScrollFactor(0);
+        for (var i in this.keyboard) {
+            eval(`this.keyboard.${i}`).on('up', (e) => {
+                this.stopMovement();
+            });
+        }
 
-        // var bbtn = this.add.sprite(this.game.renderer.width - buttonPadding, this.game.renderer.height - buttonPadding - buttonMargin, 'GAMEPAD_B').setDepth(4).setOrigin(1, 1);
-        // bbtn.setDisplaySize(buttonSize, buttonSize);
-        // bbtn.setScrollFactor(0);
+        var actionKey = this.input.keyboard.addKey('Q');
+        actionKey.on('down', (e) => {
+            if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
+                console.log('CLOSE!')
+                Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
+            } else {
+                console.log('FAR!');
+            }
+        });
 
-        // var xbtn = this.add.sprite(0 + buttonPadding, this.game.renderer.height - buttonPadding - buttonMargin, 'GAMEPAD_X').setDepth(4).setOrigin(0, 1);
-        // xbtn.setDisplaySize(buttonSize, buttonSize);
-        // xbtn.setScrollFactor(0);
-
-        // var ybtn = this.add.sprite(0 + buttonPadding + buttonMargin, this.game.renderer.height - buttonPadding, 'GAMEPAD_Y').setDepth(4).setOrigin(0, 1);
-        // ybtn.setDisplaySize(buttonSize, buttonSize);
-        // ybtn.setScrollFactor(0);
-
-        // Player movement.
-        this.keyboard = this.input.keyboard.addKeys('W, S, A, D, SHIFT');
+        this.speed = 120;
         var shiftKey = this.input.keyboard.addKey('SHIFT');
-
         shiftKey.on('down', (event) => {
-            this.speed = 400;
+            this.speed = 240;
         });
-
         shiftKey.on('up', (event) => {
-            this.speed = 200;
+            this.speed = 120;
         });
+        var tabKey = this.input.keyboard.addKey('TAB');
+        tabKey.on('down', (event) => {
+            this.speed = 540;
+        });
+        tabKey.on('up', (event) => {
+            this.speed = 120;
+        });
+    }
 
-        this.input.on('pointerdown', (pointer) => {
-            this.startX = pointer.x;
-            this.startY = pointer.y;
-        })
-        this.swipe = {}
-        this.input.on('pointerup', (pointer) => {
-            this.swipe = {}
-        })
+    moveNorth = () => {
+        this.player.body.velocity.y = -Math.abs(this.speed);
+        this.player.play('PLAYER_ANIMATION_NORTH', true);
+    }
+    moveSouth = () => {
+        this.player.body.velocity.y = this.speed;
+        this.player.play('PLAYER_ANIMATION_SOUTH', true);
+    }
+    moveWest = () => {
+        this.player.body.velocity.x = -Math.abs(this.speed);
+        this.player.play('PLAYER_ANIMATION_WEST', true);
+    }
+    
+    moveEast = () => {
+        this.player.body.velocity.x = this.speed;
+        this.player.play('PLAYER_ANIMATION_EAST', true);
+    }
 
+    stopMovement = () => {
+        this.player.anims.stop();
+        this.player.body.velocity.x = 0;
+        this.player.body.velocity.y = 0;
+        // this.speed = 120;
     }
 
     update(time, delta) {
-        // Player movement.
-        var pointer = this.game.input.activePointer;
-        var threshold = 40;
-
-        if (this.swipe.direction) {
-            this.physics.moveTo(this.player, pointer.worldX, pointer.worldY, this.speed);
-        }
-        if (pointer.isDown) {
-            console.log(this.swipe);
-            // console.log(`Start: ${this.startX} ${this.startY}, Current: ${pointer.x} ${pointer.y}`);
-            if (pointer.x > (this.startX + threshold)) {
-                this.swipe.right = true;
-                this.swipe.direction = 'right';
-            }
-            if (pointer.x < (this.startX - threshold)) {
-                this.swipe.left = true;
-                this.swipe.direction = 'left';
-            }
-            if (pointer.y > (this.startY + threshold)) {
-                this.swipe.down = true;
-                this.swipe.direction = 'down';
-            }
-            if (pointer.y < (this.startY - threshold)) {
-                this.swipe.up = true;
-                this.swipe.direction = 'up';
-            }
-        }
-
         // WSAD movement.
         if (this.keyboard.W.isDown) {
             this.moveNorth();
@@ -198,17 +254,23 @@ export class GameScene extends Phaser.Scene {
             this.moveEast();
         }
 
-        if (this.keyboard.SHIFT.isDown) {
-            console.log('SHIFT');
+        if (this.joystick.up) {
+            this.moveNorth();
+        }
+        if (this.joystick.down) {
+            this.moveSouth();
+        }
+        if (this.joystick.left) {
+            this.moveWest();
+        }
+        if (this.joystick.right) {
+            this.moveEast();
         }
 
-        // Movement reset.
-        if (this.keyboard.W.isUp && this.keyboard.S.isUp && !pointer.isDown) {
-            this.player.setVelocityY(0);
+        if (this.inSpeech) {
+            this.stopMovement();
         }
 
-        if (this.keyboard.A.isUp && this.keyboard.D.isUp && !pointer.isDown) {
-            this.player.setVelocityX(0);
-        }
+        this.player.body.velocity.normalize().scale(this.speed);
     }
 }

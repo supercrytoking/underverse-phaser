@@ -25,14 +25,22 @@ export class LoadScene extends Phaser.Scene {
 
     loadSprites() {
         this.load.setPath(`./assets/sprites`);
-        this.load.atlas('PLAYER_SPRITEZ' 'player-sprites.png', 'player-sprites.json');
+        this.load.atlas('PLAYER_SPRITEZ' 'player-animated-sprites.png', 'player-animated-sprites.json');
+    }
+
+    loadFonts() {
+        this.load.setPath(`./assets/fonts`);
+        this.load.bitmapFont('FONT_PRIMARY', 'game-over.png', 'game-over.fnt');
+        // this.load.bitmapFont('FONT_PRIMARY', 'vcr-osd-mono.png', 'vcr-osd-mono.fnt');
     }
 
     preload() {
         console.log('Loading...');
+
         this.loadImages();
         this.loadAudio();
         this.loadSprites();
+        this.loadFonts();
 
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -41,7 +49,7 @@ export class LoadScene extends Phaser.Scene {
         });
 
         this.load.on('progress', (percentage) => {
-            loadingBar.fillRect(0, this.game.renderer.height - 20, this.game.renderer.width * percentage, 20)
+            loadingBar.fillRect(0, 0, this.game.renderer.width * percentage, this.game.renderer.height)
         });
 
         this.load.on('complete', () => {

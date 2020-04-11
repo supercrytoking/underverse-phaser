@@ -5,7 +5,7 @@ import { GameScene } from './scenes/GameScene';
 var config = {
     type: Phaser.CANVAS,
     scale: {
-        mode: Phaser.Scale.FIT,
+        // mode: Phaser.Scale.FIT,
         width: window.innerWidth,
         height: window.innerHeight
     },
@@ -15,10 +15,14 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
+            gravity: { y: 0 },
             debug: true
         }
-    },
-    pixelArt: true
+    }
 }
 
 let game = new Phaser.Game(config);
+
+window.addEventListener('resize', function (event) {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+}, false);
