@@ -159,11 +159,9 @@ export class GameScene extends Phaser.Scene {
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
         this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png');
-        // this.player = this.physics.add.sprite(spawnPoint.x + (Math.random() * 100), spawnPoint.y + (Math.random() * 100), 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
-        // this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
-        // this.player.body.setSize(this.player.body.width * 0.6, this.player.body.height * 0.6, true);
-        // this.player.body.setOffset(this.player.body.width * 0.4, this.player.body.height * 0.6, true);
         this.player.setScale(2);
+        this.player.body.setSize(this.player.width, this.player.height);
+        // this.player.setCircle(this.player.height / 4, -this.player.width / 4, this.player.height / 2);
 
         this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);;
         this.physics.add.collider(this.player, this.npc);
@@ -174,9 +172,7 @@ export class GameScene extends Phaser.Scene {
         for (var i in this.obs) {
             console.log(this.obs[i]);
             this.physics.add.existing(this.obs[i], true)
-            // this.physics.add.collider(this.player, this.obs[i]);
-            // this.obs[i].body.setSize(this.obs[i].width / 2, this.obs[i].height / 2);
-            // this.obs[i].setDepth(3);
+            this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
         }
 
         // this.add.sprite(100, 100, 'TREE').setScrollFactor(0).setDepth(10);
@@ -252,11 +248,6 @@ export class GameScene extends Phaser.Scene {
     update(time, delta) {
         // console.log(this.npc.depth, this.player.depth);
         this.player.depth = this.player.y + this.player.height / 2;
-        // this.npc.depth = this.npc.y + this.npc.height / 2;
-
-        for (var i in this.obs) {
-            this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
-        }
 
         // WSAD movement.
         if (this.keyboard.W.isDown) {

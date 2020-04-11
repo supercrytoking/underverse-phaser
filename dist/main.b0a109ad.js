@@ -1447,12 +1447,12 @@ function (_super) {
       var spawnPoint = map.findObject("Objects", function (obj) {
         return obj.name === "Spawn";
       });
-      _this.player = _this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png'); // this.player = this.physics.add.sprite(spawnPoint.x + (Math.random() * 100), spawnPoint.y + (Math.random() * 100), 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
-      // this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
-      // this.player.body.setSize(this.player.body.width * 0.6, this.player.body.height * 0.6, true);
-      // this.player.body.setOffset(this.player.body.width * 0.4, this.player.body.height * 0.6, true);
+      _this.player = _this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png');
 
       _this.player.setScale(2);
+
+      _this.player.body.setSize(_this.player.width, _this.player.height); // this.player.setCircle(this.player.height / 4, -this.player.width / 4, this.player.height / 2);
+
 
       _this.npc = _this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);
       ;
@@ -1469,10 +1469,9 @@ function (_super) {
       for (var i in _this.obs) {
         console.log(_this.obs[i]);
 
-        _this.physics.add.existing(_this.obs[i], true); // this.physics.add.collider(this.player, this.obs[i]);
-        // this.obs[i].body.setSize(this.obs[i].width / 2, this.obs[i].height / 2);
-        // this.obs[i].setDepth(3);
+        _this.physics.add.existing(_this.obs[i], true);
 
+        _this.obs[i].setDepth(_this.obs[i].y + _this.obs[i].height / 2);
       } // this.add.sprite(100, 100, 'TREE').setScrollFactor(0).setDepth(10);
       // Enabled colliding with objects in the top layer where collides = true.
       // this.physics.add.collider(this.player, layerTwo);
@@ -1624,12 +1623,7 @@ function (_super) {
 
   GameScene.prototype.update = function (time, delta) {
     // console.log(this.npc.depth, this.player.depth);
-    this.player.depth = this.player.y + this.player.height / 2; // this.npc.depth = this.npc.y + this.npc.height / 2;
-
-    for (var i in this.obs) {
-      this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
-    } // WSAD movement.
-
+    this.player.depth = this.player.y + this.player.height / 2; // WSAD movement.
 
     if (this.keyboard.W.isDown) {
       this.moveNorth();
@@ -1700,8 +1694,7 @@ var config = {
     arcade: {
       gravity: {
         y: 0
-      },
-      debug: true
+      }
     }
   }
 };
@@ -1737,7 +1730,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49386" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51497" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
