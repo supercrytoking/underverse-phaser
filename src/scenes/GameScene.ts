@@ -190,10 +190,7 @@ export class GameScene extends Phaser.Scene {
         var actionKey = this.input.keyboard.addKey('Q');
         actionKey.on('down', (e) => {
             if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
-                console.log('CLOSE!')
                 Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
-            } else {
-                console.log('FAR!');
             }
         });
 

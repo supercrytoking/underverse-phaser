@@ -1489,10 +1489,7 @@ function (_super) {
 
       actionKey.on('down', function (e) {
         if (Phaser.Math.Distance.Between(_this.player.x, _this.player.y, _this.npc.x, _this.npc.y) < 50) {
-          console.log('CLOSE!');
           Utils.addSpeechModal(_this, ['Nice, it works!', "When you get close and press Q, I'll talk to you."]);
-        } else {
-          console.log('FAR!');
         }
       });
       _this.speed = 120;
