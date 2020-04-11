@@ -1225,7 +1225,7 @@ function () {
     this.buttonSize = 80;
 
     if (scene.game.renderer.width <= 600) {
-      this.buttonPadding = 20;
+      this.buttonPadding = 40;
       this.buttonMargin = 40;
       this.buttonSize = 40;
     }
