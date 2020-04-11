@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"lib/phaser.min.js":[function(require,module,exports) {
+})({"src/phaser.min.js":[function(require,module,exports) {
 var define;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -39653,7 +39653,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64413" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49516" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -39829,5 +39829,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","lib/phaser.min.js"], null)
-//# sourceMappingURL=/phaser.min.38f74be7.js.map
+},{}]},{},["../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/phaser.min.js"], null)
+//# sourceMappingURL=/phaser.min.dfc2c877.js.map
