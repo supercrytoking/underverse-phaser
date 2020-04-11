@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/css/main.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA","file":"main.1603664a.css","sourceRoot":"..","sourcesContent":["body, html {\n    margin: 0;\n    background-color: lightskyblue;\n    height: 100%;\n    overflow: hidden;\n}"]}

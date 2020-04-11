@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.css"],"names":[],"mappings":"AAAA,UACI,QAAS,CACT,wBAA8B,CAC9B,WAAY,CACZ,eACJ","file":"main.0f595149.css","sourceRoot":"..","sourcesContent":["body, html {\n    margin: 0;\n    background-color: lightskyblue;\n    height: 100%;\n    overflow: hidden;\n}"]}

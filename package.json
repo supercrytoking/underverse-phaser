@@ -2,6 +2,7 @@
   "devDependencies": {
     "cssnano": "^4.1.10",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
@@ -9,5 +10,10 @@
     "http": "0.0.1-security",
     "phaser3-rex-plugins": "^1.1.11",
     "socket.io": "^2.3.0"
+  },
+  "staticFiles": {
+    "staticPath": [
+      "./public"
+    ]
   }
 }
