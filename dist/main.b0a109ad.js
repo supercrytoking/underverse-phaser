@@ -137,7 +137,8 @@ exports.CST = {
     GAMEPAD_A: 'gamepad-a.png',
     GAMEPAD_B: 'gamepad-b.png',
     GAMEPAD_X: 'gamepad-x.png',
-    GAMEPAD_Y: 'gamepad-y.png'
+    GAMEPAD_Y: 'gamepad-y.png',
+    TREE: 'green-tree.png'
   },
   AUDIO: {
     MENU_MUSIC: 'menu-music.mp3',
@@ -1440,12 +1441,7 @@ function (_super) {
 
       var tileset = map.addTilesetImage('super-tileset', 'SUPER_TILESET', 32, 32, 1, 2);
       var floorLayer = map.createDynamicLayer('FloorLayer', [tileset], 0, 0);
-      var grassLayer = map.createDynamicLayer('GrassLayer', [tileset], 0, 0);
-      var layerTwo = map.createDynamicLayer('LayerTwo', [tileset], 0, 0).setDepth(2); // var lootObjects = map.createFromObjects('Loot', 994, {key: 'PLAYER_SPRITEZ'});
-      // var lootGroup = this.physics.add.group();
-      // for (var i in lootObjects) {
-      //     lootGroup.add(lootObjects[i]);
-      // }
+      var grassLayer = map.createDynamicLayer('GrassLayer', [tileset], 0, 0); // map.createFromObjects();
       // Create the player.
 
       var spawnPoint = map.findObject("Objects", function (obj) {
@@ -1461,14 +1457,28 @@ function (_super) {
       _this.npc = _this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);
       ;
 
-      _this.npc.setImmovable(true); // Enabled colliding with objects in the top layer where collides = true.
+      _this.physics.add.collider(_this.player, _this.npc);
+
+      _this.npc.setImmovable(true); // console.log(this.npc);
 
 
-      _this.physics.add.collider(_this.player, layerTwo);
+      _this.obs = map.createFromTiles(51, -1, {
+        key: 'TREE'
+      }, _this, _this.cameras.main, grassLayer);
 
-      layerTwo.setCollisionByProperty({
-        collides: true
-      }); // Lock the camera and set the bounds.
+      for (var i in _this.obs) {
+        console.log(_this.obs[i]);
+
+        _this.physics.add.existing(_this.obs[i], true); // this.physics.add.collider(this.player, this.obs[i]);
+        // this.obs[i].body.setSize(this.obs[i].width / 2, this.obs[i].height / 2);
+        // this.obs[i].setDepth(3);
+
+      } // this.add.sprite(100, 100, 'TREE').setScrollFactor(0).setDepth(10);
+      // Enabled colliding with objects in the top layer where collides = true.
+      // this.physics.add.collider(this.player, layerTwo);
+      // layerTwo.setCollisionByProperty({ collides: true })
+      // Lock the camera and set the bounds.
+
 
       _this.player.body.collideWorldBounds = true;
 
@@ -1491,7 +1501,7 @@ function (_super) {
 
       actionKey.on('down', function (e) {
         if (Phaser.Math.Distance.Between(_this.player.x, _this.player.y, _this.npc.x, _this.npc.y) < 50) {
-          Utils.addSpeechModal(_this, ['Nice, it works!', "When you get close and press Q, I'll talk to you."]);
+          Utils.addSpeechModal(_this, ['Nice, it works!', "When you get close and press Q, I'll talk to you.", 'SUCK ME!', 'WHAT UP!']);
         }
       });
       _this.speed = 120;
@@ -1610,14 +1620,17 @@ function (_super) {
       }),
       repeat: -1
     });
-    this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
   };
 
   GameScene.prototype.update = function (time, delta) {
     // console.log(this.npc.depth, this.player.depth);
-    // this.player.depth = this.player.y + this.player.height / 2;
-    // this.npc.depth = this.npc.y + this.npc.height / 2;
-    // WSAD movement.
+    this.player.depth = this.player.y + this.player.height / 2; // this.npc.depth = this.npc.y + this.npc.height / 2;
+
+    for (var i in this.obs) {
+      this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
+    } // WSAD movement.
+
+
     if (this.keyboard.W.isDown) {
       this.moveNorth();
     }
@@ -1724,7 +1737,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50652" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49386" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

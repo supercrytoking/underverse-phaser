@@ -12,7 +12,8 @@ export const CST = {
         GAMEPAD_A: 'gamepad-a.png',
         GAMEPAD_B: 'gamepad-b.png',
         GAMEPAD_X: 'gamepad-x.png',
-        GAMEPAD_Y: 'gamepad-y.png'
+        GAMEPAD_Y: 'gamepad-y.png',
+        TREE: 'green-tree.png'
     },
     AUDIO: {
         MENU_MUSIC: 'menu-music.mp3',
