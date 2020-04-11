@@ -53,8 +53,8 @@ export class LoadScene extends Phaser.Scene {
         });
 
         this.load.on('complete', () => {
-            this.scene.start(CST.SCENES.MENU);
-            // this.scene.start(CST.SCENES.GAME);
+            // this.scene.start(CST.SCENES.MENU);
+            this.scene.start(CST.SCENES.GAME);
         });
 
         this.load.on('load', (file: Phaser.Loader.File) => {

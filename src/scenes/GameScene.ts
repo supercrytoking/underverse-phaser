@@ -77,6 +77,8 @@ export class GameScene extends Phaser.Scene {
             }),
             repeat: -1
         });
+
+        this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
     }
 
     inSpeech = false;
@@ -155,17 +157,23 @@ export class GameScene extends Phaser.Scene {
         let grassLayer = map.createDynamicLayer('GrassLayer', [tileset], 0, 0);
         let layerTwo = map.createDynamicLayer('LayerTwo', [tileset], 0, 0).setDepth(2);
 
+        // var lootObjects = map.createFromObjects('Loot', 994, {key: 'PLAYER_SPRITEZ'});
+        // var lootGroup = this.physics.add.group();
+
+        // for (var i in lootObjects) {
+        //     lootGroup.add(lootObjects[i]);
+        // }
+
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
-        this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
+        this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png');
         // this.player = this.physics.add.sprite(spawnPoint.x + (Math.random() * 100), spawnPoint.y + (Math.random() * 100), 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
         // this.player = this.physics.add.sprite(100, 100, 'PLAYER_SPRITEZ', 'player-20.png').setDepth(2);
-        this.player.body.setSize(this.player.body.width * 0.6, this.player.body.height * 0.6, true);
-        this.player.body.setOffset(this.player.body.width * 0.4, this.player.body.height * 0.6, true);
+        // this.player.body.setSize(this.player.body.width * 0.6, this.player.body.height * 0.6, true);
+        // this.player.body.setOffset(this.player.body.width * 0.4, this.player.body.height * 0.6, true);
         this.player.setScale(2);
 
-        this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ');
-        this.physics.add.collider(this.player, this.npc);
+        this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);;
         this.npc.setImmovable(true);
 
         // Enabled colliding with objects in the top layer where collides = true.
@@ -237,6 +245,10 @@ export class GameScene extends Phaser.Scene {
     }
 
     update(time, delta) {
+        // console.log(this.npc.depth, this.player.depth);
+        // this.player.depth = this.player.y + this.player.height / 2;
+        // this.npc.depth = this.npc.y + this.npc.height / 2;
+
         // WSAD movement.
         if (this.keyboard.W.isDown) {
             this.moveNorth();
