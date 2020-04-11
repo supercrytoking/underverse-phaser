@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/CST.ts":[function(require,module,exports) {
+})({"mOOU":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -145,7 +145,7 @@ exports.CST = {
     QUESTION_004: 'question_004.mp3'
   }
 };
-},{}],"src/scenes/LoadScene.ts":[function(require,module,exports) {
+},{}],"G1z3":[function(require,module,exports) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
@@ -248,7 +248,7 @@ function (_super) {
 }(Phaser.Scene);
 
 exports.LoadScene = LoadScene;
-},{"../CST":"src/CST.ts"}],"src/scenes/MenuScene.ts":[function(require,module,exports) {
+},{"../CST":"mOOU"}],"OuKZ":[function(require,module,exports) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
@@ -331,7 +331,7 @@ function (_super) {
 }(Phaser.Scene);
 
 exports.MenuScene = MenuScene;
-},{"../CST":"src/CST.ts"}],"node_modules/phaser3-rex-plugins/plugins/utils/input/CursorKeys.js":[function(require,module,exports) {
+},{"../CST":"mOOU"}],"E7km":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -424,7 +424,7 @@ var fakeEvent = {
 };
 var _default = CursorKeys;
 exports.default = _default;
-},{}],"node_modules/phaser3-rex-plugins/plugins/utils/math/RadToDeg.js":[function(require,module,exports) {
+},{}],"dAmX":[function(require,module,exports) {
 /**
  * @author       Richard Davey <rich@photonstorm.com>
  * @copyright    2018 Photon Storm Ltd.
@@ -450,7 +450,7 @@ var RadToDeg = function (radians)
 
 module.exports = RadToDeg;
 
-},{}],"node_modules/phaser3-rex-plugins/plugins/utils/math/angle/angletodirections/Const.js":[function(require,module,exports) {
+},{}],"Evo2":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -464,7 +464,7 @@ var _default = {
   '8dir': 3
 };
 exports.default = _default;
-},{}],"node_modules/phaser3-rex-plugins/plugins/utils/math/angle/angletodirections/AngleToDirections.js":[function(require,module,exports) {
+},{}],"HbmB":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -553,7 +553,7 @@ var AngleToDirections = function (angle, dirMode, out) {
 var tmpOut = {};
 var _default = AngleToDirections;
 exports.default = _default;
-},{}],"node_modules/phaser3-rex-plugins/plugins/utils/input/VectorToCursorKeys.js":[function(require,module,exports) {
+},{}],"J4Il":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -741,7 +741,7 @@ class VectorToCursorKeys extends _CursorKeys.default {
 
 var _default = VectorToCursorKeys;
 exports.default = _default;
-},{"./CursorKeys.js":"node_modules/phaser3-rex-plugins/plugins/utils/input/CursorKeys.js","../math/RadToDeg.js":"node_modules/phaser3-rex-plugins/plugins/utils/math/RadToDeg.js","../math/angle/angletodirections/Const.js":"node_modules/phaser3-rex-plugins/plugins/utils/math/angle/angletodirections/Const.js","../math/angle/angletodirections/AngleToDirections.js":"node_modules/phaser3-rex-plugins/plugins/utils/math/angle/angletodirections/AngleToDirections.js"}],"node_modules/phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitterMethods.js":[function(require,module,exports) {
+},{"./CursorKeys.js":"E7km","../math/RadToDeg.js":"dAmX","../math/angle/angletodirections/Const.js":"Evo2","../math/angle/angletodirections/AngleToDirections.js":"HbmB"}],"xEtu":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -836,7 +836,7 @@ var _default = {
   }
 };
 exports.default = _default;
-},{}],"node_modules/phaser3-rex-plugins/plugins/input/touchcursor/TouchCursor.js":[function(require,module,exports) {
+},{}],"dQRj":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -941,7 +941,7 @@ class TouchCursor extends _VectorToCursorKeys.default {
 Object.assign(TouchCursor.prototype, _EventEmitterMethods.default);
 var _default = TouchCursor;
 exports.default = _default;
-},{"../../utils/input/VectorToCursorKeys.js":"node_modules/phaser3-rex-plugins/plugins/utils/input/VectorToCursorKeys.js","../../utils/eventemitter/EventEmitterMethods.js":"node_modules/phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitterMethods.js"}],"node_modules/phaser3-rex-plugins/plugins/touchcursor.js":[function(require,module,exports) {
+},{"../../utils/input/VectorToCursorKeys.js":"J4Il","../../utils/eventemitter/EventEmitterMethods.js":"xEtu"}],"z0Jf":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -955,7 +955,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = _TouchCursor.default;
 exports.default = _default;
-},{"./input/touchcursor/TouchCursor.js":"node_modules/phaser3-rex-plugins/plugins/input/touchcursor/TouchCursor.js"}],"node_modules/phaser3-rex-plugins/plugins/input/virtualjoystick/VirtualJoyStick.js":[function(require,module,exports) {
+},{"./input/touchcursor/TouchCursor.js":"dQRj"}],"K2E2":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1194,7 +1194,7 @@ class VirtualJoyStick {
 Object.assign(VirtualJoyStick.prototype, _EventEmitterMethods.default);
 var _default = VirtualJoyStick;
 exports.default = _default;
-},{"../../touchcursor.js":"node_modules/phaser3-rex-plugins/plugins/touchcursor.js","../../utils/eventemitter/EventEmitterMethods.js":"node_modules/phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitterMethods.js"}],"node_modules/phaser3-rex-plugins/plugins/virtualjoystick.js":[function(require,module,exports) {
+},{"../../touchcursor.js":"z0Jf","../../utils/eventemitter/EventEmitterMethods.js":"xEtu"}],"CLP5":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1208,7 +1208,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = _VirtualJoyStick.default;
 exports.default = _default;
-},{"./input/virtualjoystick/VirtualJoyStick.js":"node_modules/phaser3-rex-plugins/plugins/input/virtualjoystick/VirtualJoyStick.js"}],"src/DigitalGamepad.ts":[function(require,module,exports) {
+},{"./input/virtualjoystick/VirtualJoyStick.js":"K2E2"}],"bHBy":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1256,7 +1256,7 @@ function () {
 }();
 
 exports.DigitalGamepad = DigitalGamepad;
-},{}],"src/Utils.js":[function(require,module,exports) {
+},{}],"osRP":[function(require,module,exports) {
 exports.addSpeechModal = function (scene, string) {
   if (scene.inSpeech) return;
   scene.inSpeech = true;
@@ -1311,7 +1311,7 @@ exports.addSpeechModal = function (scene, string) {
 
   openSpeech(string);
 };
-},{}],"src/scenes/GameScene.ts":[function(require,module,exports) {
+},{}],"lJBV":[function(require,module,exports) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
@@ -1655,7 +1655,7 @@ function (_super) {
 }(Phaser.Scene);
 
 exports.GameScene = GameScene;
-},{"../CST":"src/CST.ts","phaser3-rex-plugins/plugins/virtualjoystick.js":"node_modules/phaser3-rex-plugins/plugins/virtualjoystick.js","../DigitalGamepad":"src/DigitalGamepad.ts","../Utils":"src/Utils.js"}],"src/main.ts":[function(require,module,exports) {
+},{"../CST":"mOOU","phaser3-rex-plugins/plugins/virtualjoystick.js":"CLP5","../DigitalGamepad":"bHBy","../Utils":"osRP"}],"jP6t":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1690,209 +1690,5 @@ var game = new Phaser.Game(config);
 window.addEventListener('resize', function (event) {
   game.scale.resize(window.innerWidth, window.innerHeight);
 }, false);
-},{"./scenes/LoadScene":"src/scenes/LoadScene.ts","./scenes/MenuScene":"src/scenes/MenuScene.ts","./scenes/GameScene":"src/scenes/GameScene.ts"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
-var global = arguments[3];
-var OVERLAY_ID = '__parcel__error__overlay__';
-var OldModule = module.bundle.Module;
-
-function Module(moduleName) {
-  OldModule.call(this, moduleName);
-  this.hot = {
-    data: module.bundle.hotData,
-    _acceptCallbacks: [],
-    _disposeCallbacks: [],
-    accept: function (fn) {
-      this._acceptCallbacks.push(fn || function () {});
-    },
-    dispose: function (fn) {
-      this._disposeCallbacks.push(fn);
-    }
-  };
-  module.bundle.hotData = null;
-}
-
-module.bundle.Module = Module;
-var checkedAssets, assetsToAccept;
-var parent = module.bundle.parent;
-
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = "" || location.hostname;
-  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49516" + '/');
-
-  ws.onmessage = function (event) {
-    checkedAssets = {};
-    assetsToAccept = [];
-    var data = JSON.parse(event.data);
-
-    if (data.type === 'update') {
-      var handled = false;
-      data.assets.forEach(function (asset) {
-        if (!asset.isNew) {
-          var didAccept = hmrAcceptCheck(global.parcelRequire, asset.id);
-
-          if (didAccept) {
-            handled = true;
-          }
-        }
-      }); // Enable HMR for CSS by default.
-
-      handled = handled || data.assets.every(function (asset) {
-        return asset.type === 'css' && asset.generated.js;
-      });
-
-      if (handled) {
-        console.clear();
-        data.assets.forEach(function (asset) {
-          hmrApply(global.parcelRequire, asset);
-        });
-        assetsToAccept.forEach(function (v) {
-          hmrAcceptRun(v[0], v[1]);
-        });
-      } else if (location.reload) {
-        // `location` global exists in a web worker context but lacks `.reload()` function.
-        location.reload();
-      }
-    }
-
-    if (data.type === 'reload') {
-      ws.close();
-
-      ws.onclose = function () {
-        location.reload();
-      };
-    }
-
-    if (data.type === 'error-resolved') {
-      console.log('[parcel] ✨ Error resolved');
-      removeErrorOverlay();
-    }
-
-    if (data.type === 'error') {
-      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
-      removeErrorOverlay();
-      var overlay = createErrorOverlay(data);
-      document.body.appendChild(overlay);
-    }
-  };
-}
-
-function removeErrorOverlay() {
-  var overlay = document.getElementById(OVERLAY_ID);
-
-  if (overlay) {
-    overlay.remove();
-  }
-}
-
-function createErrorOverlay(data) {
-  var overlay = document.createElement('div');
-  overlay.id = OVERLAY_ID; // html encode message and stack trace
-
-  var message = document.createElement('div');
-  var stackTrace = document.createElement('pre');
-  message.innerText = data.error.message;
-  stackTrace.innerText = data.error.stack;
-  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
-  return overlay;
-}
-
-function getParents(bundle, id) {
-  var modules = bundle.modules;
-
-  if (!modules) {
-    return [];
-  }
-
-  var parents = [];
-  var k, d, dep;
-
-  for (k in modules) {
-    for (d in modules[k][1]) {
-      dep = modules[k][1][d];
-
-      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
-        parents.push(k);
-      }
-    }
-  }
-
-  if (bundle.parent) {
-    parents = parents.concat(getParents(bundle.parent, id));
-  }
-
-  return parents;
-}
-
-function hmrApply(bundle, asset) {
-  var modules = bundle.modules;
-
-  if (!modules) {
-    return;
-  }
-
-  if (modules[asset.id] || !bundle.parent) {
-    var fn = new Function('require', 'module', 'exports', asset.generated.js);
-    asset.isNew = !modules[asset.id];
-    modules[asset.id] = [fn, asset.deps];
-  } else if (bundle.parent) {
-    hmrApply(bundle.parent, asset);
-  }
-}
-
-function hmrAcceptCheck(bundle, id) {
-  var modules = bundle.modules;
-
-  if (!modules) {
-    return;
-  }
-
-  if (!modules[id] && bundle.parent) {
-    return hmrAcceptCheck(bundle.parent, id);
-  }
-
-  if (checkedAssets[id]) {
-    return;
-  }
-
-  checkedAssets[id] = true;
-  var cached = bundle.cache[id];
-  assetsToAccept.push([bundle, id]);
-
-  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
-    return true;
-  }
-
-  return getParents(global.parcelRequire, id).some(function (id) {
-    return hmrAcceptCheck(global.parcelRequire, id);
-  });
-}
-
-function hmrAcceptRun(bundle, id) {
-  var cached = bundle.cache[id];
-  bundle.hotData = {};
-
-  if (cached) {
-    cached.hot.data = bundle.hotData;
-  }
-
-  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
-    cached.hot._disposeCallbacks.forEach(function (cb) {
-      cb(bundle.hotData);
-    });
-  }
-
-  delete bundle.cache[id];
-  bundle(id);
-  cached = bundle.cache[id];
-
-  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
-    cached.hot._acceptCallbacks.forEach(function (cb) {
-      cb();
-    });
-
-    return true;
-  }
-}
-},{}]},{},["../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.ts"], null)
-//# sourceMappingURL=/main.b0a109ad.js.map
+},{"./scenes/LoadScene":"G1z3","./scenes/MenuScene":"OuKZ","./scenes/GameScene":"lJBV"}]},{},["jP6t"], null)
+//# sourceMappingURL=/main.a11b193d.js.map
