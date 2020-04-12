@@ -19,7 +19,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            // debug: true
         }
     },
     plugins: {
@@ -38,4 +38,8 @@ let game = new Phaser.Game(config);
 
 window.addEventListener('resize', function (event) {
     game.scale.resize(window.innerWidth, window.innerHeight);
+
+    if (game.scene.isActive('VGP')) {
+        game.scene.getScene('VGP').scene.restart();
+    }
 }, false);

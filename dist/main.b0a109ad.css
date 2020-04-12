@@ -9,7 +9,6 @@
     z-index: 99;
     width: 100%;
     bottom: 0;
-    color: white;
     padding: 50px;
     font-family: 'VT323', monospace;
 }
@@ -20,16 +19,19 @@
 }
 
 .speech-bubble .contain {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
+    color: black;
     height: 25vh;
     padding: 20px;
     border-radius: 6px;
-    border: 5px solid rgba(0, 0, 0, 0.5);
+    border: 20px solid rgb(202, 114, 114);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     
 }
 
 .speech-name {
-    font-size: 1.6em;
+    font-size: 2em;
+    text-transform: uppercase;
     margin-bottom: 10px;
 }
 

@@ -9,18 +9,23 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "express": "^4.17.1",
     "http": "0.0.1-security",
+    "mysql": "^2.18.1",
     "parcel-plugin-change-file": "^1.3.0",
+    "parcel-plugin-static-files-copy": "^2.3.1",
     "phaser": "^3.22.0",
     "phaser3-react": "^1.1.1",
     "phaser3-rex-plugins": "^1.1.11",
+    "random": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "socket.io": "^2.3.0"
   },
   "parcel-plugin-change-file": {
     "timeout": 30,
-    "replaceName": "parcel-plugin-change-file",
-    "copy": [
+    "replaceName": "parcel-plugin-change-file"
+  },
+  "staticFiles": {
+    "staticPath": [
       "public"
     ]
   }

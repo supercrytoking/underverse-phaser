@@ -1,6 +1,7 @@
 import { CST } from '../CST';
 
 const Utils = require('../Utils');
+var r = require('random');
 
 export class GameScene extends Phaser.Scene {
     constructor() {
@@ -10,6 +11,19 @@ export class GameScene extends Phaser.Scene {
     }
     preload() {
         this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
+
+        this.anims.create({
+            key: 'ANIMATED_TREE',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('TREE_SPRITE', {
+                prefix: 'frame_',
+                start: 1,
+                end: 13,
+                suffix: '.gif',
+                frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+            }),
+            repeat: -1
+        });
 
         this.anims.create({
             key: 'PLAYER_ANIMATION',
@@ -82,34 +96,42 @@ export class GameScene extends Phaser.Scene {
         this.scene.launch(CST.SCENES.VGP, this);
 
         // Create a map, terrain, and layers.
-        let map = this.add.tilemap('map');
+        let map = this.add.tilemap('map')
         let tileset = map.addTilesetImage('super-tileset', 'SUPER_TILESET', 32, 32, 1, 2);
 
-        let floorLayer = map.createDynamicLayer('FloorLayer', [tileset], 0, 0);
-        let grassLayer = map.createDynamicLayer('GrassLayer', [tileset], 0, 0);
-        let waterLayer = map.createDynamicLayer('WaterLayer', [tileset], 0, 0);
-        let bridgeLayer = map.createDynamicLayer('BridgeLayer', [tileset], 0, 0);
-
-        // map.createFromObjects();
+        let floorLayer = map.createStaticLayer('FloorLayer', [tileset], 0, 0).setScale(2);
+        let grassLayer = map.createStaticLayer('GrassLayer', [tileset], 0, 0).setScale(2);
+        let treeLayer = map.createStaticLayer('TreeLayer', [tileset], 0, 0).setScale(2);
+        let waterLayer = map.createStaticLayer('WaterLayer', [tileset], 0, 0).setScale(2);
+        let bridgeLayer = map.createStaticLayer('BridgeLayer', [tileset], 0, 0).setScale(2);
+        this.cameras.main.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
+        this.physics.world.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
 
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
-        this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png');
-        this.player.body.setSize(this.player.width, this.player.height / 2);
-        this.player.setOffset(0, this.player.height / 2)
+        this.player = this.physics.add.sprite(spawnPoint.x * 2, spawnPoint.y * 2, 'PLAYER_SPRITEZ', 'player-20.png');
+        this.player.body.setSize(this.player.width, this.player.height / 4);
+        this.player.setOffset(0, this.player.height - (this.player.height / 4))
         this.player.setScale(2);
         // this.player.setCircle(this.player.height / 4, -this.player.width / 4, this.player.height / 2);
 
-        this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);;
+        this.npc = this.physics.add.sprite(spawnPoint.x * 2 + 3, spawnPoint.y * 2, 'PLAYER_SPRITEZ').setScale(2);;
         this.physics.add.collider(this.player, this.npc);
         this.npc.setImmovable(true);
         this.npc.setDepth(this.npc.y + this.npc.height / 2)
         
         // console.log(this.npc);
-        this.obs = map.createFromTiles(51, -1, {key: 'TREE'}, this, this.cameras.main, grassLayer);
+        this.obs = map.createFromTiles(51, -1, {key: 'TREE'}, this, this.cameras.main, treeLayer);
         for (var i in this.obs) {
+            this.obs[i].x = this.obs[i].x + r.int(0, 64);
+            this.obs[i].y = this.obs[i].y + r.int(0, 64);
+            this.obs[i].setScale(r.float(1, 2));
             this.physics.add.existing(this.obs[i], true)
             this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
+            this.obs[i].body.setSize(this.obs[i].body.width / 2, this.obs[i].body.height / 4);
+            this.obs[i].body.setOffset(this.obs[i].body.width / 2, this.obs[i].body.height * 3);
+            this.physics.add.collider(this.player, this.obs[i]);
+            this.obs[i].play('ANIMATED_TREE');
         }
 
         // this.add.sprite(100, 100, 'TREE').setScrollFactor(0).setDepth(10);
@@ -121,8 +143,6 @@ export class GameScene extends Phaser.Scene {
         // Lock the camera and set the bounds.
         this.player.body.collideWorldBounds = true;
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
         // Keyboard handling...
         this.keyboard = this.input.keyboard.addKeys('W, S, A, D');
@@ -137,7 +157,7 @@ export class GameScene extends Phaser.Scene {
         actionKey.on('down', (e) => {
             if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
                 // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`, 'SUCK ME!', 'WHAT UP!']);
-                Utils.reactSpeechBubble(this, 'The King', ['Nice, it works!', `When you get close and press Q, I'll talk to you.`])
+                Utils.reactSpeechBubble(this, 'The King', ['Nice, it works!', `When you get close and press Q, I'll talk to you.`, `This is an example of NPC interaction in the UNDERVERSE. These views are made in React!`])
 
             }
         });
@@ -186,7 +206,7 @@ export class GameScene extends Phaser.Scene {
 
     update(time, delta) {
         // console.log(this.npc.depth, this.player.depth);
-        this.player.depth = this.player.y + this.player.height / 2;
+        this.player.depth = this.player.y + this.player.height;
 
         // WSAD movement.
         if (this.keyboard.W.isDown) {

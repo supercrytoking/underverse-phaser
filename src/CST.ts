@@ -6,7 +6,7 @@ export const CST = {
         VGP: 'VGP'
     },
     IMAGES: {
-        MENU_BG: 'menu-background.png',
+        MENU_BG: 'menu-background.jpg',
         LOGIN_BTN: 'login-button.png',
         REGISTER_BTN: 'register-button.png',
         SUPER_TILESET: 'super-tileset-extruded.png',
@@ -14,7 +14,9 @@ export const CST = {
         GAMEPAD_B: 'gamepad-b.png',
         GAMEPAD_X: 'gamepad-x.png',
         GAMEPAD_Y: 'gamepad-y.png',
-        TREE: 'green-tree.png'
+        TREE: 'green-tree.png',
+        SETTINGS_BUTTON: 'settings-button.png',
+        LOGO: 'underverse-logo.png',
     },
     AUDIO: {
         MENU_MUSIC: 'menu-music.mp3',

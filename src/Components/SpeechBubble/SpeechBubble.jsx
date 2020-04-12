@@ -12,27 +12,38 @@ class SpeechBubble extends React.Component {
             hide: false
         }
 
-        console.log(this.props);
+        this.enableActionKey();
+    }
+
+    enableActionKey = () => {
+        this.actionKey = this.props.scene.input.keyboard.addKey('Q');
+        this.actionKey.once('down', () => {
+            console.log('!Q!');
+            this.onClick();
+        });
     }
 
     onClick = () => {
-        this.props.scene.sound.play('CONFIRMATION_OO2', {volume: 0.5});
-
         var messages = this.state.messages;
+
+        if (messages.length <= 1) {
+            this.setState({
+                hide: true
+            });
+            this.props.closeSpeechBubble();
+            return;
+        }
+
+        this.props.scene.sound.play('CONFIRMATION_OO2', {volume: 0.5});
 
         messages.shift();
         console.log(messages);
 
         this.setState({
             messages: messages
-        })
+        });
 
-        if (!messages.length) {
-            this.setState({
-                hide: true
-            });
-            this.props.closeSpeechBubble();
-        }
+        this.enableActionKey();
     }
 
     render() {

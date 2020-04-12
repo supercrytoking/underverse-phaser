@@ -62,9 +62,9 @@ exports.reactSpeechBubble = (scene, name, messages) => {
     }
 
     var config = {
-        scene: scene,
-        name: name,
-        messages: messages,
+        scene,
+        name,
+        messages,
         closeSpeechBubble
     }
 

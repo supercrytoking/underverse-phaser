@@ -24,6 +24,15 @@ export class VirtualGamepadScene extends Phaser.Scene {
     }
 
     create() {
+        var settingsButton = this.add.image(this.game.renderer.width - 20, 20, 'SETTINGS_BUTTON')
+            .setOrigin(1, 0)
+            .setDisplaySize(40, 40)
+            .setInteractive();
+
+         settingsButton.on('pointerdown', () => {
+             console.log('Down!');
+         });
+
         // VGP buttons.
         var gamepad = new DigitalGamepad(this);
         gamepad.load();

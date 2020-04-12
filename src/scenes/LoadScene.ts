@@ -26,6 +26,7 @@ export class LoadScene extends Phaser.Scene {
     loadSprites() {
         this.load.setPath(`./assets/sprites`);
         this.load.atlas('PLAYER_SPRITEZ' 'player-animated-sprites.png', 'player-animated-sprites.json');
+        this.load.atlas('TREE_SPRITE' 'animated-tree.png', 'animated-tree.json');
     }
 
     loadFonts() {
