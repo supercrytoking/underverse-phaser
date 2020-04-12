@@ -2,6 +2,11 @@
 	"name": "UNDER",
 	"short_name": "UNDER",
 	"description": "The best browser game ever created.",
+	"orientation": "portrait",
+	"start_url": "./",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff",
 	"icons": [
 		{
 			"src": "./assets/img/favicon.ico",
@@ -18,9 +23,5 @@
 			"type": "image/png",
 			"sizes": "512x512"
 		}
-	],
-	"start_url": "./",
-	"display": "standalone",
-	"theme_color": "#000000",
-	"background_color": "#ffffff"
+	]
 }
