@@ -3,6 +3,7 @@ import phaserReact from 'phaser3-react'
 import { LoadScene } from './scenes/LoadScene';
 import { MenuScene } from './scenes/MenuScene';
 import { GameScene } from './scenes/GameScene';
+import { VirtualGamepadScene } from './scenes/VirtualGamepadScene';
 
 var config = {
     type: Phaser.CANVAS,
@@ -12,13 +13,13 @@ var config = {
         height: window.innerHeight
     },
     scene: [
-        LoadScene, MenuScene, GameScene
+        LoadScene, MenuScene, GameScene, VirtualGamepadScene
     ],
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            // debug: true
+            debug: true
         }
     },
     plugins: {

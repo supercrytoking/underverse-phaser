@@ -1,8 +1,5 @@
 import { CST } from '../CST';
 
-import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js';
-import { DigitalGamepad } from '../DigitalGamepad';
-
 const Utils = require('../Utils');
 
 export class GameScene extends Phaser.Scene {
@@ -82,71 +79,7 @@ export class GameScene extends Phaser.Scene {
     inSpeech = false;
 
     create = () => {
-        // Utils.loadGamepad(this);
-        // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
-
-        var gamepad = new DigitalGamepad(this);
-        gamepad.load();
-
-        gamepad.aButton.on('pointerdown', () => {
-            if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
-                console.log('CLOSE!')
-                Utils.reactSpeechBubble(this, 'The King', ['Nice, it works!', `When you get close and press Q, I'll talk to you.`])
-                // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
-            } else {
-                console.log('FAR!');
-            }
-        });
-
-        // Create Joystick
-        var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0.1).setDepth(10);
-        var joystickThumb = this.add.circle(0, 0, 25, 0xFFFFFF, 0.1).setDepth(10);
-
-        this.joystick = new VirtualJoystick(this, {
-            x: 200,
-            y: 200,
-            radius: 50,
-            base: joystickBase,
-            thumb: joystickThumb,
-            // dir: '8dir',
-            // forceMin: 16,
-            // fixed: true,
-            enable: false
-        });
-
-        let joystickMoved = 0;
-        this.joystick.on('update', () => {
-            if (this.joystick.force >= 200) {
-                joystickMoved++;
-                this.joystick.x = this.joystick.pointerX;
-                this.joystick.y = this.joystick.pointerY;
-            }
-
-            if (joystickMoved >= 1) {
-                this.speed = 240;
-                joystickBase.fillColor = 0xFF0000;
-            } else {
-                this.speed = 120;
-            }
-        });
-
-        var joystickArea = this.add.rectangle(0, 0, window.innerWidth / 2, window.innerHeight, 0xFF0000, 0).setScrollFactor(0).setDepth(4).setOrigin(0, 0);
-        joystickArea.setInteractive()
-
-        joystickArea.on('pointerdown', (pointer) => {
-            // Enable joystick on clickdown.
-            this.joystick.x = pointer.x;
-            this.joystick.y = pointer.y;
-            this.joystick.enable = true;
-        });
-
-        this.input.on('pointerup', (pointer) => {
-            // Disable joystick on clickup.
-            this.stopMovement();
-            // this.joystick.enable = false;
-            joystickMoved = 0;
-            joystickBase.fillColor = 0xFFFFFF;
-        })
+        this.scene.launch(CST.SCENES.VGP, this);
 
         // Create a map, terrain, and layers.
         let map = this.add.tilemap('map');
@@ -154,14 +87,17 @@ export class GameScene extends Phaser.Scene {
 
         let floorLayer = map.createDynamicLayer('FloorLayer', [tileset], 0, 0);
         let grassLayer = map.createDynamicLayer('GrassLayer', [tileset], 0, 0);
+        let waterLayer = map.createDynamicLayer('WaterLayer', [tileset], 0, 0);
+        let bridgeLayer = map.createDynamicLayer('BridgeLayer', [tileset], 0, 0);
 
         // map.createFromObjects();
 
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
         this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png');
+        this.player.body.setSize(this.player.width, this.player.height / 2);
+        this.player.setOffset(0, this.player.height / 2)
         this.player.setScale(2);
-        this.player.body.setSize(this.player.width, this.player.height);
         // this.player.setCircle(this.player.height / 4, -this.player.width / 4, this.player.height / 2);
 
         this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);;
@@ -172,7 +108,6 @@ export class GameScene extends Phaser.Scene {
         // console.log(this.npc);
         this.obs = map.createFromTiles(51, -1, {key: 'TREE'}, this, this.cameras.main, grassLayer);
         for (var i in this.obs) {
-            console.log(this.obs[i]);
             this.physics.add.existing(this.obs[i], true)
             this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
         }
@@ -264,19 +199,6 @@ export class GameScene extends Phaser.Scene {
             this.moveWest();
         }
         if (this.keyboard.D.isDown) {
-            this.moveEast();
-        }
-
-        if (this.joystick.up) {
-            this.moveNorth();
-        }
-        if (this.joystick.down) {
-            this.moveSouth();
-        }
-        if (this.joystick.left) {
-            this.moveWest();
-        }
-        if (this.joystick.right) {
             this.moveEast();
         }
 
