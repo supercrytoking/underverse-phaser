@@ -26,10 +26,11 @@ var config = {
           {
             key: 'phaser-react',
             plugin: phaserReact,
-            start: true
+            start: true,
+            data: { parent: 'react' }
           }
         ]
-      }
+    }
 }
 
 let game = new Phaser.Game(config);
