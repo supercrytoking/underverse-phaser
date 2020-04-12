@@ -18,13 +18,12 @@ class SpeechBubble extends React.Component {
     enableActionKey = () => {
         this.actionKey = this.props.scene.input.keyboard.addKey('Q');
         this.actionKey.once('down', () => {
-            console.log('!Q!');
             this.onClick();
         });
     }
 
     onClick = () => {
-        var messages = this.state.messages;
+        var messages = [].concat(this.state.messages);
 
         if (messages.length <= 1) {
             this.setState({

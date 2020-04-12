@@ -58,7 +58,7 @@ exports.reactSpeechBubble = (scene, name, messages) => {
 
     var closeSpeechBubble = () => {
         scene.inSpeech = false;
-        console.log('Closed!')
+        console.log('Closed!');
     }
 
     var config = {

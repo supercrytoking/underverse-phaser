@@ -1,4 +1,5 @@
 import { CST } from '../CST';
+import { NPC } from '../Classes/NPC';
 
 const Utils = require('../Utils');
 var r = require('random');
@@ -28,7 +29,7 @@ export class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'PLAYER_ANIMATION',
             frameRate: 10,
-            frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+            frames: this.anims.generateFrameNames('PLAYER_SPRITE', {
                 prefix: 'player-',
                 start: 1,
                 end: 41,
@@ -40,7 +41,7 @@ export class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'PLAYER_ANIMATION_NORTH',
             frameRate: 10,
-            frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+            frames: this.anims.generateFrameNames('PLAYER_SPRITE', {
                 prefix: 'player-',
                 start: 1,
                 end: 41,
@@ -53,7 +54,7 @@ export class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'PLAYER_ANIMATION_SOUTH',
             frameRate: 10,
-            frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+            frames: this.anims.generateFrameNames('PLAYER_SPRITE', {
                 prefix: 'player-',
                 start: 1,
                 end: 41,
@@ -66,7 +67,7 @@ export class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'PLAYER_ANIMATION_EAST',
             frameRate: 20,
-            frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+            frames: this.anims.generateFrameNames('PLAYER_SPRITE', {
                 prefix: 'player-',
                 start: 1,
                 end: 41,
@@ -79,7 +80,7 @@ export class GameScene extends Phaser.Scene {
         this.anims.create({
             key: 'PLAYER_ANIMATION_WEST',
             frameRate: 20,
-            frames: this.anims.generateFrameNames('PLAYER_SPRITEZ', {
+            frames: this.anims.generateFrameNames('PLAYER_SPRITE', {
                 prefix: 'player-',
                 start: 1,
                 end: 41,
@@ -95,6 +96,8 @@ export class GameScene extends Phaser.Scene {
     create = () => {
         this.scene.launch(CST.SCENES.VGP, this);
 
+        this.actionKey = this.input.keyboard.addKey('Q');
+
         // Create a map, terrain, and layers.
         let map = this.add.tilemap('map')
         let tileset = map.addTilesetImage('super-tileset', 'SUPER_TILESET', 32, 32, 1, 2);
@@ -109,19 +112,12 @@ export class GameScene extends Phaser.Scene {
 
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
-        this.player = this.physics.add.sprite(spawnPoint.x * 2, spawnPoint.y * 2, 'PLAYER_SPRITEZ', 'player-20.png');
+        this.player = this.physics.add.sprite(spawnPoint.x * 2, spawnPoint.y * 2, 'PLAYER_SPRITE', 'player-20.png');
         this.player.body.setSize(this.player.width, this.player.height / 4);
         this.player.setOffset(0, this.player.height - (this.player.height / 4))
         this.player.setScale(2);
-        // this.player.setCircle(this.player.height / 4, -this.player.width / 4, this.player.height / 2);
 
-        this.npc = this.physics.add.sprite(spawnPoint.x * 2 + 3, spawnPoint.y * 2, 'PLAYER_SPRITEZ').setScale(2);;
-        this.physics.add.collider(this.player, this.npc);
-        this.npc.setImmovable(true);
-        this.npc.setDepth(this.npc.y + this.npc.height / 2)
-        
-        // console.log(this.npc);
-        this.obs = map.createFromTiles(51, -1, {key: 'TREE'}, this, this.cameras.main, treeLayer);
+        this.obs = map.createFromTiles(51, -1, { key: 'TREE' }, this, this.cameras.main, treeLayer);
         for (var i in this.obs) {
             this.obs[i].x = this.obs[i].x + r.int(0, 64);
             this.obs[i].y = this.obs[i].y + r.int(0, 64);
@@ -134,7 +130,6 @@ export class GameScene extends Phaser.Scene {
             this.obs[i].play('ANIMATED_TREE');
         }
 
-        // this.add.sprite(100, 100, 'TREE').setScrollFactor(0).setDepth(10);
 
         // Enabled colliding with objects in the top layer where collides = true.
         // this.physics.add.collider(this.player, layerTwo);
@@ -153,15 +148,6 @@ export class GameScene extends Phaser.Scene {
             });
         }
 
-        var actionKey = this.input.keyboard.addKey('Q');
-        actionKey.on('down', (e) => {
-            if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
-                // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`, 'SUCK ME!', 'WHAT UP!']);
-                Utils.reactSpeechBubble(this, 'The King', ['Nice, it works!', `When you get close and press Q, I'll talk to you.`, `This is an example of NPC interaction in the UNDERVERSE. These views are made in React!`])
-
-            }
-        });
-
         this.speed = 120;
         var shiftKey = this.input.keyboard.addKey('SHIFT');
         shiftKey.on('down', (event) => {
@@ -177,6 +163,30 @@ export class GameScene extends Phaser.Scene {
         tabKey.on('up', (event) => {
             this.speed = 120;
         });
+
+        var beeps = new NPC(this, {
+            x: this.player.x,
+            y: this.player.y,
+            name: 'Beeps',
+            sprite: 'PLAYER_SPRITE',
+            messages: [
+                'Hi!, I\' Beeps.'
+            ]
+        });
+
+        var kingo = new NPC(this, {
+            x: this.player.x + 200,
+            y: this.player.y,
+            name: 'Kingo',
+            sprite: 'PLAYER_SPRITE',
+            messages: [
+                'Don\'t talk to me.',
+                '...',
+                '?'
+            ]
+        });
+
+        kingo.animate();
     }
 
     moveNorth = () => {
@@ -191,7 +201,7 @@ export class GameScene extends Phaser.Scene {
         this.player.body.velocity.x = -Math.abs(this.speed);
         this.player.play('PLAYER_ANIMATION_WEST', true);
     }
-    
+
     moveEast = () => {
         this.player.body.velocity.x = this.speed;
         this.player.play('PLAYER_ANIMATION_EAST', true);

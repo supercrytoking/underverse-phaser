@@ -22,6 +22,7 @@ var config = {
             // debug: true
         }
     },
+    pixelArt: true,
     plugins: {
         global: [
             {

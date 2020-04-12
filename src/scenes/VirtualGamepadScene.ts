@@ -37,15 +37,15 @@ export class VirtualGamepadScene extends Phaser.Scene {
         var gamepad = new DigitalGamepad(this);
         gamepad.load();
 
-        gamepad.aButton.on('pointerdown', () => {
-            if (Phaser.Math.Distance.Between(parent.player.x, parent.player.y, parent.npc.x, parent.npc.y) < 50) {
-                console.log('CLOSE!')
-                Utils.reactSpeechBubble(this, 'The King', ['Nice, it works!', `When you get close and press Q, I'll talk to you.`])
-                // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
-            } else {
-                console.log('FAR!');
-            }
-        });
+        // gamepad.aButton.on('pointerdown', () => {
+        //     if (Phaser.Math.Distance.Between(parent.player.x, parent.player.y, parent.npc.x, parent.npc.y) < 50) {
+        //         console.log('CLOSE!')
+        //         Utils.reactSpeechBubble(this, 'The King', ['Nice, it works!', `When you get close and press Q, I'll talk to you.`])
+        //         // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
+        //     } else {
+        //         console.log('FAR!');
+        //     }
+        // });
 
         // VGP joystick.
         var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0.1).setDepth(10);
