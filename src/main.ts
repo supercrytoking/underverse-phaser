@@ -24,12 +24,12 @@ var config = {
     },
     plugins: {
         global: [
-          {
-            key: 'phaser-react',
-            plugin: phaserReact,
-            start: true,
-            data: { parent: 'react' }
-          }
+            {
+                key: 'phaser-react',
+                plugin: phaserReact,
+                start: true,
+                data: { parent: 'react' }
+            }
         ]
     }
 }
@@ -43,3 +43,15 @@ window.addEventListener('resize', function (event) {
         game.scene.getScene('VGP').scene.restart();
     }
 }, false);
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function (err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
