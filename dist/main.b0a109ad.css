@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=VT323&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+.speech-bubble {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    bottom: 0;
+    color: white;
+    padding: 50px;
+    font-family: 'VT323', monospace;
+}
+
+.speech-bubble.hide {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.speech-bubble .contain {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 25vh;
+    padding: 20px;
+    border-radius: 6px;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    
+}
+
+.speech-name {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+
+.speech-text {
+    font-size: 1.4em;
+}
+
+@media (max-width: 600px) {
+    .speech-bubble {
+        padding: 20px;
+        font-size: 1em;
+    }
+    .speech-bubble .contain {
+        padding: 10px;
+    }
+}
+
+/*# sourceMappingURL=/main.b0a109ad.css.map */

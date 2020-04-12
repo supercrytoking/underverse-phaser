@@ -83,7 +83,6 @@ export class GameScene extends Phaser.Scene {
 
     create = () => {
         // Utils.loadGamepad(this);
-        // Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
 
         var gamepad = new DigitalGamepad(this);
         gamepad.load();
@@ -91,7 +90,7 @@ export class GameScene extends Phaser.Scene {
         gamepad.aButton.on('pointerdown', () => {
             if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
                 console.log('CLOSE!')
-                Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`]);
+                Utils.reactSpeechBubble(this, 'Name', ['Hello, how are you? I\'m just a sample NPC to test text boxes.', 'I am doing alright, but I am tired of being pocked all day. I am sick of being Sebastian\'s lab rat.', 'Thanks for asking!']);
             } else {
                 console.log('FAR!');
             }
@@ -160,12 +159,12 @@ export class GameScene extends Phaser.Scene {
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
         this.player = this.physics.add.sprite(map.tileToWorldX(22), map.tileToWorldY(72), 'PLAYER_SPRITEZ', 'player-20.png');
         this.player.setScale(2);
-        this.player.body.setSize(this.player.width, this.player.height);
         // this.player.setCircle(this.player.height / 4, -this.player.width / 4, this.player.height / 2);
 
         this.npc = this.physics.add.sprite(map.tileToWorldX(20), map.tileToWorldY(72), 'PLAYER_SPRITEZ').setScale(2);;
         this.physics.add.collider(this.player, this.npc);
         this.npc.setImmovable(true);
+        this.npc.setDepth(this.npc.y + this.npc.height / 2)
         
         // console.log(this.npc);
         this.obs = map.createFromTiles(51, -1, {key: 'TREE'}, this, this.cameras.main, grassLayer);
@@ -199,7 +198,7 @@ export class GameScene extends Phaser.Scene {
         var actionKey = this.input.keyboard.addKey('Q');
         actionKey.on('down', (e) => {
             if (Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y) < 50) {
-                Utils.addSpeechModal(this, ['Nice, it works!', `When you get close and press Q, I'll talk to you.`, 'SUCK ME!', 'WHAT UP!']);
+                Utils.reactSpeechBubble(this, 'Name', ['Hello, how are you!', 'I am doing alright.', 'Thanks for asking!']);
             }
         });
 
@@ -218,6 +217,18 @@ export class GameScene extends Phaser.Scene {
         tabKey.on('up', (event) => {
             this.speed = 120;
         });
+        
+        var array = {
+            name: 'The King',
+            message: ['One', 'Two', 'Tree']
+        }
+        // this.speechBubble.setInteractive();
+
+        // this.speechBubble.on('pointerdown', () => {
+        //     console.log('Clicked');
+        // })
+
+        // this.speechBubble.destroy();
     }
 
     moveNorth = () => {

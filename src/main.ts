@@ -1,3 +1,5 @@
+import phaserReact from 'phaser3-react'
+
 import { LoadScene } from './scenes/LoadScene';
 import { MenuScene } from './scenes/MenuScene';
 import { GameScene } from './scenes/GameScene';
@@ -18,7 +20,16 @@ var config = {
             gravity: { y: 0 },
             // debug: true
         }
-    }
+    },
+    plugins: {
+        global: [
+          {
+            key: 'phaser-react',
+            plugin: phaserReact,
+            start: true
+          }
+        ]
+      }
 }
 
 let game = new Phaser.Game(config);

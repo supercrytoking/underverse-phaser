@@ -1,3 +1,5 @@
+import SpeechBubble from './Components/SpeechBubble/SpeechBubble.jsx';
+
 exports.addSpeechModal = (scene, string) => {
     if (scene.inSpeech) return;
     scene.inSpeech = true;
@@ -18,19 +20,19 @@ exports.addSpeechModal = (scene, string) => {
         fontSize = 50;
     }
 
-    scene.sound.play('CONFIRMATION_OO2', {volume: 0.01});
+    scene.sound.play('CONFIRMATION_OO2', {volume: 0.5});
 
     var openSpeech = (string) => {
         if (!string.length) {
             scene.inSpeech = false;
             return;
         }
-        var speechBox = scene.add.rectangle(margin, screenHeight - margin, screenWidth - (margin * 2), height, 0x000000).setOrigin(0, 1).setDepth(10).setScrollFactor(0).setAlpha(0.5);
-        var speechBoxText = scene.add.bitmapText(margin + padding, screenHeight - height - margin + padding, 'FONT_PRIMARY', string[0]).setDepth(10).setMaxWidth(screenWidth - 120).setFontSize(fontSize).setScrollFactor(0);
+        var speechBox = scene.add.rectangle(margin, screenHeight - margin, screenWidth - (margin * 2), height, 0x000000).setOrigin(0, 1).setDepth(999999).setScrollFactor(0).setAlpha(0.5);
+        var speechBoxText = scene.add.bitmapText(margin + padding, screenHeight - height - margin + padding, 'FONT_PRIMARY', string[0]).setDepth(999999).setMaxWidth(screenWidth - 120).setFontSize(fontSize).setScrollFactor(0);
         speechBox.setInteractive();
 
         var destroySpeech = () => {
-            scene.sound.play('QUESTION_004', {volume: 0.01});
+            scene.sound.play('QUESTION_004', {volume: 0.3});
             speechBox.destroy();
             speechBoxText.destroy();
 
@@ -48,4 +50,25 @@ exports.addSpeechModal = (scene, string) => {
         });
     }
     openSpeech(string);
+}
+
+exports.reactSpeechBubble = (scene, name, messages) => {
+    if (scene.inSpeech) return;
+    scene.inSpeech = true;
+
+    var closeSpeechBubble = () => {
+        scene.inSpeech = false;
+        console.log('Closed!')
+    }
+
+    var config = {
+        scene: scene,
+        name: name,
+        messages: messages,
+        closeSpeechBubble
+    }
+
+    scene.speechBubble = scene.add.reactDom(SpeechBubble, config);
+    
+    scene.sound.play('CONFIRMATION_OO2', {volume: 0.5});
 }
