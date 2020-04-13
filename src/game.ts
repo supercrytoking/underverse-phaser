@@ -10,8 +10,8 @@ var config = {
     type: Phaser.CANVAS,
     scale: {
         mode: Phaser.Scale.FIT,
-        width: window.innerWidth / 2,
-        height: window.innerHeight / 2
+        width: window.innerWidth,
+        height: window.innerHeight
     },
     scene: [
         LoadScene, MenuScene, GameScene, VirtualGamepadScene

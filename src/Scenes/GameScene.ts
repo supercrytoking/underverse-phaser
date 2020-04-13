@@ -21,7 +21,7 @@ export class GameScene extends Phaser.Scene {
     preload() {
         this.load.tilemapTiledJSON('map', './assets/maps/underverse.json');
         this.load.image('UNDERVERSE_TILESET', './assets/maps/underverse-tileset.png')
-        this.load.image('WATER_TILESET', './assets/maps/water-tileset.png')
+        this.load.image('WATER_TILESET', './assets/maps/water-tileset.png');
 
         this.anims.create({
             key: 'ANIMATED_TREE',
@@ -113,7 +113,8 @@ export class GameScene extends Phaser.Scene {
         let tileset = map.addTilesetImage('underverse-tileset', 'UNDERVERSE_TILESET', 32, 32, 0, 0);
         let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
 
-        let floorLayer = map.createStaticLayer('Floor', [tileset, waterTileset], 0, 0);
+        let floorLayer = map.createStaticLayer('Floor', [tileset, waterTileset], 0, 0).setScale(2);
+        let foilageLayer = map.createStaticLayer('Foilage', [tileset, waterTileset], 0, 0).setScale(2);
         // let grassLayer = map.createStaticLayer('GrassLayer', [tileset, underTileset], 0, 0).setScale(2);
         // let treeLayer = map.createStaticLayer('TreeLayer', [tileset, underTileset], 0, 0).setScale(2);
         // let waterLayer = map.createStaticLayer('WaterLayer', [tileset, underTileset], 0, 0).setScale(2);
@@ -123,9 +124,10 @@ export class GameScene extends Phaser.Scene {
 
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn") as any;
-        this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, 'PLAYER_SPRITE', 'player-20.png');
+        this.player = this.physics.add.sprite(spawnPoint.x * 2, spawnPoint.y * 2, 'PLAYER_SPRITE', 'player-20.png');
         this.player.body.setSize(this.player.width, this.player.height / 4);
         this.player.setOffset(0, this.player.height - (this.player.height / 4))
+        this.player.setScale(2);
 
         // this.obs = map.createFromTiles(51, -1, { key: 'TREE' }, this, this.cameras.main, treeLayer);
         // for (var i in this.obs) {
