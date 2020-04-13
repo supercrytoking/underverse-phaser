@@ -13,21 +13,27 @@ export class VirtualGamepadScene extends Phaser.Scene {
     joystick: any
     speed: number
     inSpeech: any
+    buttonPadding: number
+    buttonMargin: number
+    buttonSize: number
+    aButton: any
+    bButton: any
     constructor() {
         super({
             key: CST.SCENES.VGP
         })
-        
-        this.speed = 120
+
+        this.speed = 120;
+        this.buttonPadding = 40;
+        this.buttonMargin = 80;
+        this.buttonSize = 80;
     }
 
     init = (data: any) => {
-        this.parent = data
+        this.parent = data;
     }
 
-    preload() {
-        console.log('Loading VGP...')
-    }
+    preload() {}
 
     create() {
         var settingsButton = this.add.image(this.game.renderer.width - 20, 20, 'SETTINGS_BUTTON')
@@ -35,13 +41,45 @@ export class VirtualGamepadScene extends Phaser.Scene {
             .setDisplaySize(40, 40)
             .setInteractive()
 
-         settingsButton.on('pointerdown', () => {
-             console.log('Down!')
-         })
+        settingsButton.on('pointerdown', () => {
+            console.log('Down!')
+        })
+
+        if (this.game.renderer.width <= 600) {
+            this.buttonPadding = 20;
+            this.buttonMargin = 50;
+            this.buttonSize = 60;
+        }
+
+        this.aButton = this.add.sprite(this.game.renderer.width - this.buttonPadding - this.buttonMargin, this.game.renderer.height - this.buttonPadding, 'GAMEPAD_A').setOrigin(1, 1);
+        this.aButton.setDisplaySize(this.buttonSize, this.buttonSize);
+        this.aButton.setScrollFactor(0);
+        this.aButton.setInteractive();
+
+        this.bButton = this.add.sprite(this.game.renderer.width - this.buttonPadding, this.game.renderer.height - this.buttonPadding - this.buttonMargin, 'GAMEPAD_B').setOrigin(1, 1);
+        this.bButton.setDisplaySize(this.buttonSize, this.buttonSize);
+        this.bButton.setScrollFactor(0);
+        this.bButton.setInteractive();
+
+        this.aButton.on('pointerdown', () => {
+            this.parent.events.emit('gamepad-a-down');
+        });
+
+        this.aButton.on('pointerup', () => {
+            this.parent.events.emit('gamepad-a-up');
+        });
+
+        this.bButton.on('pointerdown', () => {
+            this.parent.events.emit('gamepad-b-down');
+        });
+
+        this.bButton.on('pointerup', () => {
+            this.parent.events.emit('gamepad-b-up');
+        });
 
         // VGP buttons.
         var gamepad = new DigitalGamepad(this)
-        gamepad.load()
+        gamepad.load(this.parent)
 
         // VGP joystick.
         var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0.1).setDepth(10)

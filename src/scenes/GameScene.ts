@@ -193,11 +193,10 @@ export class GameScene extends Phaser.Scene {
         });
 
         this.kingo.animate();
-
     }
     
     update(time: number, delta: number) {
-        var lol = time + delta;
+        this.player.setDepth(this.player.y + this.player.height);
 
         // WSAD movement.
         if (this.movementKeys.W.isDown) {

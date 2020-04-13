@@ -41,13 +41,16 @@ export class NPC {
 
         if (!this.messages.length) return;
 
-        // var actionKey = this.scene.input.keyboard.addKey('Q');
         this.scene.actionKey.on('down', () => {
             if (Phaser.Math.Distance.Between(this.scene.player.x, this.scene.player.y, this.npc.x, this.npc.y) < 100) {
                 Utils.reactSpeechBubble(this.scene, this.name, this.messages);
             }
+        });
 
-            console.log(this.messages);
+        this.scene.events.on('gamepad-a-down', () => {
+            if (Phaser.Math.Distance.Between(this.scene.player.x, this.scene.player.y, this.npc.x, this.npc.y) < 100) {
+                Utils.reactSpeechBubble(this.scene, this.name, this.messages);
+            }
         });
     }
 
