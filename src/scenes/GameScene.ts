@@ -174,7 +174,7 @@ export class GameScene extends Phaser.Scene {
             ]
         });
 
-        var kingo = new NPC(this, {
+        this.kingo = new NPC(this, {
             x: this.player.x + 200,
             y: this.player.y,
             name: 'Kingo',
@@ -186,7 +186,8 @@ export class GameScene extends Phaser.Scene {
             ]
         });
 
-        kingo.animate();
+        this.kingo.animate();
+
     }
 
     moveNorth = () => {
@@ -215,6 +216,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     update(time, delta) {
+
         // console.log(this.npc.depth, this.player.depth);
         this.player.depth = this.player.y + this.player.height;
 

@@ -3,25 +3,25 @@ import { throws } from "assert";
 var Utils = require('../Utils.js');
 
 export class NPC {
-    scene: any;
+    scene: Phaser.Scene;
     x: number;
     y: number;
     name: string;
-    interacts: boolean;
-    moves: boolean;
     messages: string[];
-    npc: any;
+    npc!: Phaser.Physics.Arcade.Sprite;
     // constructor(scene: Phaser.Scene, x: any, y: any, name: string, sprite: string, messages: Array<string>) {
     constructor(scene: Phaser.Scene, npcObject: any) {
         this.scene = scene;
         this.x = npcObject.x;
         this.y = npcObject.y;
         this.name = npcObject.name;
-        this.interacts = true;
-        this.moves = false;
         this.messages = npcObject.messages;
 
         this.add(this.x, this.y, this.name, 'PLAYER_SPRITE', this.messages);
+    }
+
+    get getNPC() {
+        return this.npc;
     }
 
     add = (x: any, y: any, name: string, sprite: string, messages: Array<string>) => {
