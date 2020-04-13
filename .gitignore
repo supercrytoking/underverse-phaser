@@ -105,3 +105,4 @@ typings/
 # Custom
 .DS_Store
 package-lock.json
+src/.DS_Store
