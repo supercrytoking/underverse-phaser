@@ -1,9 +1,10 @@
+import 'phaser'
 import phaserReact from 'phaser3-react'
 
-import { LoadScene } from './scenes/LoadScene';
-import { MenuScene } from './scenes/MenuScene';
-import { GameScene } from './scenes/GameScene';
-import { VirtualGamepadScene } from './scenes/VirtualGamepadScene';
+import { LoadScene } from './Scenes/LoadScene';
+import { MenuScene } from './Scenes/MenuScene';
+import { GameScene } from './Scenes/GameScene';
+import { VirtualGamepadScene } from './Scenes/VirtualGamepadScene';
 
 var config = {
     type: Phaser.CANVAS,

@@ -1,22 +1,23 @@
 import { CST } from '../CST';
 
+// @ts-ignore
 import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js';
-import { DigitalGamepad } from '../DigitalGamepad';
+import { DigitalGamepad } from '../Classes/DigitalGamepad';
 
 const Utils = require('../Utils');
 
-var test;
-
 export class VirtualGamepadScene extends Phaser.Scene {
+    parent: any;
+    joystick: any;
+    inSpeech: any;
     constructor() {
         super({
             key: CST.SCENES.VGP
         });
     }
 
-    parent = null;
     init = (data: any) => {
-        parent = data;
+        this.parent = data;
     }
 
     preload() {
@@ -72,10 +73,10 @@ export class VirtualGamepadScene extends Phaser.Scene {
             }
 
             if (joystickMoved >= 1) {
-                this.speed = 240;
+                this.parent.speed = 240;
                 joystickBase.fillColor = 0xFF0000;
             } else {
-                this.speed = 120;
+                this.parent.speed = 120;
             }
         });
 
@@ -91,7 +92,7 @@ export class VirtualGamepadScene extends Phaser.Scene {
 
         this.input.on('pointerup', (pointer) => {
             // Disable joystick on clickup.
-            parent.stopMovement();
+            this.parent.stopMovement();
             // this.joystick.enable = false;
             joystickMoved = 0;
             joystickBase.fillColor = 0xFFFFFF;
@@ -100,20 +101,20 @@ export class VirtualGamepadScene extends Phaser.Scene {
 
     update() {
         if (this.joystick.up) {
-            parent.moveNorth();
+            this.parent.moveNorth();
         }
         if (this.joystick.down) {
-            parent.moveSouth();
+            this.parent.moveSouth();
         }
         if (this.joystick.left) {
-            parent.moveWest();
+            this.parent.moveWest();
         }
         if (this.joystick.right) {
-            parent.moveEast();
+            this.parent.moveEast();
         }
 
         if (this.inSpeech) {
-            parent.stopMovement();
+            this.parent.stopMovement();
         }
     }
 }
