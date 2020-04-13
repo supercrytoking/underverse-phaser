@@ -1,5 +1,11 @@
 export class DigitalGamepad {
-    constructor(scene) {
+    scene: any;
+    buttonPadding: number;
+    buttonMargin: number;
+    buttonSize: number;
+    aButton: any;
+    bButton: any;
+    constructor(scene: Phaser.Scene) {
         this.scene = scene;
         this.buttonPadding = 40;
         this.buttonMargin = 80;

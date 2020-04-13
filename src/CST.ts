@@ -1,4 +1,4 @@
-export const CST = {
+export const CST: any = {
     SCENES: {
         LOAD: 'LOAD',
         MENU: 'MENU',

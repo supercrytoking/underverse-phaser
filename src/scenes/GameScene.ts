@@ -5,10 +5,18 @@ const Utils = require('../Utils');
 var r = require('random');
 
 export class GameScene extends Phaser.Scene {
+    actionKey: any;
+    player: any;
+    obs: any;
+    speed: number;
+    kingo!: NPC;
+    movementKeys: object | any;
     constructor() {
         super({
             key: CST.SCENES.GAME
         });
+
+        this.speed = 120;
     }
     preload() {
         this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
@@ -111,7 +119,7 @@ export class GameScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
 
         // Create the player.
-        const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn");
+        const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn") as any;
         this.player = this.physics.add.sprite(spawnPoint.x * 2, spawnPoint.y * 2, 'PLAYER_SPRITE', 'player-20.png');
         this.player.body.setSize(this.player.width, this.player.height / 4);
         this.player.setOffset(0, this.player.height - (this.player.height / 4))
@@ -140,39 +148,37 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
 
         // Keyboard handling...
-        this.keyboard = this.input.keyboard.addKeys('W, S, A, D');
+        this.movementKeys = this.input.keyboard.addKeys({
+            W: 'W',
+            S: 'S',
+            A: 'A',
+            D: 'D'
+        });
 
-        for (var i in this.keyboard) {
-            eval(`this.keyboard.${i}`).on('up', (e) => {
-                this.stopMovement();
-            });
-        }
-
-        this.speed = 120;
         var shiftKey = this.input.keyboard.addKey('SHIFT');
-        shiftKey.on('down', (event) => {
+        shiftKey.on('down', () => {
             this.speed = 240;
         });
-        shiftKey.on('up', (event) => {
+        shiftKey.on('up', () => {
             this.speed = 120;
         });
         var tabKey = this.input.keyboard.addKey('TAB');
-        tabKey.on('down', (event) => {
+        tabKey.on('down', () => {
             this.speed = 540;
         });
-        tabKey.on('up', (event) => {
+        tabKey.on('up', () => {
             this.speed = 120;
         });
 
-        var beeps = new NPC(this, {
-            x: this.player.x,
-            y: this.player.y,
-            name: 'Beeps',
-            sprite: 'PLAYER_SPRITE',
-            messages: [
-                'Hi!, I\' Beeps.'
-            ]
-        });
+        // var beeps = new NPC(this, {
+        //     x: this.player.x,
+        //     y: this.player.y,
+        //     name: 'Beeps',
+        //     sprite: 'PLAYER_SPRITE',
+        //     messages: [
+        //         'Hi!, I\' Beeps.'
+        //     ]
+        // });
 
         this.kingo = new NPC(this, {
             x: this.player.x + 200,
@@ -189,53 +195,55 @@ export class GameScene extends Phaser.Scene {
         this.kingo.animate();
 
     }
-
-    moveNorth = () => {
-        this.player.body.velocity.y = -Math.abs(this.speed);
-        this.player.play('PLAYER_ANIMATION_NORTH', true);
-    }
-    moveSouth = () => {
-        this.player.body.velocity.y = this.speed;
-        this.player.play('PLAYER_ANIMATION_SOUTH', true);
-    }
-    moveWest = () => {
-        this.player.body.velocity.x = -Math.abs(this.speed);
-        this.player.play('PLAYER_ANIMATION_WEST', true);
-    }
-
-    moveEast = () => {
-        this.player.body.velocity.x = this.speed;
-        this.player.play('PLAYER_ANIMATION_EAST', true);
-    }
-
-    stopMovement = () => {
-        this.player.anims.stop();
-        this.player.body.velocity.x = 0;
-        this.player.body.velocity.y = 0;
-        // this.speed = 120;
-    }
-
-    update(time, delta) {
-
-        // console.log(this.npc.depth, this.player.depth);
-        this.player.depth = this.player.y + this.player.height;
+    
+    update(time: number, delta: number) {
+        var lol = time + delta;
 
         // WSAD movement.
-        if (this.keyboard.W.isDown) {
-            this.moveNorth();
+        if (this.movementKeys.W.isDown) {
+            this.player.body.velocity.y = -Math.abs(this.speed);
         }
-        if (this.keyboard.S.isDown) {
-            this.moveSouth();
+        if (this.movementKeys.S.isDown) {
+            this.player.body.velocity.y = this.speed;
         }
-        if (this.keyboard.A.isDown) {
-            this.moveWest();
+        if (this.movementKeys.A.isDown) {
+            this.player.body.velocity.x = -Math.abs(this.speed);
         }
-        if (this.keyboard.D.isDown) {
-            this.moveEast();
+        if (this.movementKeys.D.isDown) {
+            this.player.body.velocity.x = this.speed;
         }
 
         if (this.inSpeech) {
-            this.stopMovement();
+            this.player.body.velocity.x = 0;
+            this.player.body.velocity.y = 0;
+        }
+        
+        if (this.player.body.velocity.x > 0) {
+            this.player.play('PLAYER_ANIMATION_EAST', true);
+        }
+        
+        if (this.player.body.velocity.x < 0) {
+            this.player.play('PLAYER_ANIMATION_WEST', true);
+        }
+
+        if (this.player.body.velocity.y > 0 && this.player.body.velocity.x == 0) {
+            this.player.play('PLAYER_ANIMATION_SOUTH', true);
+        }
+        
+        if (this.player.body.velocity.y < 0 && this.player.body.velocity.x == 0) {
+            this.player.play('PLAYER_ANIMATION_NORTH', true);
+        }
+
+        if (this.player.body.velocity.x == 0 && this.player.body.velocity.y == 0) {
+            this.player.anims.stop();
+        }
+
+        if (this.movementKeys.W.isUp && this.movementKeys.S.isUp) {
+            this.player.body.velocity.y = 0;
+        }
+
+        if (this.movementKeys.A.isUp && this.movementKeys.D.isUp) {
+            this.player.body.velocity.x = 0;
         }
 
         this.player.body.velocity.normalize().scale(this.speed);

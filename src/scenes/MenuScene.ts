@@ -1,6 +1,7 @@
 import { CST } from '../CST';
 
 export class MenuScene extends Phaser.Scene {
+    bg: any;
     constructor() {
         super({
             key: CST.SCENES.MENU
