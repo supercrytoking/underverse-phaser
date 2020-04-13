@@ -9,9 +9,9 @@ import { VirtualGamepadScene } from './Scenes/VirtualGamepadScene';
 var config = {
     type: Phaser.CANVAS,
     scale: {
-        // mode: Phaser.Scale.FIT,
-        width: window.innerWidth,
-        height: window.innerHeight
+        mode: Phaser.Scale.FIT,
+        width: window.innerWidth / 2,
+        height: window.innerHeight / 2
     },
     scene: [
         LoadScene, MenuScene, GameScene, VirtualGamepadScene

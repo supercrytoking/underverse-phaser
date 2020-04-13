@@ -55,6 +55,7 @@ export class LoadScene extends Phaser.Scene {
         });
 
         this.load.on('complete', () => {
+            // this.add.rectangle(window.innerWidth / 2, window.innerHeight / 2, 100, 100, 0xFF0000);
             this.scene.start(CST.SCENES.MENU);
             // this.scene.start(CST.SCENES.GAME);
         });

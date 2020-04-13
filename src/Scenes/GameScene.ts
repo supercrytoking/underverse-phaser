@@ -19,7 +19,9 @@ export class GameScene extends Phaser.Scene {
         this.speed = 120;
     }
     preload() {
-        this.load.tilemapTiledJSON('map', './assets/maps/sammoland.json');
+        this.load.tilemapTiledJSON('map', './assets/maps/underverse.json');
+        this.load.image('UNDERVERSE_TILESET', './assets/maps/underverse-tileset.png')
+        this.load.image('WATER_TILESET', './assets/maps/water-tileset.png')
 
         this.anims.create({
             key: 'ANIMATED_TREE',
@@ -108,35 +110,35 @@ export class GameScene extends Phaser.Scene {
 
         // Create a map, terrain, and layers.
         let map = this.add.tilemap('map')
-        let tileset = map.addTilesetImage('super-tileset', 'SUPER_TILESET', 32, 32, 1, 2);
+        let tileset = map.addTilesetImage('underverse-tileset', 'UNDERVERSE_TILESET', 32, 32, 0, 0);
+        let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
 
-        let floorLayer = map.createStaticLayer('FloorLayer', [tileset], 0, 0).setScale(2);
-        let grassLayer = map.createStaticLayer('GrassLayer', [tileset], 0, 0).setScale(2);
-        let treeLayer = map.createStaticLayer('TreeLayer', [tileset], 0, 0).setScale(2);
-        let waterLayer = map.createStaticLayer('WaterLayer', [tileset], 0, 0).setScale(2);
-        let bridgeLayer = map.createStaticLayer('BridgeLayer', [tileset], 0, 0).setScale(2);
+        let floorLayer = map.createStaticLayer('Floor', [tileset, waterTileset], 0, 0);
+        // let grassLayer = map.createStaticLayer('GrassLayer', [tileset, underTileset], 0, 0).setScale(2);
+        // let treeLayer = map.createStaticLayer('TreeLayer', [tileset, underTileset], 0, 0).setScale(2);
+        // let waterLayer = map.createStaticLayer('WaterLayer', [tileset, underTileset], 0, 0).setScale(2);
+        // let bridgeLayer = map.createStaticLayer('BridgeLayer', [tileset, underTileset], 0, 0).setScale(2);
         this.cameras.main.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
         this.physics.world.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
 
         // Create the player.
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn") as any;
-        this.player = this.physics.add.sprite(spawnPoint.x * 2, spawnPoint.y * 2, 'PLAYER_SPRITE', 'player-20.png');
+        this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, 'PLAYER_SPRITE', 'player-20.png');
         this.player.body.setSize(this.player.width, this.player.height / 4);
         this.player.setOffset(0, this.player.height - (this.player.height / 4))
-        this.player.setScale(2);
 
-        this.obs = map.createFromTiles(51, -1, { key: 'TREE' }, this, this.cameras.main, treeLayer);
-        for (var i in this.obs) {
-            this.obs[i].x = this.obs[i].x + r.int(0, 64);
-            this.obs[i].y = this.obs[i].y + r.int(0, 64);
-            this.obs[i].setScale(r.float(1, 2));
-            this.physics.add.existing(this.obs[i], true)
-            this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
-            this.obs[i].body.setSize(this.obs[i].body.width / 2, this.obs[i].body.height / 4);
-            this.obs[i].body.setOffset(this.obs[i].body.width / 2, this.obs[i].body.height * 3);
-            this.physics.add.collider(this.player, this.obs[i]);
-            this.obs[i].play('ANIMATED_TREE');
-        }
+        // this.obs = map.createFromTiles(51, -1, { key: 'TREE' }, this, this.cameras.main, treeLayer);
+        // for (var i in this.obs) {
+        //     this.obs[i].x = this.obs[i].x + r.int(0, 64);
+        //     this.obs[i].y = this.obs[i].y + r.int(0, 64);
+        //     this.obs[i].setScale(r.float(1, 2));
+        //     this.physics.add.existing(this.obs[i], true)
+        //     this.obs[i].setDepth(this.obs[i].y + this.obs[i].height / 2);
+        //     this.obs[i].body.setSize(this.obs[i].body.width / 2, this.obs[i].body.height / 4);
+        //     this.obs[i].body.setOffset(this.obs[i].body.width / 2, this.obs[i].body.height * 3);
+        //     this.physics.add.collider(this.player, this.obs[i]);
+        //     this.obs[i].play('ANIMATED_TREE');
+        // }
 
 
         // Enabled colliding with objects in the top layer where collides = true.

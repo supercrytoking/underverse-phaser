@@ -9,6 +9,7 @@ export const CST: any = {
         MENU_BG: 'menu-background.jpg',
         LOGIN_BTN: 'login-button.png',
         REGISTER_BTN: 'register-button.png',
+        UNDERVERSE_TILESET: 'underverse-tileset.png',
         SUPER_TILESET: 'super-tileset-extruded.png',
         GAMEPAD_A: 'gamepad-a.png',
         GAMEPAD_B: 'gamepad-b.png',

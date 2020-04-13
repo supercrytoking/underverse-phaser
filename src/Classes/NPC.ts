@@ -33,7 +33,7 @@ export class NPC {
         this.npc = this.scene.physics.add.sprite(
             x,
             y,
-            sprite).setScale(2);
+            sprite);
         
         this.npc.setDepth(this.npc.y + this.npc.height / 2);
         this.scene.physics.add.collider(this.scene.player, this.npc);
