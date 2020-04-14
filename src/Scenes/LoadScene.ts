@@ -1,48 +1,14 @@
-import { CST } from '../CST';
+import Pack from '../pack.json'
 
 export class LoadScene extends Phaser.Scene {
     constructor() {
         super({
-            key: 'CST.SCENES.LOAD'
+            key: 'LOAD_SCENE'
         });
     }
 
-    loadImages() {
-        this.load.setPath(`./assets/img`)
-        for (var i in CST.IMAGES) {
-            // console.log(`${i}, ${CST.IMAGES[i]}`);
-            this.load.image(i, CST.IMAGES[i]);
-        }
-    }
-
-    loadAudio() {
-        this.load.setPath(`./assets/audio`);
-        for (var i in CST.AUDIO) {
-            // console.log(`${i}, ${CST.AUDIO[i]}`);
-            this.load.audio(i, CST.AUDIO[i]);
-        }
-    }
-
-    loadSprites() {
-        this.load.setPath(`./assets/sprites`);
-        this.load.atlas('PLAYER_SPRITE', 'player-animated-sprites.png', 'player-animated-sprites.json');
-        this.load.atlas('TREE_SPRITE', 'animated-tree.png', 'animated-tree.json');
-        this.load.atlas('SCHOOLGIRLS_SPRITE', 'schoolgirls-sprite.png', 'schoolgirls-sprite.json');
-    }
-
-    loadFonts() {
-        this.load.setPath(`./assets/fonts`);
-        this.load.bitmapFont('FONT_PRIMARY', 'game-over.png', 'game-over.fnt');
-        // this.load.bitmapFont('FONT_PRIMARY', 'vcr-osd-mono.png', 'vcr-osd-mono.fnt');
-    }
-
     preload() {
-        console.log('Loading...');
-
-        this.loadImages();
-        this.loadAudio();
-        this.loadSprites();
-        this.loadFonts();
+        this.load.pack('images', Pack);
 
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -56,8 +22,8 @@ export class LoadScene extends Phaser.Scene {
 
         this.load.on('complete', () => {
             // this.add.rectangle(window.innerWidth / 2, window.innerHeight / 2, 100, 100, 0xFF0000);
-            this.scene.start(CST.SCENES.MENU);
-            // this.scene.start(CST.SCENES.GAME);
+            this.scene.start('MENU_SCENE');
+            // this.scene.start('GAME_SCENE');
         });
 
         this.load.on('load', (file: Phaser.Loader.File) => {

@@ -1,5 +1,3 @@
-import { CST } from '../CST'
-
 // @ts-ignore
 import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js'
 import { DigitalGamepad } from '../Classes/DigitalGamepad'
@@ -20,7 +18,7 @@ export class VirtualGamepadScene extends Phaser.Scene {
     bButton: any
     constructor() {
         super({
-            key: CST.SCENES.VGP
+            key: 'VGP_SCENE'
         })
 
         this.speed = 120;

@@ -1,4 +1,3 @@
-import { CST } from '../CST';
 import { NPC } from '../Classes/NPC';
 
 const Utils = require('../Utils');
@@ -13,7 +12,7 @@ export class GameScene extends Phaser.Scene {
     movementKeys: object | any;
     constructor() {
         super({
-            key: CST.SCENES.GAME
+            key: 'GAME_SCENE'
         });
 
         this.speed = 120;
@@ -104,7 +103,7 @@ export class GameScene extends Phaser.Scene {
     inSpeech = false;
 
     create = () => {
-        this.scene.launch(CST.SCENES.VGP, this);
+        this.scene.launch('VGP_SCENE', this);
 
         this.actionKey = this.input.keyboard.addKey('Q');
 
