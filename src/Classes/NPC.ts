@@ -1,72 +1,48 @@
-import { throws } from "assert";
+import { Physics } from 'phaser';
+import Utils from '../Utils.js';
 
-var Utils = require('../Utils.js');
+import { GameScene } from '../Scenes/GameScene';
 
-export class NPC {
-    scene: Phaser.Scene;
+type Config = {
     x: number;
     y: number;
     name: string;
+    texture: string;
     messages: string[];
-    npc!: Phaser.Physics.Arcade.Sprite;
-    // constructor(scene: Phaser.Scene, x: any, y: any, name: string, sprite: string, messages: Array<string>) {
-    constructor(scene: Phaser.Scene, npcObject: any) {
-        this.scene = scene;
-        this.x = npcObject.x;
-        this.y = npcObject.y;
-        this.name = npcObject.name;
-        this.messages = npcObject.messages;
+}
 
-        this.add(this.x, this.y, this.name, 'PLAYER_SPRITE', this.messages);
-    }
+export class NPC extends Physics.Arcade.Sprite {
+    private messages: string[];
 
-    get getNPC() {
-        return this.npc;
-    }
+    constructor(scene: GameScene, config: Config) {
+        const { x, y, texture, name, messages } = config;
 
-    add = (x: any, y: any, name: string, sprite: string, messages: Array<string>) => {
-        this.x = x;
-        this.y = y;
-        this.name = name;
+        super(scene, x, y, texture);
+
+        this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
+
+        this.setName(name);
         this.messages = messages;
 
-        this.npc = this.scene.physics.add.sprite(
-            x,
-            y,
-            sprite);
+        this.setDepth(this.y + this.height / 2);
+        this.scene.physics.add.collider(scene.player, this);
+        this.setImmovable(true);
         
-        this.npc.setDepth(this.npc.y + this.npc.height / 2);
-        this.scene.physics.add.collider(this.scene.player, this.npc);
-        this.npc.setImmovable(true);
+        this.anims.play(texture);
 
         if (!this.messages.length) return;
 
-        this.scene.actionKey.on('down', () => {
-            if (Phaser.Math.Distance.Between(this.scene.player.x, this.scene.player.y, this.npc.x, this.npc.y) < 100) {
+        scene.actionKey.on('down', () => {
+            if (Phaser.Math.Distance.Between(scene.player.x, scene.player.y, this.x, this.y) < 100) {
                 Utils.reactSpeechBubble(this.scene, this.name, this.messages);
             }
         });
 
         this.scene.events.on('gamepad-a-down', () => {
-            if (Phaser.Math.Distance.Between(this.scene.player.x, this.scene.player.y, this.npc.x, this.npc.y) < 100) {
+            if (Phaser.Math.Distance.Between(scene.player.x, scene.player.y, this.x, this.y) < 100) {
                 Utils.reactSpeechBubble(this.scene, this.name, this.messages);
             }
         });
-    }
-
-    animate = () => {
-        this.scene.anims.create({
-            key: 'BETSY_ANIMATION',
-            frameRate: 3,
-            frames: this.scene.anims.generateFrameNames('SCHOOLGIRLS_SPRITE', {
-                prefix: 'betsy-',
-                start: 0,
-                end: 2,
-                suffix: '.png'
-            }),
-            repeat: -1
-        });
-
-        this.npc.play('BETSY_ANIMATION');
     }
 }
