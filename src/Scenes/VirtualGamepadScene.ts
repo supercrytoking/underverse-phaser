@@ -2,11 +2,7 @@ import { CST } from '../CST'
 
 // @ts-ignore
 import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js'
-import { DigitalGamepad } from '../Classes/DigitalGamepad'
-
-const Utils = require('../Utils')
-
-var test
+import { DigitalGamepad } from '../classes/DigitalGamepad'
 
 export class VirtualGamepadScene extends Phaser.Scene {
     parent: any
@@ -29,7 +25,7 @@ export class VirtualGamepadScene extends Phaser.Scene {
         this.buttonSize = 80;
     }
 
-    init = (data: any) => {
+    init(data: any) {
         this.parent = data;
     }
 
