@@ -76,8 +76,8 @@ export class VirtualGamepadScene extends Phaser.Scene {
         gamepad.load(this.parent)
 
         // VGP joystick.
-        var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0.1).setDepth(10)
-        var joystickThumb = this.add.circle(0, 0, 25, 0xFFFFFF, 0.1).setDepth(10)
+        var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0).setDepth(10)
+        var joystickThumb = this.add.circle(0, 0, 25, 0xFFFFFF, 0).setDepth(10)
 
         this.joystick = new VirtualJoystick(this, {
             x: 200,

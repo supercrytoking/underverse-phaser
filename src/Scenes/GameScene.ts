@@ -53,6 +53,10 @@ export class GameScene extends Phaser.Scene {
         //     this.obs[i].play('ANIMATED_TREE');
         // }
 
+        var lol = this.input.keyboard.addKey('H');
+        lol.on('down', () => {
+            map.destroy();
+        });
 
         // Enabled colliding with objects in the top layer where collides = true.
         // this.physics.add.collider(this.player, layerTwo);

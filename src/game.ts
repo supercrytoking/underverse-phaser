@@ -9,7 +9,7 @@ import { VirtualGamepadScene } from './Scenes/VirtualGamepadScene';
 var config = {
     type: Phaser.CANVAS,
     scale: {
-        mode: Phaser.Scale.FIT,
+        // mode: Phaser.Scale.FIT,
         width: window.innerWidth,
         height: window.innerHeight
     },
@@ -41,7 +41,7 @@ let game = new Phaser.Game(config);
 window.addEventListener('resize', function (event) {
     game.scale.resize(window.innerWidth, window.innerHeight);
 
-    if (game.scene.isActive('VGP')) {
-        game.scene.getScene('VGP').scene.restart();
+    if (game.scene.isActive('VGP_SCENE')) {
+        game.scene.getScene('VGP_SCENE').scene.restart();
     }
 }, false);
