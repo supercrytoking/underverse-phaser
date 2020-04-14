@@ -1,10 +1,8 @@
-import { CST } from '../CST';
-
 export class MenuScene extends Phaser.Scene {
     bg: any;
     constructor() {
         super({
-            key: CST.SCENES.MENU
+            key: 'MENU_SCENE'
         });
     }
     preload() {}
@@ -22,7 +20,7 @@ export class MenuScene extends Phaser.Scene {
             .setInteractive();
 
         logo.on('pointerdown', () => {
-            this.scene.start(CST.SCENES.GAME);
+            this.scene.start('GAME_SCENE');
             this.sound.stopAll();
         });
 

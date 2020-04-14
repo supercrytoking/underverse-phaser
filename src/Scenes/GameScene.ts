@@ -10,7 +10,7 @@ export class GameScene extends Phaser.Scene {
     kingo!: NPC;
     constructor() {
         super({
-            key: CST.SCENES.GAME
+            key: 'GAME_SCENE'
         });
     }
 
