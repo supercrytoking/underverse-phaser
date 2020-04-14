@@ -1,5 +1,5 @@
 import { NPC } from '../classes/npc';
-import { Player } from '../classes/player';
+import { Player } from '../Classes/Player';
 
 export class GameScene extends Phaser.Scene {
     actionKey: any;
@@ -71,5 +71,9 @@ export class GameScene extends Phaser.Scene {
         });
     }
     
-    update(time: number, delta: number) {}
+    update(time: number, delta: number) {
+        // if (this.player.keys.S.isDown) {
+        //     console.log('LOL');
+        // }
+    }
 }

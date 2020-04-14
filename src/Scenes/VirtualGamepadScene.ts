@@ -121,20 +121,40 @@ export class VirtualGamepadScene extends Phaser.Scene {
             joystickMoved = 0
             joystickBase.fillColor = 0xFFFFFF
         })
+
+        this.joystick.on('update', () => {
+            this.parent.player.keys.W.isDown = false;
+            this.parent.player.keys.W.isUp = true;
+            this.parent.player.keys.S.isDown = false;
+            this.parent.player.keys.S.isUp = true;
+            this.parent.player.keys.A.isDown = false;
+            this.parent.player.keys.A.isUp = true;
+            this.parent.player.keys.D.isDown = false;
+            this.parent.player.keys.D.isUp = true;
+        });
     }
 
     update() {
+        
         if (this.joystick.up) {
-            this.parent.player.body.velocity.y = -Math.abs(this.speed)
+            // this.parent.player.body.velocity.y = -Math.abs(this.speed)
+            this.parent.player.keys.W.isDown = true;
+            this.parent.player.keys.W.isUp = false;
         }
         if (this.joystick.down) {
-            this.parent.player.body.velocity.y = this.speed
+            // this.parent.player.body.velocity.y = this.speed
+            this.parent.player.keys.S.isDown = true;
+            this.parent.player.keys.S.isUp = false;
         }
         if (this.joystick.left) {
-            this.parent.player.body.velocity.x = -Math.abs(this.speed)
+            // this.parent.player.body.velocity.x = -Math.abs(this.speed)
+            this.parent.player.keys.A.isDown = true;
+            this.parent.player.keys.A.isUp = false;
         }
         if (this.joystick.right) {
-            this.parent.player.body.velocity.x = this.speed
+            // this.parent.player.body.velocity.x = -Math.abs(this.speed)
+            this.parent.player.keys.D.isDown = true;
+            this.parent.player.keys.D.isUp = false;
         }
     }
 }
