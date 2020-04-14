@@ -9,6 +9,7 @@ export class LoadScene extends Phaser.Scene {
 
     preload() {
         this.load.pack('images', Pack);
+        this.load.tilemapTiledJSON('map', './assets/maps/underverse.json')
 
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -115,6 +116,6 @@ export class LoadScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.scene.start(CST.SCENES.MENU);
+        this.scene.start('MENU_SCENE');
     }
 }

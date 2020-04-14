@@ -1,7 +1,5 @@
-import { CST } from '../CST';
 import { NPC } from '../classes/npc';
 import { Player } from '../classes/player';
-import { spawn } from 'child_process';
 
 export class GameScene extends Phaser.Scene {
     actionKey: any;
@@ -17,7 +15,7 @@ export class GameScene extends Phaser.Scene {
     inSpeech = false;
 
     create() {
-        this.scene.launch(CST.SCENES.VGP, this);
+        this.scene.launch('VGP_SCENE', this);
 
         this.actionKey = this.input.keyboard.addKey('Q');
 
@@ -27,7 +25,7 @@ export class GameScene extends Phaser.Scene {
         let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
 
         let floorLayer = map.createStaticLayer('Floor', [tileset, waterTileset], 0, 0).setScale(2);
-        let foilageLayer = map.createStaticLayer('Foilage', [tileset, waterTileset], 0, 0).setScale(2);
+        // let foilageLayer = map.createStaticLayer('Foilage', [tileset, waterTileset], 0, 0).setScale(2);
         // let grassLayer = map.createStaticLayer('GrassLayer', [tileset, underTileset], 0, 0).setScale(2);
         // let treeLayer = map.createStaticLayer('TreeLayer', [tileset, underTileset], 0, 0).setScale(2);
         // let waterLayer = map.createStaticLayer('WaterLayer', [tileset, underTileset], 0, 0).setScale(2);

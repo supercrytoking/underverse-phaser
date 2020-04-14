@@ -24,7 +24,12 @@
             {
                 "type": "image",
                 "key": "UNDERVERSE_TILESET",
-                "url": "./assets/img/underverse-tileset.png"
+                "url": "./assets/maps/underverse-tileset.png"
+            },
+            {
+                "type": "image",
+                "key": "WATER_TILESET",
+                "url": "./assets/maps/water-tileset.png"
             },
             {
                 "type": "image",
