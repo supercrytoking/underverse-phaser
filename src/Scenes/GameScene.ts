@@ -21,7 +21,8 @@ export class GameScene extends Phaser.Scene {
 
         // Create a map, terrain, and layers.
         let map = this.add.tilemap('map')
-        let tileset = map.addTilesetImage('underverse-tileset', 'UNDERVERSE_TILESET', 32, 32, 0, 0);
+        let tileset = map.addTilesetImage('varniro-tileset', 'VARNIRO_TILESET', 32, 32, 0, 0);
+        // let tileset = map.addTilesetImage('underverse-tileset', 'UNDERVERSE_TILESET', 32, 32, 0, 0);
         let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
 
         let floorLayer = map.createStaticLayer('Floor', [tileset, waterTileset], 0, 0).setScale(2);

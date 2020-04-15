@@ -38,6 +38,11 @@
             },
             {
                 "type": "image",
+                "key": "VARNIRO_TILESET",
+                "url": "./assets/maps/varniro-tileset.png"
+            },
+            {
+                "type": "image",
                 "key": "GAMEPAD_A",
                 "url": "./assets/img/gamepad-a.png"
             },
