@@ -23,14 +23,10 @@ export class GameScene extends Phaser.Scene {
         let map = this.add.tilemap('map')
         let tileset = map.addTilesetImage('varniro-tileset', 'VARNIRO_TILESET', 32, 32, 0, 0);
         // let tileset = map.addTilesetImage('underverse-tileset', 'UNDERVERSE_TILESET', 32, 32, 0, 0);
-        let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
+        // let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
 
-        let floorLayer = map.createStaticLayer('Floor', [tileset, waterTileset], 0, 0).setScale(2);
-        // let foilageLayer = map.createStaticLayer('Foilage', [tileset, waterTileset], 0, 0).setScale(2);
-        // let grassLayer = map.createStaticLayer('GrassLayer', [tileset, underTileset], 0, 0).setScale(2);
-        // let treeLayer = map.createStaticLayer('TreeLayer', [tileset, underTileset], 0, 0).setScale(2);
-        // let waterLayer = map.createStaticLayer('WaterLayer', [tileset, underTileset], 0, 0).setScale(2);
-        // let bridgeLayer = map.createStaticLayer('BridgeLayer', [tileset, underTileset], 0, 0).setScale(2);
+        let floorLayer = map.createStaticLayer('Floor', [tileset], 0, 0).setScale(2);
+        
         this.cameras.main.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
         this.physics.world.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
 
@@ -40,6 +36,9 @@ export class GameScene extends Phaser.Scene {
             x: spawnPoint.x * 2,
             y: spawnPoint.y * 2,
         });
+
+        this.physics.add.collider(this.player, floorLayer);
+        floorLayer.setCollisionByProperty({ collides: true });
 
         // this.obs = map.createFromTiles(51, -1, { key: 'TREE' }, this, this.cameras.main, treeLayer);
         // for (var i in this.obs) {
