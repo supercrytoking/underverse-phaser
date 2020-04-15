@@ -1,5 +1,5 @@
-import { NPC } from '../classes/npc';
-import { Player } from '../Classes/Player';
+import { NPC } from '../Classes/NPC';
+import { Player } from '../Classes/Player'
 
 export class GameScene extends Phaser.Scene {
     actionKey: any;
