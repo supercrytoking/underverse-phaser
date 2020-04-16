@@ -26,6 +26,7 @@ export class GameScene extends Phaser.Scene {
         // let waterTileset = map.addTilesetImage('water-tileset', 'WATER_TILESET', 32, 32, 0, 0);
 
         let floorLayer = map.createStaticLayer('Floor', [tileset], 0, 0).setScale(2);
+        let foliageLayer = map.createStaticLayer('Foliage', [tileset], 0, 0).setScale(2);
         
         this.cameras.main.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
         this.physics.world.setBounds(0, 0, floorLayer.displayWidth, floorLayer.displayHeight);
@@ -39,6 +40,8 @@ export class GameScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player, floorLayer);
         floorLayer.setCollisionByProperty({ collides: true });
+        this.physics.add.collider(this.player, foliageLayer);
+        foliageLayer.setCollisionByProperty({ collides: true });
 
         // this.obs = map.createFromTiles(51, -1, { key: 'TREE' }, this, this.cameras.main, treeLayer);
         // for (var i in this.obs) {
