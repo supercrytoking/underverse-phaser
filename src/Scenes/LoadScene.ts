@@ -116,6 +116,7 @@ export class LoadScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.scene.start('MENU_SCENE');
+        // this.scene.start('MENU_SCENE');
+        this.scene.start('GAME_SCENE');
     }
 }
