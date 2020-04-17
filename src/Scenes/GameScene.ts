@@ -82,16 +82,18 @@ export class GameScene extends Phaser.Scene {
         // });
 
         this.mobs = this.add.group();
-        for (var i = 0; i < 10; i++) {
-            var mob = new Mob(this, this.player.x + R.int(50, 200), this.player.y + R.int(50, 100), 'MOB_DUNNOT', 100, 100, 100)
+        for (var i = 0; i < 100; i++) {
+            var mob = new Mob(this, this.player.x + R.int(-1000, 1000), this.player.y + R.int(-1000, 1000), 'MOB_DUNNOT', 100, 100, 100)
             this.mobs.add(mob);
         }
+
+        this.physics.add.collider(this.mobs, this.mobs)
     }
     
     update(time: number, delta: number) {
-        this.mobs.getChildren().forEach(mob => {
-            this.physics.moveToObject(mob, this.player);
-        })
+        // this.mobs.getChildren().forEach(mob => {
+        //     this.physics.moveToObject(mob, this.player);
+        // })
         // this.physics.moveToObject(this.mob, this.player);
     }
 }
