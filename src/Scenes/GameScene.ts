@@ -82,8 +82,8 @@ export class GameScene extends Phaser.Scene {
         // });
 
         this.mobs = this.add.group();
-        for (var i = 0; i < 200; i++) {
-            var mob = new Mob(this, this.player.x + R.int(-1000, 1000), this.player.y + R.int(-1000, 1000), 'MOB_DUNNOT', 100, 100, 100)
+        for (var i = 0; i < 10; i++) {
+            var mob = new Mob(this, this.player.x + R.int(-1000, 1000), this.player.y + R.int(-1000, 1000), 'MOB_DUNNOT', 100, 100, 100, 200)
             this.mobs.add(mob);
         }
 
