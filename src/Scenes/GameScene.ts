@@ -1,6 +1,7 @@
 import { Player } from '../Classes/Player'
 import { NPC } from '../Classes/NPC'
 import { Mob } from '../Classes/Mob'
+import { Weapon } from '../Classes/Weapon';
 
 var R = require('random')
 
