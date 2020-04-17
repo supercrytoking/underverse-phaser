@@ -1,11 +1,15 @@
-import { NPC } from '../Classes/NPC';
 import { Player } from '../Classes/Player'
+import { NPC } from '../Classes/NPC'
+import { Mob } from '../Classes/Mob'
+
+var R = require('random')
 
 export class GameScene extends Phaser.Scene {
     actionKey: any;
     player!: Player;
     obs: any;
     kingo!: NPC;
+    mob!: Mob;
     constructor() {
         super({
             key: 'GAME_SCENE'
@@ -65,22 +69,29 @@ export class GameScene extends Phaser.Scene {
         // this.physics.add.collider(this.player, layerTwo);
         // layerTwo.setCollisionByProperty({ collides: true })
 
-        this.kingo = new NPC(this, {
-            x: this.player.x + 200,
-            y: this.player.y,
-            name: 'Kingo',
-            texture: 'BETSY_ANIMATION',
-            messages: [
-                'Don\'t talk to me.',
-                '...',
-                '?'
-            ]
-        });
+        // this.kingo = new NPC(this, {
+        //     x: this.player.x + 200,
+        //     y: this.player.y,
+        //     name: 'Kingo',
+        //     texture: 'BETSY_ANIMATION',
+        //     messages: [
+        //         'Don\'t talk to me.',
+        //         '...',
+        //         '?'
+        //     ]
+        // });
+
+        this.mobs = this.add.group();
+        for (var i = 0; i < 10; i++) {
+            var mob = new Mob(this, this.player.x + R.int(50, 200), this.player.y + R.int(50, 100), 'MOB_DUNNOT', 100, 100, 100)
+            this.mobs.add(mob);
+        }
     }
     
     update(time: number, delta: number) {
-        // if (this.player.keys.S.isDown) {
-        //     console.log('LOL');
-        // }
+        this.mobs.getChildren().forEach(mob => {
+            this.physics.moveToObject(mob, this.player);
+        })
+        // this.physics.moveToObject(this.mob, this.player);
     }
 }

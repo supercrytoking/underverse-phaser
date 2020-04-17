@@ -67,6 +67,11 @@
                 "url": "./assets/img/settings-button.png"
             },
             {
+                "type": "image",
+                "key": "MOB_DUNNOT",
+                "url": "./assets/img/mob-dunnot.png"
+            },
+            {
                 "type": "audio",
                 "key": "MENU_MUSIC",
                 "url": "./assets/audio/menu-music.mp3"
