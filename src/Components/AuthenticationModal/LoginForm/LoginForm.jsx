@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
 
         // Front-end form authentication here.
         
-        Axios.post('http://mc.underforums.com:1233/login', {
+        Axios.post('https://underverse-authentication.herokuapp.com/login', {
             username: this.state.username,
             password: this.state.password
         }).then((reply) => {

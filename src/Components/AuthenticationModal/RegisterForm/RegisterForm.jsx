@@ -26,7 +26,7 @@ class RegisterForm extends React.Component {
 
         // Front-end form authentication here.
         
-        Axios.post('http://mc.underforums.com:1233/register', {
+        Axios.post('https://underverse-authentication.herokuapp.com/register', {
             email: this.state.email,
             username: this.state.username,
             password: this.state.password

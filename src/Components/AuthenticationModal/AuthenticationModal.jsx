@@ -34,7 +34,7 @@ class AuthenticationModal extends React.Component {
     componentDidMount = () => {
         this.props.game.input.enabled = false
         if (Cookies.get('sessionID')) {
-            Axios.get(`http://mc.underforums.com:1233/session/${Cookies.get('sessionID')}`)
+            Axios.get(`https://underverse-authentication.herokuapp.com/session/${Cookies.get('sessionID')}`)
             .then((reply) => {
                 if (reply.data.uid) {
                     this.closeModal()
