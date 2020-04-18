@@ -62,10 +62,6 @@ export class GameScene extends Phaser.Scene {
         //     this.obs[i].play('ANIMATED_TREE');
         // }
 
-        var lol = this.input.keyboard.addKey('H');
-        lol.on('down', () => {
-            map.destroy();
-        });
 
         // Enabled colliding with objects in the top layer where collides = true.
         // this.physics.add.collider(this.player, layerTwo);
@@ -94,6 +90,9 @@ export class GameScene extends Phaser.Scene {
     }
     
     update(time: number, delta: number) {
+        // this fixes a issue where our pointer positions get modified when hovering ui stuff.
+        // use the values immediatly, or else they'll get modified again.
+        this.input.activePointer.updateWorldPoint(this.cameras.main);
         console.log('Pointer:', this.input.activePointer.worldX, this.input.activePointer.worldY)
         // this.mobs.getChildren().forEach(mob => {
         //     this.physics.moveToObject(mob, this.player);
