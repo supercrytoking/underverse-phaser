@@ -34,15 +34,16 @@ export class Player extends Physics.Arcade.Sprite {
 		this.keys = this.scene.input.keyboard.addKeys('W,A,S,D,SHIFT,TAB');
 		this.speed = 120;
 
-		// this.actionkey = this.scene.input.keyboard.addKey('E')
-		// this.actionkey.on('down', () => {
-		// 	this.weapon.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY)
-		// })
+		this.actionkey = this.scene.input.keyboard.addKey('E')
+		this.actionkey.on('down', () => {
+			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main);
+			this.weapon.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY)
+		})
 	}
 
-	// addWeapon = () => {
-	// 	this.weapon = new Weapon(this.scene, this, 'TREE_SPRITE')
-	// }
+	addWeapon = () => {
+		this.weapon = new Weapon(this.scene, this, 'TREE_SPRITE')
+	}
 
 	preUpdate(time, delta) {
 		super.preUpdate(time, delta);

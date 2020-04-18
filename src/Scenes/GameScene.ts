@@ -43,6 +43,7 @@ export class GameScene extends Phaser.Scene {
             x: spawnPoint.x * 2,
             y: spawnPoint.y * 2,
         });
+        this.player.addWeapon()
 
         this.physics.add.collider(this.player, floorLayer);
         floorLayer.setCollisionByProperty({ collides: true });
@@ -93,7 +94,7 @@ export class GameScene extends Phaser.Scene {
         // this fixes a issue where our pointer positions get modified when hovering ui stuff.
         // use the values immediatly, or else they'll get modified again.
         this.input.activePointer.updateWorldPoint(this.cameras.main);
-        console.log('Pointer:', this.input.activePointer.worldX, this.input.activePointer.worldY)
+        // console.log('Pointer:', this.input.activePointer.worldX, this.input.activePointer.worldY)
         // this.mobs.getChildren().forEach(mob => {
         //     this.physics.moveToObject(mob, this.player);
         // })
