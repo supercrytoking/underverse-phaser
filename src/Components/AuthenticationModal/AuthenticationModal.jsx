@@ -57,7 +57,7 @@ class AuthenticationModal extends React.Component {
     }
 
     setForm = (form) => {
-        this.setState({form: form})
+        this.setState({form: form, message: ''})
     }
 
     renderMessage = () => {
