@@ -46,7 +46,7 @@ class RegisterForm extends React.Component {
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" placeholder="truegamer777" onChange={this.onChange} />
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" placeholder="*****" onChange={this.onChange} />
+                    <input type="password" name="password" placeholder="*****" autoComplete="" onChange={this.onChange} />
                     <input type="submit" name="submit" value="Register"/>
                 </form>
                 <div className="buttons">
