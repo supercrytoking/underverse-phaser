@@ -24,15 +24,26 @@ class LoginForm extends React.Component {
     onSubmit = (e) => {
         e.preventDefault()
 
-        // Front-end form authentication here.
-        
+        var errors = []
+
+        if (!this.state.username || !this.state.password) errors.push('You cannot leave any fields empty.')
+
+        if (errors.length) {
+            this.props.setMessage(errors.join('\r\n'))
+            return
+        }
+
         Axios.post('https://underverse-authentication.herokuapp.com/login', {
             username: this.state.username,
             password: this.state.password
         }).then((reply) => {
-            console.log(reply.data)
-            alert(reply.data.message)
-            if (reply.data.error) return
+            console.log(reply)
+            if (reply.data.error) {
+                alert('uh')
+                this.props.setMessage('Failed to login: Did you enter the correct username and password?')
+                return
+            }
+
             Cookies.set('sessionID', reply.data.sessionID)
             this.props.closeModal()
         })
@@ -40,8 +51,8 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="box login-form">
-                <form onSubmit={this.onSubmit} method="POST">
+            <>
+                <form onSubmit={this.onSubmit} method="POST" className="login-form">
                         <label htmlFor="username">Username</label>
                         <input type="text" name="username" placeholder="truegamer777" onChange={this.onChange} />
                         <label htmlFor="password">Password</label>
@@ -51,7 +62,7 @@ class LoginForm extends React.Component {
                     <div className="buttons">
                         <a href="# " className="" onClick={(e) => {e.preventDefault(); this.props.setForm('register')}}>Register</a>
                     </div>
-            </div>
+            </>
         )
     }
 }

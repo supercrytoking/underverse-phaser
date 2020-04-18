@@ -1,5 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
 
+body, html {
+    height: 100%;
+    margin: 0;
+    /* background-color: lightskyblue; */
+    height: 100%;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* #react {
+    position: fixed;
+} */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v5.0.1 | 20191019
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+	line-height: 1;
+}
+menu, ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
 .authentication-modal {
     position: fixed;
     display: flex;
@@ -31,6 +100,16 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.authentication-modal .message {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    line-height: 1.5em;
+    font-size: 0.8em;
+}
+
 .authentication-modal label {
     display: block;
     text-transform: uppercase;
@@ -60,6 +139,10 @@
     border-radius: 3px;
     color: white;
     font-weight: 900;
+}
+
+.authentication-modal .buttons {
+    /* text-align: center; */
 }
 
 .authentication-modal .buttons a {

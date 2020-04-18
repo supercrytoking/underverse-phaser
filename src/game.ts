@@ -1,6 +1,9 @@
 import 'phaser'
 import phaserReact from 'phaser3-react'
 
+import './game.css'
+import 'reset-css'
+
 import { LoadScene } from './Scenes/LoadScene';
 import { MenuScene } from './Scenes/MenuScene';
 import { GameScene } from './Scenes/GameScene';

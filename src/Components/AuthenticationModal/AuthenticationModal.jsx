@@ -13,6 +13,7 @@ class AuthenticationModal extends React.Component {
 
         this.state = {
             form: 'register',
+            message: '',
             hide: false
         }
 
@@ -46,11 +47,11 @@ class AuthenticationModal extends React.Component {
     renderForm = () => {
         if (this.state.form == 'login') {
             return(
-                <LoginForm setForm={this.setForm} closeModal={this.closeModal} />
+                <LoginForm setForm={this.setForm} closeModal={this.closeModal} setMessage={this.setMessage} />
             )
         } else if (this.state.form == 'register') {
             return(
-                <RegisterForm setForm={this.setForm} closeModal={this.closeModal} />
+                <RegisterForm setForm={this.setForm} closeModal={this.closeModal} setMessage={this.setMessage} />
             )
         }
     }
@@ -58,11 +59,26 @@ class AuthenticationModal extends React.Component {
     setForm = (form) => {
         this.setState({form: form})
     }
-    
+
+    renderMessage = () => {
+        if (this.state.message) {
+            return(
+                <p className="message">{this.state.message}</p>
+            )
+        }
+    }
+
+    setMessage = (message) => {
+        this.setState({message: message})
+    }
+
     render() {
         return (
             <div className={this.state.hide ? 'authentication-modal hide' : 'authentication-modal'}>
-                {this.renderForm()}
+                <div class="box">
+                    {this.renderMessage()}
+                    {this.renderForm()}
+                </div>
             </div>
         )
     }

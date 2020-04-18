@@ -28,20 +28,15 @@ class RegisterForm extends React.Component {
 
         var errors = []
 
-        if (!this.state.email) {
-            errors.push('You cannot leave the email field blank.')
+        if (!this.state.email || !this.state.username || !this.state.password) {
+            errors.push('You cannot leave any fields empty.')
         } else {
             if (!this.state.email.includes('@') || !this.state.email.includes('.')) errors.push('You must enter a valid email.')
-        }
-        if (!this.state.username) errors.push('You cannot leave the username field blank.')
-        if (!this.state.password) {
-            errors.push('You cannot leave the password field blank.')
-        } else {
             if (this.state.password.length < 6) errors.push('Your password must be atleast 6 characters long.')
         }
 
-        if (errors) {
-            alert(errors.join('\r\n'))
+        if (errors.length) {
+            this.props.setMessage(errors.join('\r\n'))
             return
         }
         
@@ -58,8 +53,8 @@ class RegisterForm extends React.Component {
 
     render() {
         return (
-            <div className="box register-form">
-                <form onSubmit={this.onSubmit} method="POST">
+            <>
+                <form onSubmit={this.onSubmit} method="POST" className="register-form">
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" placeholder="truegamer777@you.com" onChange={this.onChange} />
                     <label htmlFor="username">Username</label>
@@ -71,7 +66,7 @@ class RegisterForm extends React.Component {
                 <div className="buttons">
                     <a href="# " className="" onClick={(e) => {e.preventDefault(); this.props.setForm('login')}}>Login</a>
                 </div>
-            </div>
+            </>
         )
     }
 }

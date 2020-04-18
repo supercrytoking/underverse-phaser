@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
 
 .authentication-modal {
     position: fixed;
@@ -31,6 +30,16 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.authentication-modal .message {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    line-height: 1.5em;
+    font-size: 0.8em;
+}
+
 .authentication-modal label {
     display: block;
     text-transform: uppercase;
@@ -60,6 +69,10 @@
     border-radius: 3px;
     color: white;
     font-weight: 900;
+}
+
+.authentication-modal .buttons {
+    /* text-align: center; */
 }
 
 .authentication-modal .buttons a {
