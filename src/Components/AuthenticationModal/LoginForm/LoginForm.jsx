@@ -39,12 +39,12 @@ class LoginForm extends React.Component {
         }).then((reply) => {
             console.log(reply)
             if (reply.data.error) {
-                alert('uh')
                 this.props.setMessage('Failed to login: Did you enter the correct username and password?')
                 return
             }
 
             Cookies.set('sessionID', reply.data.sessionID)
+            console.log(reply.data.sessionID)
             this.props.closeModal()
         })
     }
