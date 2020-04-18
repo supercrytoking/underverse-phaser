@@ -20,14 +20,15 @@
 }
 
 .authentication-modal .box {
-    max-width: 400px;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
     margin-top: auto;
     margin-bottom: auto;
-    height: auto;
-    background-color: #36393F;
     padding: 40px;
+    background-color: #36393F;
     border-radius: 3px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .authentication-modal label {
@@ -46,15 +47,17 @@
     margin-bottom: 20px;
 }
 
-.authentication-modal input[type="text"], .authentication-modal input[type="password"] {
+.authentication-modal input[type="text"], .authentication-modal input[type="password"], .authentication-modal input[type="email"] {
     background-color: #40444B;
     border-radius: 3px;
+    color: #B8BABD;
 }
 
 .authentication-modal input[type="submit"] {
     font-family: inherit;
     text-transform: uppercase;
-    background-color: rgb(252, 76, 76);
+    background-color: #A873D8;
+    border-radius: 3px;
     color: white;
     font-weight: 900;
 }

@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="login-form">
+            <div className="box login-form">
                 <form onSubmit={this.onSubmit} method="POST">
                         <label htmlFor="username">Username</label>
                         <input type="text" name="username" placeholder="truegamer777" onChange={this.onChange} />

@@ -25,6 +25,25 @@ class RegisterForm extends React.Component {
         e.preventDefault()
 
         // Front-end form authentication here.
+
+        var errors = []
+
+        if (!this.state.email) {
+            errors.push('You cannot leave the email field blank.')
+        } else {
+            if (!this.state.email.includes('@') || !this.state.email.includes('.')) errors.push('You must enter a valid email.')
+        }
+        if (!this.state.username) errors.push('You cannot leave the username field blank.')
+        if (!this.state.password) {
+            errors.push('You cannot leave the password field blank.')
+        } else {
+            if (this.state.password.length < 6) errors.push('Your password must be atleast 6 characters long.')
+        }
+
+        if (errors) {
+            alert(errors.join('\r\n'))
+            return
+        }
         
         Axios.post('https://underverse-authentication.herokuapp.com/register', {
             email: this.state.email,
@@ -39,10 +58,10 @@ class RegisterForm extends React.Component {
 
     render() {
         return (
-            <div className="register-form">
+            <div className="box register-form">
                 <form onSubmit={this.onSubmit} method="POST">
                     <label htmlFor="email">Email</label>
-                    <input type="text" name="email" placeholder="truegamer777@you.com" onChange={this.onChange} />
+                    <input type="email" name="email" placeholder="truegamer777@you.com" onChange={this.onChange} />
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" placeholder="truegamer777" onChange={this.onChange} />
                     <label htmlFor="password">Password</label>

@@ -62,9 +62,7 @@ class AuthenticationModal extends React.Component {
     render() {
         return (
             <div className={this.state.hide ? 'authentication-modal hide' : 'authentication-modal'}>
-                <div className="box">
-                    {this.renderForm()}
-                </div>
+                {this.renderForm()}
             </div>
         )
     }
