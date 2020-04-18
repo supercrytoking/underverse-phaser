@@ -38,11 +38,6 @@
             },
             {
                 "type": "image",
-                "key": "SUPER_TILESET",
-                "url": "./assets/img/super-tileset-extruded.png"
-            },
-            {
-                "type": "image",
                 "key": "VARNIRO_TILESET",
                 "url": "./assets/maps/varniro-tileset.png"
             },
