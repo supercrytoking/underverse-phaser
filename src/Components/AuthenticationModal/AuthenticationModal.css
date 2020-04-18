@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
 
 .authentication-modal {
-    position: absolute;
+    position: fixed;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 40px;
+    background-color: #202225;
     font-family: 'Roboto Mono', monospace;
+    color: #B8BABD;
 }
 
 .authentication-modal.hide {
@@ -18,41 +20,45 @@
 }
 
 .authentication-modal .box {
-    max-width: 300px;
-    background-color: white;
-    padding: 20px;
+    max-width: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: auto;
+    background-color: #36393F;
+    padding: 40px;
     border-radius: 3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)
 }
 
 .authentication-modal label {
-    display: inline-block;
-    margin-bottom: 10px;
+    display: block;
     text-transform: uppercase;
     font-size: 0.7em;
+    margin-bottom: 10px;
 }
 
 .authentication-modal input {
     -webkit-appearance: none;
     outline: none;
     border: 0;
-}
-
-.authentication-modal input {
-    -webkit-appearance: none;
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
 }
 
 .authentication-modal input[type="text"], .authentication-modal input[type="password"] {
-    color: red;
-    border: 1px solid rgb(168, 168, 168);
+    background-color: #40444B;
+    border-radius: 3px;
 }
 
 .authentication-modal input[type="submit"] {
     font-family: inherit;
     text-transform: uppercase;
-    background-color: red;
+    background-color: rgb(252, 76, 76);
     color: white;
     font-weight: 900;
+}
+
+.authentication-modal .buttons a {
+    color: inherit;
 }
