@@ -60,6 +60,12 @@
     background-color: #40444B;
     border-radius: 3px;
     color: #B8BABD;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: 0.15s ease all;
+}
+
+.authentication-modal input[type="text"]:focus, .authentication-modal input[type="password"]:focus, .authentication-modal input[type="email"]:focus {
+    border: 1px solid #A873D8;
 }
 
 .authentication-modal input[type="submit"] {
@@ -76,5 +82,5 @@
 }
 
 .authentication-modal .buttons a {
-    color: inherit;
+    color: #A873D8;
 }
