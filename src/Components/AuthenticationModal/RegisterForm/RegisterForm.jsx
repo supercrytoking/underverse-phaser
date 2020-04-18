@@ -33,6 +33,7 @@ class RegisterForm extends React.Component {
         } else {
             if (!this.state.email.includes('@') || !this.state.email.includes('.')) errors.push('You must enter a valid email.')
             if (this.state.password.length < 6) errors.push('Your password must be atleast 6 characters long.')
+            if (this.state.password !== this.state.confirmPassword) errors.push('Your password does not match.')
         }
 
         if (errors.length) {
@@ -61,6 +62,8 @@ class RegisterForm extends React.Component {
                     <input type="text" name="username" placeholder="truegamer777" onChange={this.onChange} />
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" placeholder="*****" autoComplete="" onChange={this.onChange} />
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" placeholder="*****" autoComplete="" onChange={this.onChange} />
                     <input type="submit" name="submit" value="Register"/>
                 </form>
                 <div className="buttons">
