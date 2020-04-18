@@ -60,7 +60,6 @@ export class Player extends Physics.Arcade.Sprite {
 
 		// WSAD movement.
 		if (this.keys.W.isDown) {
-			console.log('W is DOWN.');
 			this.body.velocity.y = -Math.abs(this.speed);
 		}
 		if (this.keys.S.isDown) {
