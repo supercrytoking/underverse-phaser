@@ -38,10 +38,12 @@ var config = {
 
 let game = new Phaser.Game(config);
 
-window.addEventListener('resize', function (event) {
+window.addEventListener('resize', (e) => {
     game.scale.resize(window.innerWidth, window.innerHeight);
 
     if (game.scene.isActive('VGP_SCENE')) {
         game.scene.getScene('VGP_SCENE').scene.restart();
     }
-}, false);
+}, false)
+
+// game.input.enabled = false;

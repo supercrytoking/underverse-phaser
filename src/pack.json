@@ -23,6 +23,11 @@
             },
             {
                 "type": "image",
+                "key": "BUTTON_START",
+                "url": "./assets/img/button-start.png"
+            },
+            {
+                "type": "image",
                 "key": "UNDERVERSE_TILESET",
                 "url": "./assets/maps/underverse-tileset.png"
             },

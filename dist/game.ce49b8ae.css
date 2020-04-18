@@ -1,3 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
+
+.authentication-modal {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    font-family: 'Roboto Mono', monospace;
+}
+
+.authentication-modal.hide {
+    pointer-events: none;
+    opacity: 0;
+    display: none;
+}
+
+.authentication-modal .box {
+    max-width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.authentication-modal label {
+    display: inline-block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.7em;
+}
+
+.authentication-modal input {
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+}
+
+.authentication-modal input {
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.authentication-modal input[type="text"], .authentication-modal input[type="password"] {
+    color: red;
+    border: 1px solid rgb(168, 168, 168);
+}
+
+.authentication-modal input[type="submit"] {
+    font-family: inherit;
+    text-transform: uppercase;
+    background-color: red;
+    color: white;
+    font-weight: 900;
+}
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=VT323&display=swap');
 
 * {

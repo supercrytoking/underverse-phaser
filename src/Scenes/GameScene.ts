@@ -68,17 +68,17 @@ export class GameScene extends Phaser.Scene {
         // this.physics.add.collider(this.player, layerTwo);
         // layerTwo.setCollisionByProperty({ collides: true })
 
-        // this.kingo = new NPC(this, {
-        //     x: this.player.x + 200,
-        //     y: this.player.y,
-        //     name: 'Kingo',
-        //     texture: 'BETSY_ANIMATION',
-        //     messages: [
-        //         'Don\'t talk to me.',
-        //         '...',
-        //         '?'
-        //     ]
-        // });
+        this.kingo = new NPC(this, {
+            x: this.player.x + 200,
+            y: this.player.y,
+            name: 'Kingo',
+            texture: 'BETSY_ANIMATION',
+            messages: [
+                'Don\'t talk to me.',
+                '...',
+                '?'
+            ]
+        });
 
         this.mobs = this.add.group();
         for (var i = 0; i < 100; i++) {

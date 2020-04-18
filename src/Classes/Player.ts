@@ -16,6 +16,7 @@ export class Player extends Physics.Arcade.Sprite {
 	constructor(scene: GameScene, config: Config) {
 		super(scene, config.x, config.y, 'PLAYER_SPRITE', 'player-20.png');
 
+
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this, false);
 
@@ -36,16 +37,16 @@ export class Player extends Physics.Arcade.Sprite {
 
 		this.actionkey = this.scene.input.keyboard.addKey('E')
 		this.actionkey.on('down', () => {
-			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main);
+			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main)
 			this.weapon.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY)
 		})
 	}
 
 	addWeapon = () => {
-		this.weapon = new Weapon(this.scene, this, 'TREE_SPRITE')
+		// this.weapon = new Weapon(this.scene, this, 'TREE_SPRITE')
 	}
 
-	preUpdate(time, delta) {
+	preUpdate(time: number, delta: number) {
 		super.preUpdate(time, delta);
 		this.setDepth(this.y + this.height);
 

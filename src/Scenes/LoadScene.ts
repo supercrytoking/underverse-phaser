@@ -1,4 +1,5 @@
 import Pack from '../pack.json'
+import AuthenticationModal from '../Components/AuthenticationModal/AuthenticationModal'
 
 export class LoadScene extends Phaser.Scene {
     constructor() {
@@ -8,22 +9,27 @@ export class LoadScene extends Phaser.Scene {
     }
 
     preload() {
+        this.add.reactDom(AuthenticationModal, this)
+
         this.load.pack('images', Pack);
         this.load.tilemapTiledJSON('map', './assets/maps/underverse.json')
-
+        
         let loadingBar = this.add.graphics({
             fillStyle: {
                 color: 0x700000
             }
         });
-
+        
         this.load.on('progress', (percentage: number) => {
             loadingBar.fillRect(0, 0, this.game.renderer.width * percentage, this.game.renderer.height)
+            if (percentage == 1) {
+                console.log('Done')
+            }
         });
 
-        this.load.on('load', (file: Phaser.Loader.File) => {
-            console.log(`Loaded ${file.key}.`);
-        });
+        // this.load.on('load', (file: Phaser.Loader.File) => {
+        //     console.log(`Loaded ${file.key}.`);
+        // });
     }
 
     create() {
@@ -116,7 +122,12 @@ export class LoadScene extends Phaser.Scene {
             repeat: -1
         });
 
-        // this.scene.start('MENU_SCENE');
-        this.scene.start('GAME_SCENE');
+        var startButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'BUTTON_START')
+        startButton.setInteractive()
+        startButton.on('pointerdown', () => {
+            this.scene.start('MENU_SCENE')
+        })
+
+        // this.scene.start('GAME_SCENE');
     }
 }
