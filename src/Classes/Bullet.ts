@@ -36,14 +36,13 @@ export class Bullet extends Physics.Arcade.Sprite {
         }, 1500)
 
         this.scene.physics.add.collider(this.scene.mobs, this, (object) => {
-            object.destroy()
+            console.log(object.health)
+            object.reduceHealth(10)
             this.destroy()
         })
     }
 
     preUpdate() {
         this.setDepth(this.y + this.height)
-
-        if (this)
     }
 }

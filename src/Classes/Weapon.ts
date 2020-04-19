@@ -2,9 +2,12 @@ import { Physics } from "phaser";
 import { Bullet } from "./Bullet";
 import { GameScene } from "../Scenes/GameScene";
 
+var lastShot = 0
+
 export class Weapon extends Physics.Arcade.Sprite {
     sprite: Physics.Arcade.Sprite;
     bullets: Phaser.GameObjects.Group;
+    actionkey: import("phaser").Input.Keyboard.Key;
     constructor(scene: GameScene, sprite: Physics.Arcade.Sprite, texture: string) {
         super(scene, sprite.x + 10, sprite.y + 10, texture)
 
@@ -30,7 +33,11 @@ export class Weapon extends Physics.Arcade.Sprite {
     }
 
     shoot = (x: number, y: number, angle: number) => {
-        this.bullets.add(new Bullet(this.scene, this, x, y, angle, 'TREE_SPRITE'))
+		var timeNow = new Date().getTime()
+		if (timeNow - lastShot > 300) {
+            lastShot = new Date().getTime()
+            this.bullets.add(new Bullet(this.scene, this, x, y, angle, 'TREE_SPRITE'))
+        }
     }
 
     preUpdate() {

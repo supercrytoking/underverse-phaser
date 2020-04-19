@@ -34,6 +34,19 @@ export class Mob extends Physics.Arcade.Sprite {
         if (distance > this.range) {
             this.scene.physics.moveToObject(this, this.scene.player);
         }
+
+        if (this.health == 0) {
+            this.destroy()
+        }
+        
+    }
+
+    reduceHealth = (amount: number) => {
+        this.health -= amount
+    }
+
+    increaseHealth = (amount: number) => {
+        this.health += amount
     }
 
 }

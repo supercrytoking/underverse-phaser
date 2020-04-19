@@ -16,7 +16,6 @@ export class Player extends Physics.Arcade.Sprite {
 	constructor(scene: GameScene, config: Config) {
 		super(scene, config.x, config.y, 'PLAYER_SPRITE', 'player-20.png');
 
-
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this, false);
 
