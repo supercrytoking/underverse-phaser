@@ -61,6 +61,7 @@ class LoginForm extends React.Component {
                     </form>
                     <div className="buttons">
                         <a href="# " className="" onClick={(e) => {e.preventDefault(); this.props.setForm('register')}}>Register</a>
+                        <a href="# " className="" onClick={(e) => {e.preventDefault(); this.props.setForm('resetPassword')}}>Forgot Password?</a>
                     </div>
             </>
         )

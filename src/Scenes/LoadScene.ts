@@ -9,7 +9,7 @@ export class LoadScene extends Phaser.Scene {
     }
 
     preload() {
-        this.add.reactDom(AuthenticationModal, this)
+        // this.add.reactDom(AuthenticationModal, this)
 
         this.load.pack('images', Pack);
         this.load.tilemapTiledJSON('map', './assets/maps/underverse.json')
@@ -125,6 +125,6 @@ export class LoadScene extends Phaser.Scene {
             this.scene.start('MENU_SCENE')
         })
 
-        // this.scene.start('GAME_SCENE');
+        this.scene.start('GAME_SCENE');
     }
 }

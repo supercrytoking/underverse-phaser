@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 
 import RegisterForm from './RegisterForm/RegisterForm'
 import LoginForm from './LoginForm/LoginForm'
+import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
 import './AuthenticationModal.css'
 
@@ -52,6 +53,11 @@ class AuthenticationModal extends React.Component {
         } else if (this.state.form == 'register') {
             return(
                 <RegisterForm setForm={this.setForm} closeModal={this.closeModal} setMessage={this.setMessage} />
+            )
+        } else if (this.state.form == 'resetPassword') {
+            return(
+                // <>123</>
+                <ResetPasswordForm setForm={this.setForm} closeModal={this.closeModal} setMessage={this.setMessage} />
             )
         }
     }

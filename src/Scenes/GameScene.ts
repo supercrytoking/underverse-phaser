@@ -11,7 +11,7 @@ export class GameScene extends Phaser.Scene {
     obs: any;
     kingo!: NPC;
     mob!: Mob;
-    mobs: any;
+    mobs!: Phaser.GameObjects.Group;
     constructor() {
         super({
             key: 'GAME_SCENE'
@@ -21,7 +21,9 @@ export class GameScene extends Phaser.Scene {
     inSpeech = false;
 
     create() {
-        this.scene.launch('VGP_SCENE', this);
+        if (this.game.renderer.width <= 600) {
+            this.scene.launch('VGP_SCENE', this);
+        }
 
         this.actionKey = this.input.keyboard.addKey('Q');
 

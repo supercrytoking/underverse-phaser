@@ -1,10 +1,11 @@
 import { Physics } from "phaser";
 import { Bullet } from "./Bullet";
+import { GameScene } from "../Scenes/GameScene";
 
 export class Weapon extends Physics.Arcade.Sprite {
     sprite: Physics.Arcade.Sprite;
     bullets: Phaser.GameObjects.Group;
-    constructor(scene: Phaser.Scene, sprite: Physics.Arcade.Sprite, texture: string) {
+    constructor(scene: GameScene, sprite: Physics.Arcade.Sprite, texture: string) {
         super(scene, sprite.x + 10, sprite.y + 10, texture)
 
         this.scene = scene
@@ -15,6 +16,21 @@ export class Weapon extends Physics.Arcade.Sprite {
         this.scene.physics.add.existing(this, false);
 
         this.setScale(0.3)
+
+		this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main)
+			this.shoot(pointer.worldX, pointer.worldY)
+		})
+
+		this.actionkey = this.scene.input.keyboard.addKey('E')
+		this.actionkey.on('down', () => {
+			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main)
+			this.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY)
+        })
+
+        console.log(this.scene.mobs)
+        
+        // this.scene.physics.add.collider(this.scene.mobs, this.bullets)
     }
 
     shoot = (x: number, y: number) => {

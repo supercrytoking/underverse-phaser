@@ -78,9 +78,16 @@
 }
 
 .authentication-modal .buttons {
-    /* text-align: center; */
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 2em;
+    opacity: 0.5;
+    font-weight: 900;
+    text-decoration: none;
 }
 
 .authentication-modal .buttons a {
+    display: inline-block;
     color: #A873D8;
+    margin: 0 10px;
 }

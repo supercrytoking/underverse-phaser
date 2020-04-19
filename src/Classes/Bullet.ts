@@ -16,19 +16,21 @@ export class Bullet extends Physics.Arcade.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this, false);
 
-        this.setScale(0.3)
+        this.setScale(0.1)
+        var angle = Phaser.Math.Angle.Between(this.x, this.y, this.goToX, this.goToY)
+        console.log(angle)
+
+        this.setDrag(0, 0)
+        this.scene.physics.moveTo(this, this.goToX, this.goToY, 1000)
+        
+        setTimeout(() => {
+            this.destroy()
+        }, 1500)
+
+        this.scene.physics.add.collider(this.scene.mobs, this)
     }
 
     preUpdate() {
         this.setDepth(this.y + this.height)
-
-        this.scene.physics.moveTo(this, this.goToX, thnpm install phaser3-weapon-pluginis.goToY, 1000)
-
-        var distance = Phaser.Math.Distance.Between(this.x, this.y, this.weapon.x, this.weapon.y)
-        // if (distance > 300) {
-        // if (distance > 300 || this.x == this.goToX && this.y == this.goToY) {
-        //     this.destroy()
-        //     console.log('Killed bullet.')
-        // }
     }
 }

@@ -1,5 +1,9 @@
+import ReactDOM from 'react-dom'
+import React from 'react'
 import 'phaser'
 import phaserReact from 'phaser3-react'
+
+// import AuthenticationModal from './Components/AuthenticationModal/'
 
 import './game.css'
 import 'reset-css'

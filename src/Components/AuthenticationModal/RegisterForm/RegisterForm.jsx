@@ -46,9 +46,11 @@ class RegisterForm extends React.Component {
             username: this.state.username,
             password: this.state.password
         }).then((reply) => {
-            alert(reply.data.message)
+            this.props.setMessage(reply.data.message)
             if (reply.data.error) return
-            this.props.setForm('login')
+            setTimeout(() => {
+                this.props.setForm('login')
+            }, 2000)
         })
     }
 
@@ -68,6 +70,7 @@ class RegisterForm extends React.Component {
                 </form>
                 <div className="buttons">
                     <a href="# " className="" onClick={(e) => {e.preventDefault(); this.props.setForm('login')}}>Login</a>
+                    <a href="# " className="" onClick={(e) => {e.preventDefault(); this.props.setForm('resetPassword')}}>Forgot Password?</a>
                 </div>
             </>
         )
