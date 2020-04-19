@@ -16,6 +16,7 @@ import { VirtualGamepadScene } from './Scenes/VirtualGamepadScene';
 var config = {
     type: Phaser.CANVAS,
     activePointers: 3,
+    touch: true,
     scale: {
         // mode: Phaser.Scale.FIT,
         width: window.innerWidth,
