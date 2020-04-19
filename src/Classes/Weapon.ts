@@ -19,18 +19,18 @@ export class Weapon extends Physics.Arcade.Sprite {
 
 		this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
 			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main)
-			this.shoot(pointer.worldX, pointer.worldY)
+			this.shoot(pointer.worldX, pointer.worldY, null)
 		})
 
 		this.actionkey = this.scene.input.keyboard.addKey('E')
 		this.actionkey.on('down', () => {
 			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main)
-			this.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY)
+			this.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY, null)
         })
     }
 
-    shoot = (x: number, y: number) => {
-        this.bullets.add(new Bullet(this.scene, this, x, y, 'TREE_SPRITE'))
+    shoot = (x: number, y: number, angle: number) => {
+        this.bullets.add(new Bullet(this.scene, this, x, y, angle, 'TREE_SPRITE'))
     }
 
     preUpdate() {

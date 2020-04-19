@@ -22,10 +22,11 @@ export class GameScene extends Phaser.Scene {
 
     create() {
         this.input.addPointer(2);
-        
+
         if (this.game.renderer.width <= 600) {
             this.scene.launch('VGP_SCENE', this);
         }
+        
 
         this.actionKey = this.input.keyboard.addKey('Q');
 
@@ -48,7 +49,8 @@ export class GameScene extends Phaser.Scene {
             y: spawnPoint.y * 2,
         });
         this.player.addWeapon()
-
+        // this.player.body.position.
+        
         this.physics.add.collider(this.player, floorLayer);
         floorLayer.setCollisionByProperty({ collides: true });
         this.physics.add.collider(this.player, foliageLayer);

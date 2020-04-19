@@ -4,7 +4,8 @@ import { DigitalGamepad } from '../Classes/DigitalGamepad'
 
 export class VirtualGamepadScene extends Phaser.Scene {
     parent: any
-    joystick: any
+    movementJoystick: VirtualJoystick
+    weaponJoystick: VirtualJoystick
     speed: number
     inSpeech: any
     buttonPadding: number
@@ -76,15 +77,15 @@ export class VirtualGamepadScene extends Phaser.Scene {
         gamepad.load(this.parent)
 
         // VGP joystick.
-        var joystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0).setDepth(10)
-        var joystickThumb = this.add.circle(0, 0, 25, 0xFFFFFF, 0).setDepth(10)
+        var movementJoystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0).setDepth(10)
+        var movementJoystickThumb = this.add.circle(0, 0, 25, 0xFFFFFF, 0).setDepth(10)
 
-        this.joystick = new VirtualJoystick(this, {
+        this.movementJoystick = new VirtualJoystick(this, {
             x: 200,
             y: 200,
             radius: 50,
-            base: joystickBase,
-            thumb: joystickThumb,
+            base: movementJoystickBase,
+            thumb: movementJoystickThumb,
             // dir: '8dir',
             // forceMin: 16,
             // fixed: true,
@@ -92,37 +93,61 @@ export class VirtualGamepadScene extends Phaser.Scene {
         })
 
         let joystickMoved = 0
-        this.joystick.on('update', () => {
-            if (this.joystick.force >= 200) {
+        this.movementJoystick.on('update', () => {
+            if (this.movementJoystick.force >= 200) {
                 joystickMoved++
-                this.joystick.x = this.joystick.pointerX
-                this.joystick.y = this.joystick.pointerY
+                this.movementJoystick.x = this.movementJoystick.pointerX
+                this.movementJoystick.y = this.movementJoystick.pointerY
             }
 
             if (joystickMoved >= 1) {
                 this.speed = 240
-                joystickBase.fillColor = 0xFF0000
+                movementJoystickBase.fillColor = 0xFF0000
             } else {
                 this.speed = 120
             }
         })
 
-        var joystickArea = this.add.rectangle(0, 0, window.innerWidth / 2, window.innerHeight, 0xFF0000, 0).setScrollFactor(0).setDepth(4).setOrigin(0, 0)
-        joystickArea.setInteractive()
+        var movementJoystickArea = this.add.rectangle(0, 0, window.innerWidth / 2, window.innerHeight, 0xFF0000, 0.1).setScrollFactor(0).setDepth(4).setOrigin(0, 0)
+        movementJoystickArea.setInteractive()
 
-        joystickArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+        movementJoystickArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
             // Enable joystick on click down.
-            this.joystick.x = pointer.x
-            this.joystick.y = pointer.y
-            this.joystick.enable = true
+            this.movementJoystick.x = pointer.x
+            this.movementJoystick.y = pointer.y
+            this.movementJoystick.enable = true
+        })
+
+        var weaponJoystickArea = this.add.rectangle(window.innerWidth /2, 0, window.innerWidth / 2, window.innerHeight, 0xFFFF00, 0.1).setScrollFactor(0).setDepth(4).setOrigin(0, 0)
+        weaponJoystickArea.setInteractive()
+
+        var weaponJoystickBase = this.add.circle(0, 0, 50, 0xFFFF00, 0.2).setDepth(10)
+        var weaponJoystickThumb = this.add.circle(0, 0, 25, 0xFFFF00, 0.2).setDepth(10)
+        this.weaponJoystick = new VirtualJoystick(this, {
+            x: 200,
+            y: 200,
+            radius: 50,
+            base: weaponJoystickBase,
+            thumb: weaponJoystickThumb,
+            // dir: '8dir',
+            // forceMin: 16,
+            // fixed: true,
+            enable: false
+        })
+
+        weaponJoystickArea.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+            // Enable joystick on click down.
+            this.weaponJoystick.x = pointer.x
+            this.weaponJoystick.y = pointer.y
+            this.weaponJoystick.enable = true
         })
 
         this.input.on('pointerup', (pointer: Phaser.Input.Pointer) => {
             joystickMoved = 0
-            joystickBase.fillColor = 0xFFFFFF
+            movementJoystickBase.fillColor = 0xFFFFFF
         })
 
-        this.joystick.on('update', () => {
+        this.movementJoystick.on('update', () => {
             this.parent.player.keys.W.isDown = false;
             this.parent.player.keys.W.isUp = true;
             this.parent.player.keys.S.isDown = false;
@@ -131,27 +156,41 @@ export class VirtualGamepadScene extends Phaser.Scene {
             this.parent.player.keys.A.isUp = true;
             this.parent.player.keys.D.isDown = false;
             this.parent.player.keys.D.isUp = true;
-        });
+        })
+
+        console.log(this.parent.player.x, this.parent.player.y)
+        this.add.rectangle(this.parent.player.body.x, this.parent.player.body.y, 10, 10, 0xFF00FF).setDepth(4)
+
+        this.weaponJoystick.on('update', () => {
+            this.parent.player.weapon.shoot(null, null, this.weaponJoystick.angle)
+            // console.log('N: ', this.parent.player.x, this.parent.player.y)
+            // console.log('World: ', this.parent.player.body.worldX, this.parent.player.body.worldY)
+            // this.parent.player.weapon.shoot(this.weaponJoystick., this.weaponJoystick.pointerY)
+            // console.log(`Force: ${this.weaponJoystick.forceX}, ${this.weaponJoystick.forceY}`)
+        })
     }
 
     update() {
-        
-        if (this.joystick.up) {
+        if (this.weaponJoystick.up) {
+            // console.log('123')
+        }
+
+        if (this.movementJoystick.up) {
             // this.parent.player.body.velocity.y = -Math.abs(this.speed)
             this.parent.player.keys.W.isDown = true;
             this.parent.player.keys.W.isUp = false;
         }
-        if (this.joystick.down) {
+        if (this.movementJoystick.down) {
             // this.parent.player.body.velocity.y = this.speed
             this.parent.player.keys.S.isDown = true;
             this.parent.player.keys.S.isUp = false;
         }
-        if (this.joystick.left) {
+        if (this.movementJoystick.left) {
             // this.parent.player.body.velocity.x = -Math.abs(this.speed)
             this.parent.player.keys.A.isDown = true;
             this.parent.player.keys.A.isUp = false;
         }
-        if (this.joystick.right) {
+        if (this.movementJoystick.right) {
             // this.parent.player.body.velocity.x = -Math.abs(this.speed)
             this.parent.player.keys.D.isDown = true;
             this.parent.player.keys.D.isUp = false;
