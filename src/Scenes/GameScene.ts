@@ -21,6 +21,8 @@ export class GameScene extends Phaser.Scene {
     inSpeech = false;
 
     create() {
+        this.input.addPointer(2);
+        
         if (this.game.renderer.width <= 600) {
             this.scene.launch('VGP_SCENE', this);
         }
