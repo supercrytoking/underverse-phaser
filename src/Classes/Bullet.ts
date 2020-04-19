@@ -29,16 +29,21 @@ export class Bullet extends Physics.Arcade.Sprite {
         } else {
             this.setDrag(0, 0)
             this.scene.physics.moveTo(this, this.goToX, this.goToY, 1000)
-            
-            setTimeout(() => {
-                this.destroy()
-            }, 1500)
         }
+            
+        setTimeout(() => {
+            this.destroy()
+        }, 1500)
 
-        this.scene.physics.add.collider(this.scene.mobs, this)
+        this.scene.physics.add.collider(this.scene.mobs, this, (object) => {
+            object.destroy()
+            this.destroy()
+        })
     }
 
     preUpdate() {
         this.setDepth(this.y + this.height)
+
+        if (this)
     }
 }

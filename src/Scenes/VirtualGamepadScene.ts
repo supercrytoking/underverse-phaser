@@ -160,19 +160,11 @@ export class VirtualGamepadScene extends Phaser.Scene {
 
         console.log(this.parent.player.x, this.parent.player.y)
         this.add.rectangle(this.parent.player.body.x, this.parent.player.body.y, 10, 10, 0xFF00FF).setDepth(4)
-
-        this.weaponJoystick.on('update', () => {
-            this.parent.player.weapon.shoot(null, null, this.weaponJoystick.angle)
-            // console.log('N: ', this.parent.player.x, this.parent.player.y)
-            // console.log('World: ', this.parent.player.body.worldX, this.parent.player.body.worldY)
-            // this.parent.player.weapon.shoot(this.weaponJoystick., this.weaponJoystick.pointerY)
-            // console.log(`Force: ${this.weaponJoystick.forceX}, ${this.weaponJoystick.forceY}`)
-        })
     }
 
     update() {
-        if (this.weaponJoystick.up) {
-            // console.log('123')
+        if (this.weaponJoystick.force > 0) {
+            this.parent.player.weapon.shoot(null, null, this.weaponJoystick.angle)
         }
 
         if (this.movementJoystick.up) {
