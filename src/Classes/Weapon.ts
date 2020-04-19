@@ -27,10 +27,6 @@ export class Weapon extends Physics.Arcade.Sprite {
 			this.scene.input.activePointer.updateWorldPoint(this.scene.cameras.main)
 			this.shoot(this.scene.input.activePointer.worldX, this.scene.input.activePointer.worldY)
         })
-
-        console.log(this.scene.mobs)
-        
-        // this.scene.physics.add.collider(this.scene.mobs, this.bullets)
     }
 
     shoot = (x: number, y: number) => {
