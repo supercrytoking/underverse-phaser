@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    /* background-color: lightskyblue; */
+    height: 100%;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* #react {
+    position: fixed;
+} */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v5.0.1 | 20191019
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+	line-height: 1;
+}
+menu, ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+.authentication-modal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 40px;
+    background-color: #202225;
+    font-family: 'Roboto Mono', monospace;
+    color: #B8BABD;
+}
+
+.authentication-modal.hide {
+    pointer-events: none;
+    opacity: 0;
+    display: none;
+}
+
+.authentication-modal .box {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 40px;
+    background-color: #36393F;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.authentication-modal .message {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    line-height: 1.5em;
+    font-size: 0.8em;
+}
+
+.authentication-modal label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    margin-bottom: 10px;
+}
+
+.authentication-modal input {
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.authentication-modal input[type="text"], .authentication-modal input[type="password"], .authentication-modal input[type="email"] {
+    background-color: #40444B;
+    border-radius: 3px;
+    color: #B8BABD;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: 0.15s ease all;
+}
+
+.authentication-modal input[type="text"]:focus, .authentication-modal input[type="password"]:focus, .authentication-modal input[type="email"]:focus {
+    border: 1px solid #A873D8;
+}
+
+.authentication-modal input[type="submit"] {
+    font-family: inherit;
+    text-transform: uppercase;
+    background-color: #A873D8;
+    border-radius: 3px;
+    color: white;
+    font-weight: 900;
+}
+
+.authentication-modal .buttons {
+    /* text-align: center; */
+}
+
+.authentication-modal .buttons a {
+    color: #A873D8;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=VT323&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+.speech-bubble {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    bottom: 0;
+    padding: 50px;
+    font-family: 'VT323', monospace;
+}
+
+.speech-bubble.hide {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.speech-bubble .contain {
+    background-color: rgba(0, 0, 0, 0.95);
+    color: rgb(26, 255, 18);
+    height: 25vh;
+    padding: 20px;
+    border-radius: 12px;
+    border: 10px solid rgb(26, 255, 18);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    
+}
+
+.speech-name {
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.speech-text {
+    font-size: 1.4em;
+}
+
+@media (max-width: 600px) {
+    .speech-bubble {
+        padding: 20px;
+        font-size: 1em;
+    }
+    .speech-bubble .contain {
+        padding: 10px;
+    }
+}
+
+/*# sourceMappingURL=/game.e499fc5e.css.map */

@@ -1,0 +1,128 @@
+{
+    "images": {
+        "files": [
+            {
+                "type": "image",
+                "key": "LOGO",
+                "url": "./assets/img/underverse-logo.png"
+            },
+            {
+                "type": "image",
+                "key": "MENU_BG",
+                "url": "./assets/img/menu-background.jpg"
+            },
+            {
+                "type": "image",
+                "key": "LOGIN_BTN",
+                "url": "./assets/img/login-button.png"
+            },
+            {
+                "type": "image",
+                "key": "REGISTER_BTN",
+                "url": "./assets/img/register-button.png"
+            },
+            {
+                "type": "image",
+                "key": "BUTTON_START",
+                "url": "./assets/img/button-start.png"
+            },
+            {
+                "type": "image",
+                "key": "UNDERVERSE_TILESET",
+                "url": "./assets/maps/underverse-tileset.png"
+            },
+            {
+                "type": "image",
+                "key": "WATER_TILESET",
+                "url": "./assets/maps/water-tileset.png"
+            },
+            {
+                "type": "image",
+                "key": "VARNIRO_TILESET",
+                "url": "./assets/maps/varniro-tileset.png"
+            },
+            {
+                "type": "image",
+                "key": "GAMEPAD_A",
+                "url": "./assets/img/gamepad-a.png"
+            },
+            {
+                "type": "image",
+                "key": "GAMEPAD_B",
+                "url": "./assets/img/gamepad-b.png"
+            },
+            {
+                "type": "image",
+                "key": "GAMEPAD_X",
+                "url": "./assets/img/gamepad-y.png"
+            },
+            {
+                "type": "image",
+                "key": "GAMEPAD_Y",
+                "url": "./assets/img/gamepad-y.png"
+            },
+            {
+                "type": "image",
+                "key": "SETTINGS_BUTTON",
+                "url": "./assets/img/settings-button.png"
+            },
+            {
+                "type": "image",
+                "key": "MOB_DUNNOT",
+                "url": "./assets/img/mob-dunnot.png"
+            },
+            {
+                "type": "audio",
+                "key": "MENU_MUSIC",
+                "url": "./assets/audio/menu-music.mp3"
+            },
+            {
+                "type": "audio",
+                "key": "CONFIRMATION_OO2",
+                "url": "./assets/audio/confirmation_002.mp3"
+            },
+            {
+                "type": "audio",
+                "key": "QUESTION_004",
+                "url": "./assets/audio/question_004.mp3"
+            },
+            {
+                "type": "atlas",
+                "key": "PLAYER_SPRITE",
+                "textureURL": "./assets/sprites/player-animated-sprites.png",
+                "atlasURL": "./assets/sprites/player-animated-sprites.json"
+            },
+            {
+                "type": "atlas",
+                "key": "TREE_SPRITE",
+                "textureURL": "./assets/sprites/animated-tree.png",
+                "atlasURL": "./assets/sprites/animated-tree.json"
+            },
+            {
+                "type": "atlas",
+                "key": "SCHOOLGIRLS_SPRITE",
+                "textureURL": "./assets/sprites/schoolgirls-sprite.png",
+                "atlasURL": "./assets/sprites/schoolgirls-sprite.json"
+            },
+            {
+                "type": "bitmapFont",
+                "key": "FONT_PRIMARY",
+                "textureURL": "./assets/fonts/game-over.png",
+                "fontDataURL": "./assets/fonts/game-over.fnt"
+            },
+            {
+                "type": "bitmapFont",
+                "key": "FONT_SECONDARY",
+                "textureURL": "./assets/fonts/vcr-osd-mono.png",
+                "fontDataURL": "./assets/fonts/vcr-osd-mono.fnt"
+            }
+        ]
+    },
+    "meta": {
+        "generated": "1401380327373",
+        "app": "Phaser 3 Asset Packer",
+        "url": "https://phaser.io",
+        "version": "1.0",
+        "copyright": "Photon Storm Ltd. 2018"
+    }
+}

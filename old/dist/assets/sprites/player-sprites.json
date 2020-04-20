@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "player-sprites.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 31,
+				"h": 70
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "player-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 17,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 35
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 35
+					}
+				},
+				{
+					"filename": "player-2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 35
+					},
+					"frame": {
+						"x": 17,
+						"y": 0,
+						"w": 14,
+						"h": 35
+					}
+				},
+				{
+					"filename": "player-3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 17,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 35
+					},
+					"frame": {
+						"x": 0,
+						"y": 35,
+						"w": 17,
+						"h": 35
+					}
+				},
+				{
+					"filename": "player-4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 35
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 35
+					},
+					"frame": {
+						"x": 17,
+						"y": 35,
+						"w": 14,
+						"h": 35
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2d0bba1d576c14e278ef539266d40b7f:cfb4a372ff8f9d9cbccdff4cf84ce1d8:ec922cabdb5ad76aea8f2bbe701d0be9$"
+	}
+}

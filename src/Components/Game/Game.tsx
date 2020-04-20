@@ -25,15 +25,14 @@ var config = {
     scene: [LoadScene, MenuScene, GameScene]
 }
 
-new Phaser.Game(config);
-
-type GameState = {}
 type GameProps = {}
-class Game extends React.Component<GameState, GameProps> {
-    constructor(props: GameState) {
+type GameState = {}
+class Game extends React.Component<GameProps, GameState> {
+    constructor(props: GameProps) {
         super(props)
 
         this.state = {}
+        new Phaser.Game(config);
     }
 
     render() {

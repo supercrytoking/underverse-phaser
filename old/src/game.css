@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    /* background-color: lightskyblue; */
+    height: 100%;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* #react {
+    position: fixed;
+} */
