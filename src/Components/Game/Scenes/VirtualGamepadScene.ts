@@ -2,7 +2,7 @@
 import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js'
 import { DigitalGamepad } from '../Classes/DigitalGamepad'
 
-export class VirtualGamepadScene extends Phaser.Scene {
+export default class VirtualGamepadScene extends Phaser.Scene {
     parent: any
     movementJoystick: VirtualJoystick
     weaponJoystick: VirtualJoystick

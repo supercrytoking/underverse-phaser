@@ -22,7 +22,7 @@ export class Bullet extends Physics.Arcade.Sprite {
         this.setScale(0.1)
 
         // todo
-        if (this.goToX === 0 && this.goToY === 0) {
+        if (this.goToX === null && this.goToY === null) {
             var directionVelocity = this.body.world.scene.physics.velocityFromAngle(this.goAngle, 1000)
             this.setVelocityX(directionVelocity.x)
             this.setVelocityY(directionVelocity.y)

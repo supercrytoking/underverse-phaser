@@ -4,6 +4,7 @@ import Phaser from 'phaser'
 import LoadScene from './Scenes/LoadScene'
 import MenuScene from './Scenes/MenuScene'
 import GameScene from './Scenes/GameScene'
+import VirtualGamepadScene from './Scenes/VirtualGamepadScene'
 
 import './Game.css'
 
@@ -24,7 +25,7 @@ var config = {
         }
     },
     pixelArt: true,
-    scene: [LoadScene, MenuScene, GameScene]
+    scene: [LoadScene, MenuScene, GameScene, VirtualGamepadScene]
 }
 
 type GameProps = {}
