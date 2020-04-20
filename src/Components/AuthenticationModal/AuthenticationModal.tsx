@@ -1,6 +1,4 @@
 import React from 'react'
-import Axios from 'axios'
-import Cookies from 'js-cookie'
 
 import RegisterForm from './RegisterForm/RegisterForm'
 import LoginForm from './LoginForm/LoginForm'
@@ -8,8 +6,8 @@ import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
 import './AuthenticationModal.css'
 
-class AuthenticationModal extends React.Component {
-    constructor(props) {
+class AuthenticationModal extends React.Component<any, any> {
+    constructor(props: any) {
         super(props)
         
         var initialForm = 'register'
@@ -24,7 +22,7 @@ class AuthenticationModal extends React.Component {
         this.onChange = this.onChange.bind(this)
     }
     
-    onChange = (e) => {
+    onChange = (e: any) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -35,14 +33,14 @@ class AuthenticationModal extends React.Component {
     }
 
     componentDidMount = () => {
-        if (Cookies.get('sessionID')) {
-            Axios.get(`https://underverse-authentication.herokuapp.com/session/${Cookies.get('sessionID')}`)
-            .then((reply) => {
-                if (reply.data.uid) {
-                    this.closeModal()
-                }
-            })
-        }
+        // if (Cookies.get('sessionID')) {
+        //     Axios.get(`https://underverse-authentication.herokuapp.com/session/${Cookies.get('sessionID')}`)
+        //     .then((reply) => {
+        //         if (reply.data.uid) {
+        //             this.closeModal()
+        //         }
+        //     })
+        // }
     }
 
     renderForm = () => {
@@ -61,7 +59,7 @@ class AuthenticationModal extends React.Component {
         }
     }
 
-    setForm = (form) => {
+    setForm = (form: String) => {
         this.setState({form: form, message: ''})
     }
 
@@ -73,7 +71,7 @@ class AuthenticationModal extends React.Component {
         }
     }
 
-    setMessage = (message) => {
+    setMessage = (message: String) => {
         this.setState({message: message})
     }
 

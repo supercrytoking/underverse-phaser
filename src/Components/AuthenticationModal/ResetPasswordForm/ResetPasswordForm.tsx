@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 import './ResetPasswordForm.css'
 
-class ResetPasswordForm extends React.Component {
-    constructor(props) {
+class ResetPasswordForm extends React.Component<any, any> {
+    constructor(props: any) {
         super(props)
 
         this.state = {}
@@ -13,13 +13,13 @@ class ResetPasswordForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
     
-    onChange = (e) => {
+    onChange = (e: any) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    onSubmit = (e) => {
+    onSubmit = (e: any) => {
         e.preventDefault()
     }
 

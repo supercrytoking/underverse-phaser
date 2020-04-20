@@ -5,24 +5,23 @@ import Cookies from 'js-cookie'
 
 import './LoginForm.css'
 
-class LoginForm extends React.Component {
-    constructor(props) {
+class LoginForm extends React.Component<any, any> {
+    constructor(props: any) {
         super(props)
-
-        this.state = {
-        }
+        
+        this.state = {}
 
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
     
-    onChange = (e) => {
+    onChange = (e: any) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    onSubmit = (e) => {
+    onSubmit = (e: any) => {
         e.preventDefault()
 
         var errors = []
@@ -46,7 +45,7 @@ class LoginForm extends React.Component {
 
             Cookies.set('sessionID', reply.data.sessionID)
             console.log(reply.data.sessionID)
-            this.props.closeModal()
+            // this.props.closeModal()
         })
     }
 

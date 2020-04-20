@@ -3,15 +3,14 @@ import Cookies from 'js-cookie'
 
 import './Logout.css'
 
-type LogoutProps = {}
-type LogoutState = {}
-export default class Logout extends React.Component<LogoutProps, LogoutState> {
-    constructor(props: LogoutState) {
+export default class Logout extends React.Component<any, any> {
+    constructor(props: any) {
         super(props)
 
         this.state = {}
 
         Cookies.remove('sessionID')
+        this.props.history.push('/login')
     }
 
     render() {

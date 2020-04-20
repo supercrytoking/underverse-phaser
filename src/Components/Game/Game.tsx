@@ -1,5 +1,8 @@
 import React from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import Phaser from 'phaser'
+import Cookies from 'js-cookie'
+import Axios from 'axios'
 
 import LoadScene from './Scenes/LoadScene'
 import MenuScene from './Scenes/MenuScene'
@@ -28,13 +31,29 @@ var config = {
     scene: [LoadScene, MenuScene, GameScene, VirtualGamepadScene]
 }
 
-type GameProps = {}
+interface GameProps extends RouteComponentProps<any> {}
 type GameState = {}
 class Game extends React.Component<GameProps, GameState> {
     constructor(props: GameProps) {
         super(props)
 
         this.state = {}
+
+        if (Cookies.get('sessionID')) {
+            Axios.get(`https://underverse-authentication.herokuapp.com/session/${Cookies.get('sessionID')}`)
+            .then((reply) => {
+                console.log(reply.data)
+                if (reply.data.uid) {
+                    return
+                }
+
+                console.log('Not logged in.')
+                this.props.history.push('/login')
+            })
+        } else {
+            console.log('Not logged in.')
+            this.props.history.push('/login')
+        }
     }
 
     componentDidMount() {

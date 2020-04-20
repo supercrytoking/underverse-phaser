@@ -12,6 +12,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
         this.state = {}
     }
 
+    handleClick = () => {
+        // @ts-ignore
+        this.props.history.push("/about")
+    }
+
     render() {
         return(
             <div className="home">

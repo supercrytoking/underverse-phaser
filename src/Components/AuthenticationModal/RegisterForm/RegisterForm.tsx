@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 import './RegisterForm.css'
 
-class RegisterForm extends React.Component {
-    constructor(props) {
+class RegisterForm extends React.Component<any, any> {
+    constructor(props: any) {
         super(props)
 
         this.state = {
@@ -16,13 +16,13 @@ class RegisterForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
     
-    onChange = (e) => {
+    onChange = (e: any) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    onSubmit = (e) => {
+    onSubmit = (e: any) => {
         e.preventDefault()
 
         // Front-end form authentication here.

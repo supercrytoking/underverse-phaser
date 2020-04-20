@@ -14,12 +14,12 @@ import Logout from './Components/Logout/Logout'
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/game" component={Game} />
-            <Route exact path="/login" render={(props) => <AuthenticationModal form="login" />} />
-            <Route exact path="/register" render={(props) => <AuthenticationModal form="register" />} />
-            <Route exact path="/login/forgot" render={(props) => <AuthenticationModal form="resetPassword" />} />
-            <Route exact path="/logout" component={Logout} />
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/game" component={Game} />
+                  <Route exact path="/login" render={() => <AuthenticationModal form="login" />} />
+                  <Route exact path="/register" render={() => <AuthenticationModal form="register" />} />
+                  <Route exact path="/login/forgot" render={() => <AuthenticationModal form="resetPassword" />} />
+                  <Route exact path="/logout" component={Logout} />
 		</Router>
 	</React.StrictMode>,
 	document.getElementById('root')
