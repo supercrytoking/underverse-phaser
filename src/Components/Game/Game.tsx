@@ -5,6 +5,8 @@ import LoadScene from './Scenes/LoadScene'
 import MenuScene from './Scenes/MenuScene'
 import GameScene from './Scenes/GameScene'
 
+import './Game.css'
+
 var config = {
     type: Phaser.CANVAS,
     parent: 'game',
@@ -32,7 +34,10 @@ class Game extends React.Component<GameProps, GameState> {
         super(props)
 
         this.state = {}
-        new Phaser.Game(config);
+    }
+
+    componentDidMount() {
+        new Phaser.Game(config)
     }
 
     render() {
