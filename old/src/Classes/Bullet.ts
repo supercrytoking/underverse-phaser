@@ -1,12 +1,13 @@
 import { Physics } from 'phaser'
 import { Mob } from './Mob'
+import { GameScene } from '../Scenes/GameScene'
 
 export class Bullet extends Physics.Arcade.Sprite {
     goToX: number
     goToY: number
     weapon: Physics.Arcade.Sprite
     goAngle: number
-    constructor(scene: Phaser.Scene, weapon: Physics.Arcade.Sprite, x:number, y:number, angle: number, texture: string) {
+    constructor(scene: GameScene, weapon: Physics.Arcade.Sprite, x:number, y:number, angle: number, texture: string) {
         super(scene, weapon.x, weapon.y, texture) 
 
         this.goToX = x
@@ -14,10 +15,8 @@ export class Bullet extends Physics.Arcade.Sprite {
         this.goAngle = angle
         this.weapon = weapon
 
-        this.scene = scene
-
-        this.scene.add.existing(this);
-        this.scene.physics.add.existing(this, false);
+        this.scene.add.existing(this)
+        this.scene.physics.add.existing(this, false)
 
         this.setScale(0.1)
         var angle = Phaser.Math.Angle.Between(this.x, this.y, this.goToX, this.goToY)
@@ -36,11 +35,11 @@ export class Bullet extends Physics.Arcade.Sprite {
             this.destroy()
         }, 1500)
 
-        this.scene.physics.add.collider(this.scene.mobs, this, (object) => {
-            console.log(object.health)
-            object.reduceHealth(10)
-            this.destroy()
-        })
+        // this.scene.physics.add.collider(this.scene.mobs, this, (object) => {
+        //     console.log(object.health)
+        //     object.reduceHealth(10)
+        //     this.destroy()
+        // })
     }
 
     preUpdate() {

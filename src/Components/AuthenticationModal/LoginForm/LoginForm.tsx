@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -45,6 +45,7 @@ class LoginForm extends React.Component<any, any> {
 
             Cookies.set('sessionID', reply.data.sessionID)
             console.log(reply.data.sessionID)
+            this.props.history.push('/game')
             // this.props.closeModal()
         })
     }
@@ -68,4 +69,4 @@ class LoginForm extends React.Component<any, any> {
     }
 }
 
-export default LoginForm
+export default withRouter(LoginForm)

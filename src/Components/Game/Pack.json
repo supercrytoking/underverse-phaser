@@ -2,6 +2,11 @@
     "images": {
         "files": [
             {
+                "type": "image",
+                "key": "GUN",
+                "url": "./assets/img/gun.png"
+            },
+            {
                 "type": "tilemapTiledJSON",
                 "key": "MAP",
                 "url": "./assets/maps/underverse.json"

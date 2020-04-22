@@ -1,7 +1,7 @@
 import { Physics} from 'phaser';
 
 import GameScene from '../Scenes/GameScene';
-import { Weapon } from './Weapon';
+import Weapon from './Weapon';
 
 type Config = {
 	x: number,
@@ -14,10 +14,14 @@ export class Player extends Physics.Arcade.Sprite {
 	player!: Physics.Arcade.Sprite;
 	weapon!: Weapon;
 	parent: GameScene;
+	health: number;
+    velocity: any;
 	constructor(scene: GameScene, config: Config) {
 		super(scene, config.x, config.y, 'PLAYER_SPRITE', 'player-20.png');
 
 		this.parent = scene
+
+		this.health = 100
 
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this, false);
@@ -38,14 +42,24 @@ export class Player extends Physics.Arcade.Sprite {
 		this.speed = 120;
 	}
 
+    reduceHealth = (amount: number) => {
+        this.health -= amount
+    }
+
+    increaseHealth = (amount: number) => {
+        this.health += amount
+    }
+
 	addWeapon = () => {
-		this.weapon = new Weapon(this.parent, this, 'TREE_SPRITE')
+		this.weapon = new Weapon(this.parent, this, 'GUN')
 	}
 
 	preUpdate(time: number, delta: number) {
 		super.preUpdate(time, delta);
 		this.setDepth(this.y + this.height);
 
+		// if (this.health <= 0) console.log('HIT')
+		
 		// reset our speed incase they let up
 		this.speed = 120;
 

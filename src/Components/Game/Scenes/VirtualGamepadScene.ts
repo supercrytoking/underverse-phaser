@@ -1,6 +1,5 @@
 // @ts-ignore
 import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js'
-import { DigitalGamepad } from '../Classes/DigitalGamepad'
 
 export default class VirtualGamepadScene extends Phaser.Scene {
     parent: any
@@ -71,10 +70,6 @@ export default class VirtualGamepadScene extends Phaser.Scene {
         this.bButton.on('pointerup', () => {
             this.parent.events.emit('gamepad-b-up');
         });
-
-        // VGP buttons.
-        var gamepad = new DigitalGamepad(this)
-        gamepad.load(this.parent)
 
         // VGP joystick.
         var movementJoystickBase = this.add.circle(0, 0, 50, 0xFFFFFF, 0).setDepth(10)
